@@ -12,10 +12,10 @@ import os
 from django.core.wsgi import get_wsgi_application
 from whitenoise.django import DjangoWhiteNoise
 
-if os.getenv("DATABASE_URL"):
-	os.environ.setdefault("DJANGO_SETTINGS_MODULE", "EngSite.heroku-settings")
+if os.environ.get("DJANGO_SETTINGS_MODULE"):
+	pass   # use present settings (heroku/deployment) 
 else:
-	os.environ.setdefault("DJANGO_SETTINGS_MODULE", "EngSite.local-settings")
+	os.environ.setdefault("DJANGO_SETTINGS_MODULE", "EngSite.settings.local")
 
 application = get_wsgi_application()
 application = DjangoWhiteNoise(application)
