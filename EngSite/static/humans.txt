@@ -11,5 +11,5 @@
 
 # TECHNOLOGY COLOPHON
 
-    CSS3, HTML5
-    Apache Server Configs, Bootstrap, jQuery, Modernizr, Normalize.css
+    Python3, CSS3, HTML5
+    Django, Bootstrap, jQuery, Modernizr, Normalize.css
