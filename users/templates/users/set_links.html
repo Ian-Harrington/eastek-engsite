@@ -1,0 +1,33 @@
+{% extends "page.html" %}
+
+{% load i18n %}
+
+{% block title %} Edit Homepage Links {% endblock %}
+
+{% block pagecontent %}
+
+<div class="container">
+	<div class="border-around" style="display: inline-block;">
+		<h3>{% trans "Edit Homepage Links" %}</h3>
+		<hr/>
+		<form action="{% url 'users:setlinks' %}" method="post">
+		{% csrf_token %}
+			<table>
+				{{formset.management_form}}
+				<tr>
+					<th>{{formset.empty_form.link.label|capfirst}}</th>
+					<th>{{formset.empty_form.link_text.label|capfirst}}</th>
+				</tr>
+				{% for frm in formset %}
+				<tr>
+					<td>{{frm.link}}</td>
+					<td>{{frm.link_text}}</td>
+				</tr>
+				{% endfor %}
+			</table>
+			<input type="submit" value="{% trans 'Update' %}">
+		</form>
+	</div>
+</div>
+
+{% endblock pagecontent %}

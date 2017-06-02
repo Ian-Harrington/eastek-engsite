@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% load static i18n %}
+
+{% block content %}
+{% block navbar %}
+{# defaut navbar (probably won't override this) #}
+<nav class="navbar navbar-default">
+	<div class="container-fluid">
+	<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<div class="navbar-brand" style="text-align: center; padding: 0;"><a href="{% url 'landing' %}"><img src="{% static 'img/eastek_logo_header.png' %}" style="vertical-align: middle;"></a></div>
+		</div>
+
+	<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="navbar-collapse">
+			<ul class="nav navbar-nav">
+			<!-- ========== Overtime Button Logic ========== -->
+				{% if perms.overtime.view_Overtime %}
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> {% trans "Overtime" %} <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="{% url 'overtime:add' %}">{% trans "Record New" %}</a></li>
+						<li><a href="{% url 'overtime:requestform' %}">{% trans "Download Form" %}</a></li>
+						<li><a href="{% url 'overtime:list' 1 %}">{% trans "View All" %}</a></li>
+					</ul>
+				</li>
+				{% else %}
+				<li><a href="{% url 'overtime:add' %}">{% trans "Overtime" %}</a></li>
+				{% endif %}
+			<!-- ========== Project Dropdown ========== -->
+				{% if perms.projects.add_project and perms.projects.add_update %}
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> {% trans "Projects" %} <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="{% url 'projects:projectlist' %}?customer=&work_type=&status=INP&engineer={{request.user.employee.emp_id}}">{% trans "My Projects" %}</a></li>
+						<li><a href="{% url 'projects:addproject' %}">{% trans "Create New Project" %}</a></li>
+						<li role="separator" class="divider"></li>
+						<li><a href="{% url 'projects:projectlist' %}">{% trans "All Projects" %}</a></li>
+						<li><a href="{% url 'projects:customers' %}">{% trans "Customer List" %}</a></li>
+					</ul>
+				</li>
+				{% endif %}
+			<!-- ========== Employee Info Button Logic ========== -->
+				{% if perms.employees.add_employee and perms.employees.change_employee %}
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> {% trans "Employees" %} <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="{% url 'employees:list' %}">{% trans "View All" %}</a></li>
+						<li><a href="{% url 'employees:detail' 'add' %}">{% trans "Add New" %}</a></li>
+					</ul>
+				</li>
+				{% endif %}
+			<!-- ========== Account Drop Down ========== -->
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> {% trans "Account" %} <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li class="dropdown-header">{% trans "Settings" %}</a></li>
+						<li><a href="{% url 'users:setpassword' %}">{% trans "Change Password" %}</a></li>
+						<li><a href="{% url 'users:setlinks' %}">{% trans "Set Homepage Links" %}</a></li>
+						{% comment %}
+						<li class="dropdown-header">{% trans "Language" %}</a></li>
+						<li><div class="btn-group" role="group" style="padding-left: 3px">
+							<button id="set-lang-en" type="button" class="btn btn-default">{% trans "English" %}</button>
+							<button id="set-lang-zh" type="button" class="btn btn-default">{% trans "Chinese" %}</button>
+						</div></li>
+						{% endcomment %}
+						<li role="separator" class="divider"></li>
+						<li><a href="{% url 'logout' %}">{% trans "Logout" %}</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div><!-- /.navbar-collapse -->
+	</div><!-- /.container-fluid -->
+</nav>
+{% endblock navbar %}
+
+
+{% block pagecontent %}
+	<p> There was a problem loading the page content </p>
+{% endblock pagecontent%}
+	
+{% endblock content %}
+
+{% block pagescripts %}
+{# <script>$(document).ready(changeLang())</script> #}
+{% block scripts %} {% endblock %}
+{% endblock %}

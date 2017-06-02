@@ -1,0 +1,27 @@
+{% extends "page.html" %}
+
+{% load i18n %}
+
+{% block title %} {% firstof emp.english_name 'Add Employee' %} {% endblock title %}
+
+{% block pagecontent %}
+<div class="container">
+	<div class="border-around" style="display: inline-block;">
+	{% if arg == 'add' %}
+	<h3>{% firstof emp.name indvform.name.value %} {% trans "Employee Record" %}</h3>
+	{% else %}
+	<h3>{% trans "Add Employee Record" %}</h3>
+	{% endif %}
+	{% if saved %}
+		<span> {% trans "Employee information saved successfully" %}</span>
+	{% endif %}
+	<!-- main display/form -->
+	<form action="{% url 'employees:detail' arg %}" method="post">
+		{% csrf_token %}
+		<table>
+			{{indvform.as_table}}
+		</table>
+		<input type="submit" value="{% trans 'Save' %}">
+	</form>
+	</div>
+{% endblock pagecontent %}

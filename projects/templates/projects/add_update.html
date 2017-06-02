@@ -1,0 +1,22 @@
+{% extends "page.html" %}
+
+{% load i18n %}
+
+{% block title %} Add Update {% endblock %}
+
+{% block pagecontent %}
+
+<div class="container">
+	<div class="border-around" style="display: inline-block;">
+	<h3>{% trans "Add Project Update" %}</h3>
+	<form method="POST" action="{% url 'projects:addupdate' pid %}">
+		{% csrf_token %}
+		<table>
+			{{form.as_table}}
+		</table>
+		<input type="submit" value="{% trans 'Submit' %}">
+	</form>
+	</div>
+</div>
+
+{% endblock %}

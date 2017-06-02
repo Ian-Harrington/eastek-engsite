@@ -1,0 +1,22 @@
+{% extends "page.html" %}
+
+{% load i18n %}
+
+{% block pagecontent %}
+
+<div class="container">
+	<div class="border-around" style="display: inline-block;">
+		<h3>{% trans "Download Overtime Records" %}</h3>
+		{% if notice %}
+		<p>{{notice}}</p>
+		{% endif %}
+
+		<form action="{% url 'overtime:requestform' %}" method='post'>
+			{% csrf_token %}
+			{{dateform}}
+			<input type="submit" value="{% trans 'Download' %}">
+		</form>
+	</div>
+</div>
+
+{% endblock pagecontent %}

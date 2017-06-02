@@ -1,0 +1,25 @@
+{% extends "page.html" %}
+
+{% load i18n %}
+
+{% block title %} User Settings {% endblock %}
+
+{% block pagecontent %}
+
+<div class="container">
+	<div class="border-around" style="display: inline-block;">
+		<h3>{% trans "Change password" %}</h3>
+		{% if notice %}
+		<p>{{notice}}</p>
+		{% endif %}
+		<form method="POST" action="{% url 'users:setpassword' %}">
+			{% csrf_token %}
+			<table>
+				{{form.as_table}}
+			</table>
+			<input type="submit" value="{% trans 'Update' %}">
+		</form>
+	</div>
+</div>
+
+{% endblock %}

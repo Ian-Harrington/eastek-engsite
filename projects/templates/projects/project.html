@@ -1,0 +1,105 @@
+{% extends "page.html" %}
+
+{% load custom i18n %}
+
+{% block title %} {{project.name}} {% endblock %}
+
+
+{% block pagecontent %} 
+
+<div class="container">
+	<div class="row">
+		<h1> {{project.name}} </h1>
+		<hr/>
+		<div class="col-md-6">
+			<h3> {{project.customer}} </h3>
+			<p>{{project.work_type|human_readable:work_opts}}</p>
+			<form method="POST" action="{% url 'projects:statusupdate' project.id %}">
+			{% csrf_token %}
+			{{projstatus}}
+			<input type="Submit" value="{% trans 'Update' %}">
+			</form>
+			<table>
+				<tr>
+					<th>{% trans "Engineers" %}:</th>
+					<td>{{project.engineer.all|join:', '}}</td>
+				</tr>
+			</table>
+			<form method="POST" action="{% url 'projects:joinproject' project.id %}">
+			{% csrf_token %}
+			<input type="submit" value="{% trans 'Join Project' %}">
+			</form>
+		</div>
+		<div class="col-md-6">
+			<h3> {% trans "Milestones" %} </h3>
+			{% if milestones %}
+			<form method="POST" action="{% url 'projects:milestonecompletion' project.id %}">
+			{% csrf_token %}
+			{{formset.management_form}}
+			<table class="table">
+				<tr>
+					{# it's okay to use the first milestone in the list because this won't execute without one #}
+					<th>{{ms_fs.0.0|verbose_name:'deadline'|title}}</th>
+					<th>{{ms_fs.0.0|verbose_name:'description'|title}}</th>
+					<th>{{ms_fs.0.0|verbose_name:'remarks'|title}}</th>
+					<th>{{ms_fs.0.0|verbose_name:'is_complete'|title}}</th>
+				</tr>
+					{% for z in ms_fs %}
+
+					{% comment %}
+					{% if ms.is_complete %}
+						{# make warning #}
+					{% elif ms.deadline|past %}
+						{# make safe #}
+					{% else %}
+						{# make neutral #}
+					{% endif %}
+					{% endcomment %}
+
+					<tr>
+						<td>{{z.0.deadline}}</td>
+						<td>{{z.0.description}}</td>
+						<td>{{z.0.remarks}}</td>
+						<td>{{z.1.chk}}</td>
+					</tr>
+					{% endfor %}
+					<tr><td></td><td></td><td></td><td>
+						<input type="submit" value="{% trans 'Update' %}"></td></tr>
+			</table>
+			</form>
+			{% else %}
+			<hr/>
+			<p> {% trans "No milestones set" %}</p>
+			{% endif %}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+		<h3> {% trans "Status" %} </h3>
+		{% if status %}
+		<table class="table">
+			<tr>
+				<th>{{status|verbose_name:'mod_date'|title}}</th>
+				<th>{{status|verbose_name:'stage'|title}}</th>
+				<th>{{status|verbose_name:'action_required'|title}}</th>
+				<th>{{status|verbose_name:'estimated_hours'|title}}</th>
+			</tr>
+			<tr>
+				<td>{{status.mod_date}}</td>
+				<td>{{status.stage|human_readable:stage_opts}}</td>
+				<td>{{status.action_required}}</td>
+				<td>{{status.estimated_hours}}</td>
+			</tr>
+		</table>
+		{% else %}
+		<hr/>
+		<p>{% trans "No updates recorded" %}</p>
+		{% endif %}
+		<a href="{% url 'projects:addupdate' project.id %}" class="btn btn-default">{% trans "Update Status" %}</a>
+		<a href="{% url 'projects:updates' project.id %}" class="btn btn-default">{% trans "View Previous" %}</a>
+		</div>
+	</div>
+</div>
+
+
+{% endblock pagecontent %}

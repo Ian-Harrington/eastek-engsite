@@ -1,0 +1,54 @@
+{% extends "page.html" %}
+
+{% load custom i18n %}
+
+{% block title %} Employee List {% endblock %}
+
+{% block pagecontent %}
+<div class="pad-list">
+	<h3>{% trans "Employee List" %}</h3>
+	<div class="container-fluid">
+		<div class="row">
+			<!-- filter form -->
+			<div class="col-md-11">
+				<form action="{% url 'employees:list' %}" method="get">
+					{{ filterform }}
+					<input type="Submit" value="{% trans 'Filter' %}">
+				</form>
+			</div> 
+			<div class="col-md-1">
+				<!-- new user button -->
+				<a href="{% url 'employees:detail' 'add' %}" class="btn btn-default"> {% trans "Add Employee" %} </a>
+			</div>
+		</div>
+	</div>
+	<!-- employee display table -->
+	<div class="table-responsive">
+		<table class="table table-striped">
+			<tr>  
+				<th>{{emps.model|verbose_name:'emp_id'|capfirst}}</th>
+				<th>{{emps.model|verbose_name:'name'|title}}</th>
+				<th>{{emps.model|verbose_name:'english_name'|title}}</th>
+				<th>{{emps.model|verbose_name:'position'|title}}</th>
+				<th>{{emps.model|verbose_name:'team'|title}}</th>
+				<th>{{emps.model|verbose_name:'leader'|title}}</th>
+				<th>{{emps.model|verbose_name:'email'|title}}</th>
+			</tr>
+			{% for e in emps %}
+				<tr class="notice-me" onclick="document.location = '{% url 'employees:detail' e.emp_id %}'"> 
+					<td> {{e.emp_id}} </td>
+					<td> {{e.name}} </td>
+					<td> {{e.english_name}} </td>
+					<td> {{e.get_position_display}} </td>
+					<td> {{e.get_team_display}} </td>
+					<td> {{e.leader.english_name}} </td>
+					<td> {{e.email}} </td>
+				</tr>
+			{% endfor %}
+		</table>
+		{% if not emps %}
+			<p>{% trans "No employee information found" %}</p>
+		{% endif %}
+	</div>
+</div>
+{% endblock pagecontent %}

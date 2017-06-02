@@ -1,0 +1,58 @@
+{% extends "page.html" %}
+
+{% load custom i18n %}
+
+{% block title %} Customer List {% endblock %}
+
+{% block pagecontent %}
+
+<div class="pad-list">
+	<h3>{% trans "Customer List" %}</h3>
+	<div class="table-responsive">
+		<table class="table table-striped">
+			<tr>  
+				<th>{{customer_list.model|verbose_name:'name'|title}}</th>
+			</tr>
+			<tr>
+				<td>
+					<form action="{% url 'projects:addcustomer' %}" method="post">
+						{% csrf_token %}
+						{{form.name}}
+						<input type="submit" value="{% trans 'Add' %}">
+					</form>
+				</td>
+			</tr>
+			{% for c in customer_list %}
+			<tr class="notice-me"> 
+				<td> {{c.name}} </td>
+			</tr>
+			{% endfor %}
+		</table>
+		{% if not object_list %}
+			<p>{% trans "No customers found" %}</p>
+		{% endif %}
+	</div>
+	<div class="row">
+		<div class="col-xs-4 col-md-5"><hr style="border:none;color:#333;background-color:#333" /></div>
+		<div class="col-xs-4 col-md-2" style="text-align: center;">
+			<span style="font-size: 1.5em;">
+				{% if page_obj.has_previous %}
+					<a href="{% url 'overtime:list' page_obj.previous_page_number %}"><i class="glyphicon glyphicon-chevron-left" style="color: #333"></i></a>
+				{% else %}
+					<!-- placeholder to ensure it remains centered -->
+					<i class="glyphicon glyphicon-chevron-left" style="visibility: hidden;"></i>
+				{% endif%}
+				<span>{{page_obj.number}}</span>
+				{% if page_obj.has_next %}
+					<a href="{% url 'overtime:list' page_obj.next_page_number %}"><i class="glyphicon glyphicon-chevron-right" style="color: #333"></i></a>
+				{% else %}
+					<!-- placeholder to ensure it remains centered -->
+					<i class="glyphicon glyphicon-chevron-right" style="visibility: hidden"></i>
+				{% endif%}
+			</span>
+		</div>
+		<div class="col-xs-4 col-md-5"><hr style="border:none;color:#333;background-color:#333" /></div>
+	</div>
+</div>
+
+{% endblock pagecontent %}

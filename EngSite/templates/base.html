@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title> {% block title %} Project Engineering {% endblock %} </title>
+    <meta name="description" content="Eastek International Project Engineering">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    {% load static %}
+    <!-- need own icon/favicon -->
+    <link rel="icon" href="{% static 'img/eastek_icon.png' %}"/>
+    <link rel="apple-touch-icon" href="{% static 'img/eastek_icon.png' %}"/>
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}"/>
+
+    <script src="{% static 'js/vendor/modernizr-2.8.3.min.js' %}"></script>
+</head>
+<body>
+    <!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <!-- Main content goes here, page view will provide more hooks -->
+    {% block content %} {% endblock %}
+
+    <!-- jQuery and bootstrap javascript -->
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script>window.jQuery || document.write('<script src="{% static "js/vendor/jquery-1.12.0.min.js" %}"><\/script>')</script>
+    <script src="{% static 'js/plugins.js' %}"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script> $.fn.modal || document.write('<script src="{% static "js/vendor/bootstrap.min.js" %}"><\/script>')</script>
+    <script src="{% static 'js/main.js' %}"></script>
+    {% block pagescripts %} {% endblock %}
+</body>
+</html>

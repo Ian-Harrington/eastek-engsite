@@ -1,0 +1,40 @@
+{% extends "page.html" %}
+
+{% load custom i18n %}
+
+{% block title %} Project List {% endblock %}
+
+{% block pagecontent %} 
+
+<div class="pad-list">
+	<h3>{% trans "Project List" %}</h3>
+	<form action="{% url 'projects:projectlist' %}" method="get">
+		{{form}}
+		<input type="submit" value="{% trans 'Filter' %}">
+	</form>
+	<div class="table-responsive">
+		<table class="table table-striped">
+			<tr>  
+				<th>{{object_list.model|verbose_name:'name'|title}}</th>
+				<th>{{object_list.model|verbose_name:'customer'|title}}</th>
+				<th>{{object_list.model|verbose_name:'work_type'|title}}</th>
+				<th>{{object_list.model|verbose_name:'status'|title}}</th>
+				<th>{{object_list.model|verbose_name:'engineer'|title}}</th>
+			</tr>
+			{% for p in object_list %}
+			<tr class="notice-me" onclick="document.location = '{% url 'projects:dashboard' p.id %}'"> 
+				<td> {{p.name}} </td>
+				<td> {{p.customer}} </td>
+				<td> {{p.work_type|human_readable:work_opts}} </td>
+				<td> {{p.status|human_readable:status_opts}} </td>
+				<td> {{p.engineer.all|join:', '}} </td>
+			</tr>
+			{% endfor %}
+		</table>
+		{% if not object_list %}
+			<p>{% trans "No projects found" %}</p>
+		{% endif %}
+	</div>
+</div>
+
+{% endblock pagecontent %}

@@ -1,0 +1,67 @@
+{% extends "page.html" %}
+
+{% load static i18n %}
+
+{% block pagecontent %}
+<script src="https://use.fontawesome.com/bc6f602dde.js"></script>
+{# do the columns thing with padded icons #}
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-2" style="text-align: center; padding: 2%">
+			<a href="{% url 'overtime:add' %}">
+				<i class="fa fa-user-plus" aria-hidden='true' style="font-size: 15em;"></i>
+				<h3 class="no-show-text-link">{% trans "Add Overtime" %}</h3>
+			</a>
+		</div>
+		<div class="col-md-2" style="text-align: center; padding: 2%">
+			<a href="{% url 'projects:projectlist' %}?customer=&work_type=&status=INP&engineer={{request.user.employee.emp_id}}">
+				<i class="fa fa-list-alt" aria-hidden='true' style="font-size: 15em;"></i>
+				<h3 class="no-show-text-link">{% trans "My Projects" %}</h3>
+			</a>
+		</div>
+		<div class="col-md-2" style="text-align: center; padding: 2%">
+			<a href="{% url 'projects:addproject' %}">
+				<span class="fa-stack" style="font-size: 7.5em;">
+					<i class="fa fa-plus fa-stack-1x" aria-hidden='true' style="top: 10px"></i>
+					<i class="fa fa-folder-o fa-stack-2x" aria-hidden='true'></i>
+				</span>
+				<h3 class="no-show-text-link">{% trans "Add New Project" %}</h3>
+			</a>
+		</div>
+		<div class="col-md-3"></div>
+	</div>
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-2" style="text-align: center; padding: 2%">
+			{% if request.user.projlink1 %}
+			<a href="{% url 'projects:dashboard' request.user.projlink1.id %}">
+				<i class="fa fa-file-text-o" aria-hidden='true' style="font-size: 15em;"></i>
+				<h3 class="no-show-text-link">{{request.user.link1txt}}</h3>
+			</a>
+			{% endif %}
+		</div>
+		<div class="col-md-2" style="text-align: center; padding: 2%">
+			{% if request.user.projlink2 %}
+			<a href="{% url 'projects:dashboard' request.user.projlink2.id %}">
+				<i class="fa fa-file-text-o" aria-hidden='true' style="font-size: 15em;"></i>
+				<h3 class="no-show-text-link">{{request.user.link2txt}}</h3>
+			</a>
+			{% endif %}
+		</div>
+		<div class="col-md-2" style="text-align: center; padding: 2%">
+			{% if request.user.projlink3 %}
+			<a href="{% url 'projects:dashboard' request.user.projlink3.id %}">
+				<i class="fa fa-file-text-o" aria-hidden='true' style="font-size: 15em;"></i>
+				<h3 class="no-show-text-link">{{request.user.link3txt}}</h3>
+			</a>
+			{% endif %}
+		</div>
+		<div class="col-md-3"></div>
+	</div>
+</div>
+
+{% endblock pagecontent %}
+
+{% block scripts %}
+{% endblock %}

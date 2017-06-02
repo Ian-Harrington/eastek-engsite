@@ -1,0 +1,138 @@
+[
+	{
+		"model": "employees.Employee",
+		"pk": "00001",
+		"fields": {
+			"name": "ONE",
+			"english_name": "Name One",
+			"position": "LDR",
+			"is_active": true, 
+			"is_leader": true,
+			"team": "MECH",
+			"leader": "00001",
+			"email": "name.one@eastek-intl.com",
+			"join_date": "2012-01-01",
+			"ret_date": null,
+			"account": null
+		}
+	},
+	{
+		"model": "employees.Employee",
+		"pk": "00002",
+		"fields": {
+			"name": "TWO",
+			"english_name": "Name Two",
+			"position": "ENG",
+			"is_active": true, 
+			"is_leader": false,
+			"team": "MECH",
+			"leader": "00001",
+			"email": "name.two@eastek-intl.com",
+			"join_date": "2014-01-01",
+			"ret_date": null,
+			"account": null
+		}
+	},
+	{
+		"model": "employees.Employee",
+		"pk": "00003",
+		"fields": {
+			"name": "THREE",
+			"english_name": "Name Three",
+			"position": "ENG",
+			"is_active": true, 
+			"is_leader": false,
+			"team": "MECH",
+			"leader": "00001",
+			"email": "name.three@eastek-intl.com",
+			"join_date": "2013-01-01",
+			"ret_date": null,
+			"account": null
+		}
+	},
+	{
+		"model": "employees.Employee",
+		"pk": "00004",
+		"fields": {
+			"name": "FOUR",
+			"english_name": "Name Four",
+			"position": "AEN",
+			"is_active": true, 
+			"is_leader": false,
+			"team": "MECH",
+			"leader": "00001",
+			"email": "name.four@eastek-intl.com",
+			"join_date": "2014-01-01",
+			"ret_date": null,
+			"account": null
+		}
+	},
+	{
+		"model": "employees.Employee",
+		"pk": "00005",
+		"fields": {
+			"name": "FIVE",
+			"english_name": "Name Five",
+			"position": "LDR",
+			"is_active": true, 
+			"is_leader": true,
+			"team": "ELEC",
+			"leader": "00005",
+			"email": "name.five@eastek-intl.com",
+			"join_date": "2012-01-01",
+			"ret_date": null,
+			"account": null
+		}
+	},
+	{
+		"model": "employees.Employee",
+		"pk": "00006",
+		"fields": {
+			"name": "SIX",
+			"english_name": "Name Six",
+			"position": "ENG",
+			"is_active": true, 
+			"is_leader": false,
+			"team": "ELEC",
+			"leader": "00005",
+			"email": "name.six@eastek-intl.com",
+			"join_date": "2014-01-01",
+			"ret_date": null,
+			"account": null
+		}
+	},
+	{
+		"model": "employees.Employee",
+		"pk": "00007",
+		"fields": {
+			"name": "SEVEN",
+			"english_name": "Name Seven",
+			"position": "ENG",
+			"is_active": true, 
+			"is_leader": false,
+			"team": "ELEC",
+			"leader": "00005",
+			"email": "name.seven@eastek-intl.com",
+			"join_date": "2013-01-01",
+			"ret_date": null,
+			"account": null
+		}
+	},
+	{
+		"model": "employees.Employee",
+		"pk": "00008",
+		"fields": {
+			"name": "EIGHT",
+			"english_name": "Name Eight",
+			"position": "AEN",
+			"is_active": true, 
+			"is_leader": false,
+			"team": "ELEC",
+			"leader": "00005",
+			"email": "name.eight@eastek-intl.com",
+			"join_date": "2014-01-01",
+			"ret_date": null,
+			"account": null
+		}
+	}
+]

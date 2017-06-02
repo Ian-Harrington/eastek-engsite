@@ -1,0 +1,578 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-27 10:31+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: EngSite/settings.py:124 EngSite/templates/page.html:71
+msgid "English"
+msgstr "英语"
+
+#: EngSite/settings.py:125 EngSite/templates/page.html:72
+msgid "Chinese"
+msgstr ""
+
+#: EngSite/templates/home.html:14
+msgid "Add Overtime"
+msgstr ""
+
+#: EngSite/templates/home.html:20 EngSite/templates/page.html:44
+msgid "My Projects"
+msgstr ""
+
+#: EngSite/templates/home.html:29
+#: projects/templates/projects/add_project.html:12
+msgid "Add New Project"
+msgstr ""
+
+#: EngSite/templates/logout.html:58
+msgid "Logout Complete"
+msgstr ""
+
+#: EngSite/templates/logout.html:59
+msgid "Click"
+msgstr ""
+
+#: EngSite/templates/logout.html:59
+msgid " here"
+msgstr ""
+
+#: EngSite/templates/logout.html:59
+msgid " to log in again."
+msgstr ""
+
+#: EngSite/templates/page.html:28 EngSite/templates/page.html:37
+msgid "Overtime"
+msgstr ""
+
+#: EngSite/templates/page.html:30
+msgid "Record New"
+msgstr ""
+
+#: EngSite/templates/page.html:31
+msgid "Download Form"
+msgstr ""
+
+#: EngSite/templates/page.html:32 EngSite/templates/page.html:56
+msgid "View All"
+msgstr ""
+
+#: EngSite/templates/page.html:42
+msgid "Projects"
+msgstr ""
+
+#: EngSite/templates/page.html:46
+msgid "All Projects"
+msgstr ""
+
+#: EngSite/templates/page.html:47
+msgid "Create New Project"
+msgstr ""
+
+#: EngSite/templates/page.html:54
+msgid "Employees"
+msgstr ""
+
+#: EngSite/templates/page.html:57
+msgid "Add New"
+msgstr ""
+
+#: EngSite/templates/page.html:65
+msgid "Account"
+msgstr ""
+
+#: EngSite/templates/page.html:67
+msgid "Settings"
+msgstr ""
+
+#: EngSite/templates/page.html:68
+msgid "Change Password"
+msgstr ""
+
+#: EngSite/templates/page.html:69
+msgid "Language"
+msgstr ""
+
+#: EngSite/templates/page.html:75
+msgid "Logout"
+msgstr ""
+
+#: EngSite/templates/page.html:86
+msgid "There was a problem loading the page content"
+msgstr ""
+
+#: employees/forms.py:11
+msgid "Position"
+msgstr ""
+
+#: employees/forms.py:12
+msgid "Team"
+msgstr ""
+
+#: employees/forms.py:13 employees/forms.py:18
+msgid "Leader"
+msgstr ""
+
+#: employees/forms.py:14
+msgid "Retired"
+msgstr ""
+
+#: employees/forms.py:20
+msgid "Email"
+msgstr ""
+
+#: employees/forms.py:21 employees/models.py:44
+msgid "Employee ID"
+msgstr ""
+
+#: employees/models.py:13 overtime/models.py:32
+msgid "employee"
+msgstr ""
+
+#: employees/models.py:24
+msgid "Assistant Engineer"
+msgstr ""
+
+#: employees/models.py:25 projects/forms.py:13
+msgid "Engineer"
+msgstr ""
+
+#: employees/models.py:26
+msgid "Senior Engineer"
+msgstr ""
+
+#: employees/models.py:27
+msgid "Engineer Leader"
+msgstr ""
+
+#: employees/models.py:28
+msgid "Clerk"
+msgstr ""
+
+#: employees/models.py:29
+msgid "Tooling Engineer"
+msgstr ""
+
+#: employees/models.py:36 projects/models.py:13
+msgid "Mechanical"
+msgstr ""
+
+#: employees/models.py:37
+msgid "Electronics"
+msgstr ""
+
+#: employees/models.py:38
+msgid "Support"
+msgstr ""
+
+#: employees/models.py:39
+msgid "Tooling"
+msgstr ""
+
+#: employees/models.py:45
+msgid "name"
+msgstr ""
+
+#: employees/models.py:46
+msgid "english name"
+msgstr ""
+
+#: employees/models.py:47
+msgid "position"
+msgstr ""
+
+#: employees/models.py:48
+msgid "Employed"
+msgstr ""
+
+#: employees/models.py:49
+msgid "is leader"
+msgstr ""
+
+#: employees/models.py:50
+msgid "group"
+msgstr ""
+
+#: employees/models.py:51
+msgid "leader"
+msgstr ""
+
+#: employees/models.py:52
+msgid "email"
+msgstr ""
+
+#: employees/models.py:53
+msgid "join date"
+msgstr ""
+
+#: employees/models.py:54
+msgid "retire date"
+msgstr ""
+
+#: employees/models.py:56
+msgid "user account"
+msgstr ""
+
+#: employees/models.py:75
+msgid ""
+"Email must be a valid @eastek-intl.com or @eastekinternational.com email "
+"address"
+msgstr ""
+
+#: employees/models.py:80
+msgid "Employee selected for leader must have 'Is leader' attribute"
+msgstr ""
+
+#: employees/models.py:84
+msgid "Employee ID must be numerals only and 4-5 digits long"
+msgstr ""
+
+#: overtime/forms.py:15
+msgid "Cannot submit for overtime in the past"
+msgstr ""
+
+#: overtime/forms.py:17
+msgid "Cannot submit for overtime more than 4 days in advance"
+msgstr ""
+
+#: overtime/forms.py:19 overtime/forms.py:31 overtime/forms.py:38
+msgid "Date"
+msgstr ""
+
+#: overtime/forms.py:20
+msgid "Request hours"
+msgstr ""
+
+#: overtime/forms.py:39
+msgid "Employee"
+msgstr ""
+
+#: overtime/forms.py:40
+msgid "Project"
+msgstr ""
+
+#: overtime/models.py:13
+msgid "Can view overtime submissions"
+msgstr ""
+
+#: overtime/models.py:15 overtime/models.py:16
+msgid "overtime"
+msgstr ""
+
+#: overtime/models.py:22
+msgid "Overtime hours cannot exceed 24 hours for a given day"
+msgstr ""
+
+#: overtime/models.py:24
+msgid "Overtime hours must be greater than 0"
+msgstr ""
+
+#: overtime/models.py:26
+msgid "Overtime hours must be recorded to the half hour"
+msgstr ""
+
+#: overtime/models.py:28 projects/models.py:80
+msgid "date"
+msgstr ""
+
+#: overtime/models.py:29
+msgid "time"
+msgstr ""
+
+#: overtime/models.py:30
+msgid "request hours"
+msgstr ""
+
+#: overtime/models.py:31
+msgid "hours worked"
+msgstr ""
+
+#: overtime/models.py:33 projects/models.py:10 projects/models.py:44
+#: projects/models.py:76
+msgid "project"
+msgstr ""
+
+#: overtime/models.py:34
+msgid "reason"
+msgstr ""
+
+#: projects/forms.py:10
+msgid "Customer"
+msgstr ""
+
+#: projects/forms.py:11
+msgid "Project type"
+msgstr ""
+
+#: projects/forms.py:12 projects/forms.py:18
+#: projects/templates/projects/project.html:76
+msgid "Status"
+msgstr ""
+
+#: projects/forms.py:51 projects/models.py:29 projects/models.py:79
+msgid "estimated hours"
+msgstr ""
+
+#: projects/forms.py:67
+msgid "Associated project not found"
+msgstr ""
+
+#: projects/forms.py:79
+msgid "User instance not found"
+msgstr ""
+
+#: projects/models.py:14
+msgid "Electronic"
+msgstr ""
+
+#: projects/models.py:15
+msgid "Assembly"
+msgstr ""
+
+#: projects/models.py:18
+msgid "In-Progress"
+msgstr ""
+
+#: projects/models.py:19
+msgid "On Hold"
+msgstr ""
+
+#: projects/models.py:20
+msgid "Cancelled"
+msgstr ""
+
+#: projects/models.py:21
+msgid "Completed"
+msgstr ""
+
+#: projects/models.py:23
+msgid "project name"
+msgstr ""
+
+#: projects/models.py:24 projects/models.py:88 projects/models.py:91
+msgid "customer"
+msgstr ""
+
+#: projects/models.py:25
+msgid "project type"
+msgstr ""
+
+#: projects/models.py:26
+msgid "status"
+msgstr ""
+
+#: projects/models.py:28
+msgid "engineer"
+msgstr ""
+
+#: projects/models.py:42 projects/models.py:46
+msgid "milestone"
+msgstr ""
+
+#: projects/models.py:47
+msgid "deadline"
+msgstr ""
+
+#: projects/models.py:48
+msgid "is complete"
+msgstr ""
+
+#: projects/models.py:49
+msgid "remarks"
+msgstr ""
+
+#: projects/models.py:58
+msgid "update"
+msgstr ""
+
+#: projects/models.py:61
+msgid "Waiting for Customer Response"
+msgstr ""
+
+#: projects/models.py:62
+msgid "Creating DFM"
+msgstr ""
+
+#: projects/models.py:63
+msgid "Tooling Design"
+msgstr ""
+
+#: projects/models.py:64
+msgid "Tooling Build"
+msgstr ""
+
+#: projects/models.py:65
+msgid "Tooling Testing"
+msgstr ""
+
+#: projects/models.py:66
+msgid "Tooling Modification"
+msgstr ""
+
+#: projects/models.py:67
+msgid "Creating Samples"
+msgstr ""
+
+#: projects/models.py:68
+msgid "Improving Samples"
+msgstr ""
+
+#: projects/models.py:69
+msgid "Creating WI"
+msgstr ""
+
+#: projects/models.py:70
+msgid "Creating BOM"
+msgstr ""
+
+#: projects/models.py:71
+msgid "Creating ECO"
+msgstr ""
+
+#: projects/models.py:72
+msgid "Process Validation"
+msgstr ""
+
+#: projects/models.py:73
+msgid "Pilot Run"
+msgstr ""
+
+#: projects/models.py:74
+msgid "Building Test Fixture"
+msgstr ""
+
+#: projects/models.py:77
+msgid "stage"
+msgstr ""
+
+#: projects/models.py:78
+msgid "action required"
+msgstr ""
+
+#: projects/models.py:81
+msgid "user"
+msgstr ""
+
+#: projects/templates/projects/add_project.html:38
+#: projects/templates/projects/add_update.html:17
+msgid "Submit"
+msgstr ""
+
+#: projects/templates/projects/add_update.html:11
+msgid "Add Project Update"
+msgstr ""
+
+#: projects/templates/projects/project.html:21
+#: projects/templates/projects/project.html:65
+#: users/templates/users/user_settings.html:19
+msgid "Update"
+msgstr ""
+
+#: projects/templates/projects/project.html:25
+msgid "Engineers"
+msgstr ""
+
+#: projects/templates/projects/project.html:29
+msgid "Join Project"
+msgstr ""
+
+#: projects/templates/projects/project.html:32
+msgid "Milestones"
+msgstr ""
+
+#: projects/templates/projects/project.html:70
+msgid "No milestones set"
+msgstr ""
+
+#: projects/templates/projects/project.html:94
+msgid "No updates recorded"
+msgstr ""
+
+#: projects/templates/projects/project.html:96
+msgid "Update Status"
+msgstr ""
+
+#: projects/templates/projects/project.html:97
+msgid "View Previous"
+msgstr ""
+
+#: projects/templates/projects/project_list.html:11
+msgid "Project List"
+msgstr ""
+
+#: users/forms.py:15
+msgid "Password"
+msgstr ""
+
+#: users/forms.py:16
+msgid "Confirm password"
+msgstr ""
+
+#: users/forms.py:23
+msgid "Must enter password in both fields"
+msgstr ""
+
+#: users/forms.py:25
+msgid "Passwords must match"
+msgstr ""
+
+#: users/forms.py:35
+msgid "Password is too simple"
+msgstr ""
+
+#: users/models.py:8
+msgid "language"
+msgstr ""
+
+#: users/models.py:9
+msgid "link one"
+msgstr ""
+
+#: users/models.py:10
+msgid "link two"
+msgstr ""
+
+#: users/models.py:11
+msgid "link three"
+msgstr ""
+
+#: users/models.py:12
+msgid "link one text"
+msgstr ""
+
+#: users/models.py:13
+msgid "link two text"
+msgstr ""
+
+#: users/models.py:14
+msgid "link three text"
+msgstr ""
+
+#: users/templates/users/login.html:10
+msgid "Eastek International Project Engineering"
+msgstr ""
+
+#: users/templates/users/login.html:13
+msgid "Username / password not found."
+msgstr ""
+
+#: users/templates/users/user_settings.html:10
+msgid "Update User Settings"
+msgstr ""
+
+#: users/templates/users/user_settings.html:13
+msgid "Change password"
+msgstr ""

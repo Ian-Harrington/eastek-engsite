@@ -1,0 +1,18 @@
+{% extends "page.html" %}
+
+{% block title %} Add New Project {% endblock %}
+
+{% block pagecontent %}
+<div>
+	<h3> Add Project </h3>
+	<!-- main display/form -->
+	<form action="{% url 'overtime:addproject' %}" method="post">
+		{% csrf_token %}
+		<table>
+			{{form.as_table}}
+		</table>
+		<input type="submit" value="Save">
+	</form>
+
+</div>
+{% endblock %}

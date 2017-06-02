@@ -1,0 +1,59 @@
+{% extends "page.html" %}
+
+{% load static i18n %}
+
+{% block title %} Add Project {% endblock %}
+
+{% block pagecontent %}
+
+<div class="container">
+	<div class="border-around">
+	<h3>{% trans "Add New Project" %}</h3>
+	<form method="POST" action="{% url 'projects:addproject' %}">
+		{% csrf_token %}
+		{{formset.management_form}}
+		<table id="project-info-table" class="table">
+			{{proj_form.as_table}}
+		</table>
+		<div class="table-reponsive">
+		<table id="milestone-table" class="table">
+			<tr>
+				<th>{{formset.empty_form.description.label|capfirst}}</th>
+				<th>{{formset.empty_form.deadline.label|capfirst}}</th>
+				<th>{{formset.empty_form.remarks.label|capfirst}}</th>
+				<th></th>
+			</tr>
+			{% for frm in formset %}
+			<tr class="form">
+				<td>{{frm.description}}</td>
+				<td>{{frm.deadline}}</td>
+				<td>{{frm.remarks}}</td>
+				<td><a id="" class="delete-form" href="#"><i class="glyphicon glyphicon-remove text-danger" style="font-size: 2em"></i></td>
+			</tr>
+			{% endfor %}
+			<tr><td></td><td></td><td></td><td><a id="add-form" href="#"><i class="glyphicon glyphicon-plus text-success" style="font-size: 2em"></i></a></td></tr>
+		</table>
+		</div>
+		<input type="submit" value="{% trans 'Submit' %}">
+	</form>
+	<!-- this div only used in different add/remove form js -->
+	<div >
+		<table id="empty-form" style="display: none;">
+			<tr class="fake-form">
+				<td>{{formset.empty_form.description}}</td>
+				<td>{{formset.empty_form.deadline}}</td>
+				<td>{{formset.empty_form.remarks}}</td>
+				<td><a id="" class="delete-form" href="#"><i class="glyphicon glyphicon-remove text-danger" style="font-size: 2em"></i></a></td>
+			</tr>
+		</table>
+	</div>
+	</div>
+</div>
+
+{% endblock pagecontent %}
+
+{% block scripts %}
+
+<script>$(document).ready(addDeleteForms())</script>
+
+{% endblock %}
