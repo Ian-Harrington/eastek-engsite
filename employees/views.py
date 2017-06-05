@@ -49,7 +49,7 @@ def individual(request, emp_id):
 			# check against other validation methods? (email domain, etc.)
 			form.save()
 			context['saved'] = True
-			if form.cleaned_data['user_acc']:
+			if 'user_acc' in form.cleaned_data:
 				emp = Employee.objects.get(pk=form.cleaned_data['emp_id'])
 				emp.generate_user(supress=True)
 				assert emp.account.is_active

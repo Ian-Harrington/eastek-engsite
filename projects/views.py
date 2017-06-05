@@ -134,7 +134,7 @@ def add_update(request, pid):
 			form.save()
 			return HttpResponseRedirect('/projects/' + pid)
 	else:
-		init = {'project': pid, 'mod_user': request.user.username}
+		init = {'project': pid, 'mod_user': request.user.id}
 		form = forms.UpdateForm(initial=init)
 	context = {'form': form, 'pid': pid}
 	return render(request, 'projects/add_update.html', context)

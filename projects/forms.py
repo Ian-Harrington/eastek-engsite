@@ -1,7 +1,9 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext_lazy as _
+from django.contrib.auth import get_user_model
 
+from users.models import User
 from employees.models import Employee
 from . import models
 
@@ -47,8 +49,8 @@ class MilestoneForm(forms.ModelForm):
 class UpdateForm(forms.ModelForm):
 	"""docstring for UpdateForm"""
 	project = forms.CharField(widget=forms.HiddenInput())
-	mod_user = forms.CharField(widget=forms.HiddenInput())
-	estimated_hours = forms.IntegerField(max_value=500, min_value=0, label=_('estimated hours'))
+	mod_user = forms.ModelChoiceField(queryset=get_user_model().objects.all(), to_field_name='id', widget=forms.HiddenInput())
+	estimated_hours = forms.IntegerField(max_value=500, min_value=0, label=_('Estimated hours'))
 
 
 	class Meta:
@@ -74,10 +76,11 @@ class UpdateForm(forms.ModelForm):
 			raise forms.ValidationError()
 		User = get_user_model()
 		try:
-			instance = User.objects.get(id=val)
+			instance = User.objects.get(username=val)
 		except User.DoesNotExist:
 			raise forms.ValidationError(_('User instance not found'))
 		return instance
+
 
 class CustomerForm(forms.ModelForm):
 	"""docstring for CustomerForm"""
