@@ -10,7 +10,12 @@ function addDeleteForms() {
 
     $('#add-form').on('click', function() {
         var form_index = $('.form').length;
-        $('.form:last').after($('#empty-form').children().html().replace(/__prefix__/g, parseInt(form_index)).replace(/fake-form/, 'form'));
+        if (form_index > 0) {
+            $('.form:last').after($('#empty-form').children().html().replace(/__prefix__/g, parseInt(form_index)).replace(/fake-form/, 'form'));
+        }
+        else {
+            $('#milestone-table-header-row').after($('#empty-form').children().html().replace(/__prefix__/g, parseInt(form_index)).replace(/fake-form/, 'form'));
+        }
         addDeleteHandlers();
         form_index = $('.form').length;
         $('#id_form-TOTAL_FORMS').val(parseInt(form_index));

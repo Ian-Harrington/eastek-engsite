@@ -10,7 +10,7 @@ from projects.models import Project
 class Overtime(models.Model):
 	"""model representing an occurance of overtime work"""
 	class Meta:
-		permissions = (('view_overtime', _('Can view overtime submissions')),)
+		permissions = (('view_overtime', _('Can view overtime')),)
 		ordering = ['-date']
 		verbose_name=_('overtime')
 		verbose_name_plural=_('overtime')

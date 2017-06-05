@@ -22,7 +22,7 @@ def project_page(request, pid):
 	milestones = models.Milestone.objects.filter(project=project.id)
 	updates = models.Update.objects.filter(project=project.id)
 	form = forms.ProjectStatusForm(initial={'status': project.status})
-	init = {'form-TOTAL_FORMS':'2',
+	init = {'form-TOTAL_FORMS':str(milestones.count()),
 			'form-INITIAL_FORMS':'0',
 			'form-MIN_NUM_FORMS':'',
 			'form-MAX_NUM_FORMS':''}

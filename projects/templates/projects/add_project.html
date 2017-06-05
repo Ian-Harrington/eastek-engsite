@@ -9,7 +9,7 @@
 <div class="container">
 	<div class="border-around">
 	<h3>{% trans "Add New Project" %}</h3>
-	<form method="POST" action="{% url 'projects:addproject' %}">
+	<form method="POST" action="{% url 'projects:addproject' %}" enctype="multipart/form-data">
 		{% csrf_token %}
 		{{formset.management_form}}
 		<table id="project-info-table" class="table">
@@ -17,7 +17,7 @@
 		</table>
 		<div class="table-reponsive">
 		<table id="milestone-table" class="table">
-			<tr>
+			<tr id="milestone-table-header-row">
 				<th>{{formset.empty_form.description.label|capfirst}}</th>
 				<th>{{formset.empty_form.deadline.label|capfirst}}</th>
 				<th>{{formset.empty_form.remarks.label|capfirst}}</th>
