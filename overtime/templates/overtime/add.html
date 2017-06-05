@@ -8,6 +8,7 @@
 <div class="container">
 	<div class="border-around" style="display: inline-block;">
 		<h3>{% trans "Request Overtime" %}</h3>
+		<p> {{notice}} </p>
 		<form action='{% url "overtime:add" %}' method='post'>
 			{% csrf_token %}
 			<table>

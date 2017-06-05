@@ -14,15 +14,15 @@
 	<div class="table-responsive">
 		<table class="table table-striped">
 			<tr>
-				<th>{{object_list.model|verbose_name:'emp'|title}}</th>
-				<th>{{object_list.model|verbose_name:'project'|title}}</th>
-				<th>{{object_list.model|verbose_name:'date'|title}}</th>
-				<th>{{object_list.model|verbose_name:'time'|title}}</th>
-				<th>{{object_list.model|verbose_name:'request_hours'|title}}</th>
-				<th>{{object_list.model|verbose_name:'actual_hours'|title}}</th>
-				<th>{{object_list.model|verbose_name:'reason'|title}}</th>
+				<th>{{overtime|verbose_name:'emp'|title}}</th>
+				<th>{{overtime|verbose_name:'project'|title}}</th>
+				<th>{{overtime|verbose_name:'date'|title}}</th>
+				<th>{{overtime|verbose_name:'time'|title}}</th>
+				<th>{{overtime|verbose_name:'request_hours'|title}}</th>
+				<th>{{overtime|verbose_name:'actual_hours'|title}}</th>
+				<th>{{overtime|verbose_name:'reason'|title}}</th>
 			</tr>
-			{% for ot in object_list %}
+			{% for ot in page_obj %}
 			<tr class="notice-me">
 				<td>{{ot.emp}}</td>
 				<td>{{ot.project}}</td>
@@ -33,7 +33,7 @@
 				<td>{{ot.reason}}</td>
 			</tr>
 			{% empty %}
-			<tr><td>{% trans "No overtime records found" %}</td></tr>
+			<tr><td>{% trans "No overtime records found" %}</td><td></td><td></td><td></td><td></td><td></td></tr>
 			{% endfor %}
 		</table>
 	</div>

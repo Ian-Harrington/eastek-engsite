@@ -7,6 +7,7 @@ from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.http import HttpResponse
 from django.db.models.query import QuerySet
 from django.urls import reverse_lazy
+from django.core.paginator import Paginator
 from django.utils.translation import ugettext_lazy as _
 
 from projects.models import Project
@@ -85,8 +86,8 @@ class OvertimeListView(PermissionRequiredMixin, ListView):
 	paginate_by = 50
 
 	def get_queryset(self, **kwargs):
+		# isn't executed every time 
 		qs = super(OvertimeListView, self).get_queryset(**kwargs)
-		assert isinstance(qs, QuerySet)
 		if self.request.method == 'GET': 
 			if self.request.GET.get('emp') != '' and self.request.GET.get('emp') != None:
 				qs = qs.filter(emp=self.request.GET.get('emp'))
@@ -98,35 +99,40 @@ class OvertimeListView(PermissionRequiredMixin, ListView):
 					qs = qs.filter(date=Date(y,m,d))
 				except ValueError:
 					pass
+			if self.request.GET.get('project') != '':
+				qs = qs.filter(project=self.request.GET.get('project'))
 		return qs
 
 	def get_context_data(self, **kwargs):
+		# rarely is executed
 		context = super(OvertimeListView, self).get_context_data(**kwargs)
 		context['form'] = OvertimeFilter()
 		return context
 
-'''
-# I don't like class based views, too confusing
-class AddProjectView(PermissionRequiredMixin, CreateView):
-	"""handles the add project view for the stand-in project model"""
-	raise_exception = True
-	permission_required = 'overtime.add_project'
-	template_name = 'overtime/addproject.html'
-	model = Project
-	fields = ['name', 'customer']
-	success_url = reverse_lazy('overtime:listproject')
-
-class EditProjectView(PermissionRequiredMixin, UpdateView):
-	"""handles the add project view for the stand-in project model"""
-	raise_exception = True
-	permission_required = 'overtime.edit_project'
-	template_name = 'overtime/editproject.html'
-	model = Project
-	fields = ['name', 'customer']
-
-class ListProjectView(PermissionRequiredMixin, ListView):
-	raise_exception = True
-	permission_required = 'overtime.add_project'
-	template_name = 'overtime/listproject.html'
-	model = Project
-'''
+@login_required
+@permission_required('overtime.view_overtime', raise_exception=True)
+def overtime_list(request, page):
+	ot = Overtime.objects.all()
+	form = OvertimeFilter()
+	if request.GET:
+		y = int(request.GET.get('date_year'))
+		m = int(request.GET.get('date_month'))
+		d = int(request.GET.get('date_day'))
+		filters = {
+			'emp': request.GET.get('emp'),
+			'project': request.GET.get('project'),
+		}
+		if filters['emp'] != '':
+			ot = ot.filter(emp=filters['emp'])
+		#if request.GET.get('date_day') != None and request.GET.get('date_month') != None and request.GET.get('date_year') != None:
+		if d > 0 and m > 0 and y > 2000:
+			ot = ot.filter(date=Date(y,m,d))
+			filters['date_year'] = y
+			filters['date_month'] = m
+			filters['date_day'] = d
+		if filters['project'] != '':
+			ot = ot.filter(project=filters['project'])
+		form = OvertimeFilter(filters)
+	paginator = Paginator(ot, 50)
+	context = {'form': form, 'page_obj': paginator.page(page), 'overtime': Overtime}
+	return render(request, 'overtime/list.html', context)
