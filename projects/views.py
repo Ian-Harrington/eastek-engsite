@@ -106,7 +106,7 @@ def add_project(request):
 				'form-1-description': 'Engineering Samples Shipment 2',
 				'form-2-description': 'Qualification',
 				'form-3-description': 'Pilot Run Shipment',
-				'form-4-description': 'Production Run Shipment'}
+				'form-4-description': 'Production Run Shipment',}
 	if request.method == 'POST':
 		proj_form = forms.ProjectForm(request.POST)
 		mstn_form = formset(request.POST)
