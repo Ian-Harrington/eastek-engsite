@@ -119,6 +119,11 @@ AUTH_PASSWORD_VALIDATORS = [
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
 
+
+SESSION_COOKIE_SECURE = True
+CRSF_COOKIE_SECURE = True
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
