@@ -102,11 +102,11 @@ def add_project(request):
 				'form-INITIAL_FORMS':'0',
 				'form-MIN_NUM_FORMS':'',
 				'form-MAX_NUM_FORMS':'',
-				'form-0-description': 'Engineering Samples Shipment 1',
-				'form-1-description': 'Engineering Samples Shipment 2',
+				'form-0-description': 'Kickoff',
+				'form-1-description': 'Tool Design',
 				'form-2-description': 'Qualification',
-				'form-3-description': 'Pilot Run Shipment',
-				'form-4-description': 'Production Run Shipment',}
+				'form-3-description': 'Pilot Run',
+				'form-4-description': 'First Production Run',}
 	if request.method == 'POST':
 		proj_form = forms.ProjectForm(request.POST)
 		mstn_form = formset(request.POST)

@@ -24,7 +24,6 @@ class Project(models.Model):
 	customer = models.ForeignKey('Customer', on_delete=models.PROTECT, verbose_name=_('customer'))
 	work_type = models.CharField(max_length=4, choices=WORK_TYPES, verbose_name=_('project type'))
 	status = models.CharField(max_length=3, choices=STATUS, verbose_name=_('status'))
-	#leader = models.ForeignKey(Employee, on_delete=models.PROTECT) # put in eng?projec
 	engineer = models.ManyToManyField(Employee, verbose_name=_('engineer'))
 	estimated_hours = models.SmallIntegerField(null=True, verbose_name=_('estimated hours'))
 
@@ -42,11 +41,10 @@ class Milestone(models.Model):
 		verbose_name = _('milestone')
 		
 	project = models.ForeignKey(Project, on_delete=models.PROTECT, verbose_name=_('project'))
-	#task = models.ForeignKey('self', on_delete=PROTECT, blank=True, null=True) # represents a milestone
 	description = models.CharField(max_length=50, verbose_name=_('milestone'))
 	deadline = models.DateField(verbose_name=_('deadline'))
-	is_complete = models.BooleanField(default=False, verbose_name=_('is complete'))
-	remarks = models.TextField(blank=True, verbose_name=_('remarks'))
+	completion_date = models.DateField(null=True, verbose_name=_('completion date'))
+	gate_checklist = models.ForeignKey() 
 		
 	def __str__(self):
 		return self.project.name + ' - ' + self.description
