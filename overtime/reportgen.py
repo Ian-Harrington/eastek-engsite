@@ -91,8 +91,3 @@ def generate_overtime_report(overtime):
 			ws.cell(row=i+5, column=8, value=ot.project.name + ' - ' + ot.reason)
 	wb.remove_sheet(wb['Template'])
 	return save_virtual_workbook(wb)
-
-# accepts a worksheet object and a date, returns the worksheet
-def generate_xlsx_template(ws, date):
-
-	return ws
