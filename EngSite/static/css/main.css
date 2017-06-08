@@ -114,6 +114,10 @@ textarea {
     background-color:#F0F0F0 !important;
 }
 
+.extends-base {
+    padding-top: 70px;
+}
+
 #login-row {
     width: 100vw;
     text-align: center;

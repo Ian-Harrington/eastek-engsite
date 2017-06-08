@@ -16,8 +16,6 @@ from . import models, forms
 @login_required
 @permission_required('projects.change_project', raise_exception=True)
 def project_page(request, pid):
-	#if request.method =='GET': # if there are get parameters
-		# try to retrieve the project with that ID
 	project = get_object_or_404(models.Project, pk=pid)
 	milestones = models.Milestone.objects.filter(project=project.id)
 	updates = models.Update.objects.filter(project=project.id)
@@ -29,7 +27,7 @@ def project_page(request, pid):
 	for i in range(milestones.count()):
 		init['form-'+str(i)+'-chk'] = milestones[i].is_complete
 	formset = forms.CheckFormset(init)
-	ms_fs = list(zip(milestones, formset)) # breaks with a KeyError 0
+	ms_fs = list(zip(milestones, formset))
 	if updates.exists():
 		status = updates[0]
 	else:
