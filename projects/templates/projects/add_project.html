@@ -25,7 +25,7 @@
 			</tr>
 			{% for frm in formset %}
 			<tr class="form">
-				<td>{{frm.description}}</td>
+				<td>{{frm.description.value}}</td>
 				<td>{{frm.deadline}}</td>
 				<td>{{frm.remarks}}</td>
 				<td><a id="" class="delete-form" href="#"><i class="glyphicon glyphicon-remove text-danger" style="font-size: 2em"></i></td>

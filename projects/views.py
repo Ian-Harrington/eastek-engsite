@@ -205,3 +205,20 @@ def add_customer(request):
 	if form.is_valid():
 		form.save()
 	return HttpResponseRedirect('/projects/customers/')
+
+@require_POST
+@permission_required('projects.change_checklist', raise_exception=True)
+def create_checklist(request, pid):
+	# send kwarg with number/phrase indicating the list to use
+	# create checklist
+	# create checklist items (complete = False)
+	for cli in checklist_items:
+		models.ChecklistItem() # can I even initialize like this?
+	# redirect to forms
+	return HttpResponseRedirect('projects/'+pid+'/checklist/'+chklist_id+'/')
+
+
+@permission_required('projects.change_checklist', raise_exception=True)
+def complete_checklist(request):
+	#
+	return render(request, 'projects/checklist.html', context)

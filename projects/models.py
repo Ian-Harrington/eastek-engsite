@@ -178,10 +178,10 @@ class Checklist(models.Model):
 
 
 class ChecklistItem(models.Model):
-	"""represents a single """
+	"""represents a single item in a checklist"""
 	class Meta:
 		verbose_name  = _('checklist item')
 	
-	checklist = models.ForeignKey(Checklist, on_delete=models.PROTECT, verbose_name=_('checklist'))
+	checklist = models.ForeignKey(Checklist, on_delete=models.PROTECT, verbose_name=_('checklist'), related_name='items')
 	name = models.CharField(max_length=35, verbose_name=_('item'))
-	# check for each approbal lecel(#)
+	completed = models.NullBooleanField(verbose_name=_('is complete'))
