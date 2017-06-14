@@ -206,19 +206,34 @@ def add_customer(request):
 		form.save()
 	return HttpResponseRedirect('/projects/customers/')
 
-@require_POST
-@permission_required('projects.change_checklist', raise_exception=True)
-def create_checklist(request, pid):
-	# send kwarg with number/phrase indicating the list to use
-	# create checklist
-	# create checklist items (complete = False)
-	for cli in checklist_items:
-		models.ChecklistItem() # can I even initialize like this?
-	# redirect to forms
-	return HttpResponseRedirect('projects/'+pid+'/checklist/'+chklist_id+'/')
-
 
 @permission_required('projects.change_checklist', raise_exception=True)
-def complete_checklist(request):
-	#
+def complete_checklist(request, pid, gate):
+	if request.method == 'POST':
+		formset = ChecklistFormset(request.POST)
+		if formset.is_valid():
+			items = formset.save(commit=False)
+			for item in items:
+				item.milestone = None # make this the real thing
+				item.save()
+			return HttpResponseRedirect('projects/'+pid)
+	else:
+		# where will the defaults be located?
+		init = {
+			'form-TOTAL_FORMS':'5', # may need to be dynamic
+			'form-INITIAL_FORMS':'0',
+			'form-MIN_NUM_FORMS':'',
+			'form-MAX_NUM_FORMS':'',
+		}
+		checklist = GATE_LIST[gate-1]
+		for i in range(len(checklist)):
+			init['form-'+str(i)+'-name'] = checklist[i][0]
+			init['form-'+str(i)+'-responsible'] = checklist[i][1]
+			init['form-'+str(i)+'-completed'] = False
+			init['form-'+str(i)+'-remarks'] = ''
+			# don't know if the pre-existing remarks are supposed to be added or not
+		formset = ChecklistFormset(init, queryset=models.ChecklistItem.objects.none())
+	context = {'formset': formset}
 	return render(request, 'projects/checklist.html', context)
+
+# view for editing checklist defaults

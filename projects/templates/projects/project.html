@@ -33,7 +33,7 @@
 		<div class="col-md-6">
 			<h3> {% trans "Milestones" %} </h3>
 			{% if milestones %}
-			<form method="POST" action="{% url 'projects:milestonecompletion' project.id %}">
+			{# <form method="POST" action="{% url 'projects:milestonecompletion' project.id %}"> #}
 			{% csrf_token %}
 			{{formset.management_form}}
 			<table class="table">
@@ -41,32 +41,23 @@
 					{# it's okay to use the first milestone in the list because this won't execute without one #}
 					<th>{{ms_fs.0.0|verbose_name:'deadline'|title}}</th>
 					<th>{{ms_fs.0.0|verbose_name:'description'|title}}</th>
-					<th>{{ms_fs.0.0|verbose_name:'remarks'|title}}</th>
-					<th>{{ms_fs.0.0|verbose_name:'is_complete'|title}}</th>
+					{# <th>{{ms_fs.0.0|verbose_name:'remarks'|title}}</th> #}
+					{# <th>{{ms_fs.0.0|verbose_name:'is_complete'|title}}</th> #}
+					<th></th>
 				</tr>
 					{% for z in ms_fs %}
-
-					{% comment %}
-					{% if ms.is_complete %}
-						{# make warning #}
-					{% elif ms.deadline|past %}
-						{# make safe #}
-					{% else %}
-						{# make neutral #}
-					{% endif %}
-					{% endcomment %}
 
 					<tr>
 						<td>{{z.0.deadline}}</td>
 						<td>{{z.0.description}}</td>
-						<td>{{z.0.remarks}}</td>
-						<td>{{z.1.chk}}</td>
+						{# <td>{{z.0.remarks}}</td> #}
+						{# <td>{{z.1.chk}}</td> #}
+						<td><a href="{% url 'projects:checklist' project.id 1 %}" class="btn btn-default">Gate Checklist</a></td>
 					</tr>
 					{% endfor %}
-					<tr><td></td><td></td><td></td><td>
-						<input type="submit" value="{% trans 'Update' %}"></td></tr>
+					{# <tr><td></td><td></td><td></td><td><input type="submit" value="{% trans 'Update' %}"></td></tr> #}
 			</table>
-			</form>
+			{# </form> #}
 			{% else %}
 			<hr/>
 			<p> {% trans "No milestones set" %}</p>

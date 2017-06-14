@@ -44,14 +44,17 @@ class MilestoneForm(forms.ModelForm):
 	class Meta:
 		model = models.Milestone
 		fields = ['description', 'deadline', 'remarks']
-
+'''
+	def  __init__(self, **kwargs):
+		super(MilestoneForm, self).__init__(**kwargs)
+		self.fields['description'].widget.attrs['readonly'] = 'true'
+'''
 
 class UpdateForm(forms.ModelForm):
 	"""docstring for UpdateForm"""
 	project = forms.CharField(widget=forms.HiddenInput())
 	mod_user = forms.ModelChoiceField(queryset=get_user_model().objects.all(), to_field_name='id', widget=forms.HiddenInput())
 	estimated_hours = forms.IntegerField(max_value=500, min_value=0, label=_('Estimated hours'))
-
 
 	class Meta:
 		model = models.Update
@@ -87,4 +90,6 @@ class CustomerForm(forms.ModelForm):
 	class Meta:
 		model = models.Customer
 		fields = ['name'] # may need to expand later
-		
+
+
+ChecklistFormset = forms.modelformset_factory(models.ChecklistItem, fields=['name', 'responsible', 'completed', 'remarks'])
