@@ -29,10 +29,12 @@ CheckFormset = forms.formset_factory(CheckForm)
 
 class ProjectForm(forms.ModelForm):
 	"""docstring for ProjectForm"""
+	# Want to filter engineer based on is_active, MultipleChoiceField takes a [(DB_value, User_value)]
+	#engineer = forms.MultipleChoiceField(choices=Employee.objects.all().filter(is_active=True))
+
 	class Meta:
 		model = models.Project
-		fields = ['name', 'customer', 'work_type', 'status', 'engineer']
-		# labels not needed to be set since they are drawn from the model verbose_name 
+		fields = ['name', 'customer', 'eastek_pn', 'cust_pn', 'work_type', 'status', 'engineer']
 
 
 class MilestoneForm(forms.ModelForm):
@@ -44,11 +46,6 @@ class MilestoneForm(forms.ModelForm):
 	class Meta:
 		model = models.Milestone
 		fields = ['description', 'deadline', 'remarks']
-'''
-	def  __init__(self, **kwargs):
-		super(MilestoneForm, self).__init__(**kwargs)
-		self.fields['description'].widget.attrs['readonly'] = 'true'
-'''
 
 class UpdateForm(forms.ModelForm):
 	"""docstring for UpdateForm"""
@@ -92,4 +89,24 @@ class CustomerForm(forms.ModelForm):
 		fields = ['name'] # may need to expand later
 
 
-ChecklistFormset = forms.modelformset_factory(models.ChecklistItem, fields=['name', 'responsible', 'completed', 'remarks'])
+class ChecklistForm(forms.ModelForm):
+	"""docstring for ChecklistForm"""
+	def validate_completed(value):
+		if value == 'No'
+			raise forms.ValidationError(_('Item must be completed or not applicable'))
+
+	completed = forms.ChoiceField(choices=('Yes', 'No', 'N/A'), validators=[validate_completed])
+
+	class Meta:
+		model = models.ChecklistItem
+		fields = ['name', 'responsible', 'completed', 'remarks']
+
+	def clean_completed(self):
+		if self.cleaned_data['completed'] == 'Yes':
+			return True
+		elif self.cleaned_data['completed'] == 'N/A':
+			return None
+		else:
+			raise forms.ValidationError(_('Item must be completed or not applicable (Fix validator)'))
+
+ChecklistFormset = forms.formset_factory(ChecklistForm)
