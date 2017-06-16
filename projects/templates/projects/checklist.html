@@ -1,0 +1,36 @@
+{% extends "page.html" %}
+
+{% load i18n custom %}
+
+{% block title %} {{gate.name}} Checklist {% endblock %}
+
+
+{% block pagecontent %} 
+<div class="container">
+	<div class="border-around">
+		<h3> {{gate.name}} Checklist </h3>
+		<form method="post" action="{% url 'projects:checklist' pid gate.number %}">
+			{% csrf_token %}
+			<div class="table-responsive">
+			<table class="table table-striped">
+				<tr>
+					<th> {{formset.empty_form.name.label}} </th>
+					<th> {{formset.empty_form.responsible.label}} </th>
+					<th> {{formset.empty_form.completed.label}} </th>
+					<th> {{formset.empty_form.remarks.label}} </th>
+				</tr> 
+				{% for frm in formset %}
+				<tr> 
+					<td> {{frm.name.value}} </td>
+					<td> {{frm.responsible.value|human_readable:responsible}} </td>
+					<td> {{frm.completed}} </td>
+					<td> {{frm.remarks}} </td>
+				</tr>
+				{% endfor %}
+			</table>
+			</div>
+			<input type="submit" value="{% trans 'Submit' %}">
+		</form>
+	</div>
+</div>
+{% endblock pagecontent %}
