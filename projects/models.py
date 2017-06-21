@@ -42,7 +42,7 @@ class Milestone(models.Model):
 		ordering = ['deadline']
 		verbose_name = _('milestone')
 		
-	project = models.ForeignKey(Project, on_delete=models.PROTECT, verbose_name=_('project'))
+	project = models.ForeignKey(Project, on_delete=models.CASCADE, verbose_name=_('project'))
 	description = models.CharField(max_length=50, verbose_name=_('milestone'))
 	deadline = models.DateField(verbose_name=_('deadline'))
 	completion_date = models.DateField(blank=True, null=True, verbose_name=_('completion date'))
@@ -80,7 +80,7 @@ class Update(models.Model):
 		('PLTRN', _('Pilot Run')),
 		('TFBLD', _('Building Test Fixture')),
 	)
-	project = models.ForeignKey(Project, on_delete=models.PROTECT, verbose_name=_('project')) # filled automatically
+	project = models.ForeignKey(Project, on_delete=models.CASCADE, verbose_name=_('project')) # filled automatically
 	stage = models.CharField(max_length=5, choices=STAGES, verbose_name=_('stage'))
 	action_required = models.TextField(verbose_name=_('action required')) # this is are free text b/c too many combinations otherwise
 	estimated_hours = models.SmallIntegerField(verbose_name=_('estimated hours'))
@@ -121,7 +121,7 @@ class ChecklistItem(models.Model):
 		('None', 'N/A'),
 	)
 
-	checklist = models.ForeignKey(Milestone, on_delete=models.PROTECT, verbose_name=_('checklist'), related_name='checklist')
+	checklist = models.ForeignKey(Milestone, on_delete=models.CASCADE, verbose_name=_('checklist'), related_name='checklist')
 	name = models.CharField(max_length=70, verbose_name=_('item'))
 	responsible =  models.CharField(max_length=3, choices=RESPONSIBLE, verbose_name=_('responsible')) # multiselect field
 	completed = models.NullBooleanField(blank=True, null=True, choices=COMP_CHOICE, verbose_name=_('is complete'))
