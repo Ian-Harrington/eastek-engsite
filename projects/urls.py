@@ -15,6 +15,7 @@ urlpatterns = [
 	url(r'^(?P<pid>[0-9]+)/updates/$', views.project_updates, name='updates'),
 	url(r'^(?P<pid>[0-9]+)/updates/add/$', views.add_update, name='addupdate'),
 	url(r'^(?P<pid>[0-9]+)/gate/(?P<gate>[12345])/$', views.complete_checklist, name='checklist'),
+	url(r'^(?P<pid>[0-9]+)/download/(?P<gate>[12345])/$', views.download_checklist, name='downloadchecklist'),
 	url(r'^customers/$', views.CustomerListView.as_view(), name='customers'),
 	url(r'^customers/add_new_customer/$', views.add_customer, name='addcustomer'),
 ]

@@ -1,7 +1,7 @@
 from datetime import date
 
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import ListView
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import permission_required, login_required
@@ -9,6 +9,7 @@ from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.forms import formset_factory
 
 from EngSite.utils.utils import choice_lookup
+from EngSite.utils.reportgen import generate_gate_checklist
 from employees.models import Employee
 from . import models, forms
 
@@ -20,14 +21,6 @@ def project_page(request, pid):
 	milestones = models.Milestone.objects.filter(project=project.id)
 	updates = models.Update.objects.filter(project=project.id)
 	form = forms.ProjectStatusForm(initial={'status': project.status})
-	init = {'form-TOTAL_FORMS':str(milestones.count()),
-			'form-INITIAL_FORMS':'0',
-			'form-MIN_NUM_FORMS':'',
-			'form-MAX_NUM_FORMS':''}
-	for i in range(milestones.count()):
-		init['form-'+str(i)+'-chk'] = milestones[i].is_complete
-	formset = forms.CheckFormset(init)
-	ms_fs = list(zip(milestones, formset))
 	if updates.exists():
 		status = updates[0]
 	else:
@@ -36,8 +29,6 @@ def project_page(request, pid):
 				'projstatus': form, 
 				'milestones': milestones, 
 				'status': status,
-				'ms_fs': ms_fs,
-				'formset': formset,
 				'work_opts': models.Project.WORK_TYPES,
 				'status_opts': models.Project.STATUS,
 				'stage_opts': models.Update.STAGES}
@@ -95,22 +86,21 @@ def change_milestone_completion(request, pid):
 @login_required
 @permission_required('projects.add_project', raise_exception=True)
 def add_project(request):
-	formset = formset_factory(forms.MilestoneForm, can_delete=True)
+	formset = formset_factory(forms.MilestoneForm)
 	default = {'form-TOTAL_FORMS':'5',
 				'form-INITIAL_FORMS':'0',
 				'form-MIN_NUM_FORMS':'',
 				'form-MAX_NUM_FORMS':'',
-				'form-0-description': 'Kickoff',
-				'form-1-description': 'Engineering Samples',
-				'form-2-description': 'Qualification',
-				'form-3-description': 'Pilot Run',
-				'form-4-description': 'First Production Run',}
+				'form-0-description': GATE_LIST[0][0],
+				'form-1-description': GATE_LIST[1][0],
+				'form-2-description': GATE_LIST[2][0],
+				'form-3-description': GATE_LIST[3][0],
+				'form-4-description': GATE_LIST[4][0],}
 	if request.method == 'POST':
 		proj_form = forms.ProjectForm(request.POST)
 		mstn_form = formset(request.POST)
 		if proj_form.is_valid() and mstn_form.is_valid():
-			proj_form.save()
-			proj = models.Project.objects.get(name=proj_form.cleaned_data['name'])
+			proj = proj_form.save()
 			for frm in mstn_form:
 				ms = frm.save(commit=False)
 				ms.project = proj
@@ -210,18 +200,22 @@ def add_customer(request):
 @permission_required('projects.change_checklist', raise_exception=True)
 def complete_checklist(request, pid, gate):
 	if request.method == 'POST':
-		formset = ChecklistFormset(request.POST)
+		formset = forms.ChecklistFormset(request.POST)
 		if formset.is_valid():
-			items = formset.save(commit=False)
-			for item in items:
-				item.milestone = models.Milestone.objects.filter(project=pid).filter(name=GATE_LIST[gate-1][0]) # make this the real thing
-				item.save()
-			return HttpResponseRedirect('projects/'+pid)
+			milestone = models.Milestone.objects.filter(project=pid).get(description=GATE_LIST[int(gate)-1][0])
+			for frm in formset:
+				cli = frm.save(commit=False)
+				cli.checklist = milestone
+				# ^ could silently mess up if there are somehow two milestones on a project with the same name
+				cli.save()
+			milestone.completion_date = date.today()
+			milestone.save()
+			return HttpResponseRedirect('/projects/'+pid)
 	else:
 		# where will the defaults be located?
 		checklist = GATE_LIST[int(gate)-1][1]
 		init = {
-			'form-TOTAL_FORMS':len(checklist), # may need to be dynamic
+			'form-TOTAL_FORMS':str(len(checklist)), # may need to be dynamic
 			'form-INITIAL_FORMS':'0',
 			'form-MIN_NUM_FORMS':'',
 			'form-MAX_NUM_FORMS':'',
@@ -236,7 +230,18 @@ def complete_checklist(request, pid, gate):
 	context = {'formset': formset, 'gate':{'number':gate, 'name':GATE_LIST[int(gate)-1][0]}, 'pid':pid, 'responsible':models.ChecklistItem.RESPONSIBLE}
 	return render(request, 'projects/checklist.html', context)
 
-
+@login_required
+def download_checklist(request, pid, gate):
+	proj = get_object_or_404(models.Project, pk=pid)
+	ms = models.Milestone.objects.filter(project=pid).get(description=GATE_LIST[int(gate)-1][0])
+	if ms.is_complete():
+		filename = proj.name + ' - ' + GATE_LIST[int(gate)-1][0] + ' Gate Checklist.xlsx'
+		response = HttpResponse(generate_gate_checklist(ms), content_type='application/vnd.ms-excel')
+		response['Content-Disposition'] = 'attachment; filename="' + filename + '"'
+		return response
+	elif not ms.is_complete():
+		pass
+		#raise error
 
 KICKOFF = (
 	('Gate 1 Check List Approved and Released', 'ENG'),
@@ -394,7 +399,7 @@ PRODUCTION = (
 GATE_LIST = (
 	('Kick-off', KICKOFF),
 	('Engineering Samples', ENG_SAMPLES),
-	('Kick-off', QUALIFICATION),
+	('Qualification', QUALIFICATION),
 	('Pilot Run', PILOT),
 	('First Production', PRODUCTION),
 )

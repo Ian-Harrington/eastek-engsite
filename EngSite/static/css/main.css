@@ -114,8 +114,16 @@ textarea {
     background-color:#F0F0F0 !important;
 }
 
-.extends-base {
+.nav-pad {
     padding-top: 70px;
+}
+
+.errorlist {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    font-size-adjust: 85%;
+    color: #E22
 }
 
 #login-row {
@@ -129,9 +137,6 @@ textarea {
     background-color: #eee;
 }
 
-.nav-pad {
-    padding-top: 70px;
-}
 
 
 
