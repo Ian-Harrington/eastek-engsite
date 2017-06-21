@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
+#from django.db.models.fields.related_descriptors import RelatedObjectDoesNotExist
 from django.utils.translation import ugettext_lazy as _
 
 from projects.models import Project
@@ -16,3 +17,9 @@ class User(AbstractUser):
 
 	def __str__(self):
 		return self.username
+
+	def get_employee(self):
+		if hasattr(self, 'employee'):
+			return self.employee
+		else:
+			return None

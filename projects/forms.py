@@ -39,13 +39,12 @@ class ProjectForm(forms.ModelForm):
 
 class MilestoneForm(forms.ModelForm):
 	"""docstring for MilestoneForm"""
-	remarks = forms.CharField(widget=forms.Textarea(attrs={'rows':2}), required=False, label=_('remarks'))
-	description = forms.CharField(widget=forms.TextInput(attrs={'size':30}), label=_('milestone'))
-	deadline = forms.DateField(widget=forms.TextInput(attrs={'size':12}), label=_('deadline'))
+	#description = forms.CharField(widget=forms.TextInput(attrs={'size':30}), label=_('milestone'))
+	#deadline = forms.DateField(widget=forms.TextInput(attrs={'size':12}), label=_('deadline'))
 
 	class Meta:
 		model = models.Milestone
-		fields = ['description', 'deadline', 'remarks']
+		fields = ['description', 'deadline']
 
 class UpdateForm(forms.ModelForm):
 	"""docstring for UpdateForm"""
@@ -92,21 +91,14 @@ class CustomerForm(forms.ModelForm):
 class ChecklistForm(forms.ModelForm):
 	"""docstring for ChecklistForm"""
 	def validate_completed(value):
-		if value == 'No'
+		if value == 'False':
 			raise forms.ValidationError(_('Item must be completed or not applicable'))
 
-	completed = forms.ChoiceField(choices=('Yes', 'No', 'N/A'), validators=[validate_completed])
+	completed = forms.ChoiceField(required=False, choices=models.ChecklistItem.COMP_CHOICE, validators=[validate_completed])
 
 	class Meta:
 		model = models.ChecklistItem
 		fields = ['name', 'responsible', 'completed', 'remarks']
 
-	def clean_completed(self):
-		if self.cleaned_data['completed'] == 'Yes':
-			return True
-		elif self.cleaned_data['completed'] == 'N/A':
-			return None
-		else:
-			raise forms.ValidationError(_('Item must be completed or not applicable (Fix validator)'))
 
 ChecklistFormset = forms.formset_factory(ChecklistForm)
