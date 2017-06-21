@@ -52,7 +52,7 @@ class Milestone(models.Model):
 
 	def is_complete(self):
 		for item in self.checklist.all():
-			if not item.completed:
+			if item.completed != None and not item.completed:
 				return item.completed
 		else:
 			return self.checklist.all().count() != 0
@@ -115,9 +115,17 @@ class ChecklistItem(models.Model):
 		('PMC', 'PMC'),
 	)
 
+	COMP_CHOICE = (
+		(True, 'Yes'),
+		('False', 'No'),
+		('None', 'N/A'),
+	)
+
 	checklist = models.ForeignKey(Milestone, on_delete=models.PROTECT, verbose_name=_('checklist'), related_name='checklist')
-	name = models.CharField(max_length=35, verbose_name=_('item'))
+	name = models.CharField(max_length=70, verbose_name=_('item'))
 	responsible =  models.CharField(max_length=3, choices=RESPONSIBLE, verbose_name=_('responsible')) # multiselect field
-	completed = models.NullBooleanField(verbose_name=_('is complete'))
-	remarks = models.CharField(max_length=120, verbose_name=_('comments'))
-		
+	completed = models.NullBooleanField(blank=True, null=True, choices=COMP_CHOICE, verbose_name=_('is complete'))
+	remarks = models.CharField(max_length=120, blank=True, verbose_name=_('comments'))
+	
+	def __str__(self):
+		return self.checklist.description + ' - ' + self.name
