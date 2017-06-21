@@ -9,7 +9,7 @@
 <div class="container">
 	<div class="border-around">
 	<h3>{% trans "Add New Project" %}</h3>
-	<form method="POST" action="{% url 'projects:addproject' %}" enctype="multipart/form-data">
+	<form method="POST" action="{% url 'projects:addproject' %}">
 		{% csrf_token %}
 		{{formset.management_form}}
 		<table id="project-info-table" class="table">
@@ -24,13 +24,18 @@
 			{% for frm in formset %}
 			<tr class="form">
 				<td>{{frm.description.value}}</td>
-				<td>{{frm.deadline}}</td>
+				<td style="display: none;">{{frm.description}}</td>
+				<td>
+					{{frm.deadline}}
+					{{frm.deadline.errors}}
+				</td>
 			</tr>
 			{% endfor %}
 		</table>
 		</div>
 		<input type="submit" value="{% trans 'Submit' %}">
 	</form>
+	{% comment %}
 	<!-- this div only used in different add/remove form js -->
 	<div >
 		<table id="empty-form" style="display: none;">
@@ -40,13 +45,16 @@
 			</tr>
 		</table>
 	</div>
+	{% endcomment %}
 	</div>
 </div>
 
 {% endblock pagecontent %}
 
+{% comment %}
 {% block scripts %}
 
 <script>$(document).ready(addDeleteForms())</script>
 
 {% endblock %}
+{% endcomment %}

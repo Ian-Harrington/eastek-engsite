@@ -11,6 +11,7 @@
 		<h3> {{gate.name}} Checklist </h3>
 		<form method="post" action="{% url 'projects:checklist' pid gate.number %}">
 			{% csrf_token %}
+			{{formset.management_form}}
 			<div class="table-responsive">
 			<table class="table table-striped">
 				<tr>
@@ -22,9 +23,19 @@
 				{% for frm in formset %}
 				<tr> 
 					<td> {{frm.name.value}} </td>
+					<td style="display: none;"> {{frm.name}} </td>
 					<td> {{frm.responsible.value|human_readable:responsible}} </td>
-					<td> {{frm.completed}} </td>
-					<td> {{frm.remarks}} </td>
+					<td style="display: none;"> {{frm.responsible}} </td>
+					<td> 
+						{{frm.completed}}
+					{% if request.method == 'POST' %}
+						{{frm.completed.errors}} 
+					{% endif %}
+					</td>
+					<td> 
+						{{frm.remarks}} 
+						{{frm.remarks.errors}}
+					</td>
 				</tr>
 				{% endfor %}
 			</table>
