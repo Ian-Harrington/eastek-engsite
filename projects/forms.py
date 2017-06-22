@@ -29,29 +29,31 @@ CheckFormset = forms.formset_factory(CheckForm)
 
 class ProjectForm(forms.ModelForm):
 	"""docstring for ProjectForm"""
+	# Want to filter engineer based on is_active, MultipleChoiceField takes a [(DB_value, User_value)]
+	#engineer = forms.MultipleChoiceField(choices=Employee.objects.all().filter(is_active=True))
+
 	class Meta:
 		model = models.Project
-		fields = ['name', 'customer', 'work_type', 'status', 'engineer']
-		# labels not needed to be set since they are drawn from the model verbose_name 
+		fields = ['name', 'customer', 'eastek_pn', 'cust_pn', 'work_type', 'status', 'engineer']
+
+class PartNumForm(forms.Form):
+	partnum = forms.CharField(max_length=50, min_length=5, strip=True, label=_('part number'))
 
 
 class MilestoneForm(forms.ModelForm):
 	"""docstring for MilestoneForm"""
-	remarks = forms.CharField(widget=forms.Textarea(attrs={'rows':2}), required=False, label=_('remarks'))
-	description = forms.CharField(widget=forms.TextInput(attrs={'size':30}), label=_('milestone'))
-	deadline = forms.DateField(widget=forms.TextInput(attrs={'size':12}), label=_('deadline'))
+	#description = forms.CharField(widget=forms.TextInput(attrs={'size':30}), label=_('milestone'))
+	#deadline = forms.DateField(widget=forms.TextInput(attrs={'size':12}), label=_('deadline'))
 
 	class Meta:
 		model = models.Milestone
-		fields = ['description', 'deadline', 'remarks']
-
+		fields = ['description', 'deadline']
 
 class UpdateForm(forms.ModelForm):
 	"""docstring for UpdateForm"""
 	project = forms.CharField(widget=forms.HiddenInput())
 	mod_user = forms.ModelChoiceField(queryset=get_user_model().objects.all(), to_field_name='id', widget=forms.HiddenInput())
 	estimated_hours = forms.IntegerField(max_value=500, min_value=0, label=_('Estimated hours'))
-
 
 	class Meta:
 		model = models.Update
@@ -87,4 +89,19 @@ class CustomerForm(forms.ModelForm):
 	class Meta:
 		model = models.Customer
 		fields = ['name'] # may need to expand later
-		
+
+
+class ChecklistForm(forms.ModelForm):
+	"""docstring for ChecklistForm"""
+	def validate_completed(value):
+		if value == 'False':
+			raise forms.ValidationError(_('Item must be completed or not applicable'))
+
+	completed = forms.ChoiceField(required=False, choices=models.ChecklistItem.COMP_CHOICE, validators=[validate_completed])
+
+	class Meta:
+		model = models.ChecklistItem
+		fields = ['name', 'responsible', 'completed', 'remarks']
+
+
+ChecklistFormset = forms.formset_factory(ChecklistForm)

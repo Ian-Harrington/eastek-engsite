@@ -9,7 +9,7 @@
 <div class="container">
 	<div class="border-around">
 	<h3>{% trans "Add New Project" %}</h3>
-	<form method="POST" action="{% url 'projects:addproject' %}" enctype="multipart/form-data">
+	<form method="POST" action="{% url 'projects:addproject' %}">
 		{% csrf_token %}
 		{{formset.management_form}}
 		<table id="project-info-table" class="table">
@@ -20,40 +20,43 @@
 			<tr id="milestone-table-header-row">
 				<th>{{formset.empty_form.description.label|capfirst}}</th>
 				<th>{{formset.empty_form.deadline.label|capfirst}}</th>
-				<th>{{formset.empty_form.remarks.label|capfirst}}</th>
-				<th></th>
 			</tr>
 			{% for frm in formset %}
 			<tr class="form">
-				<td>{{frm.description}}</td>
-				<td>{{frm.deadline}}</td>
-				<td>{{frm.remarks}}</td>
-				<td><a id="" class="delete-form" href="#"><i class="glyphicon glyphicon-remove text-danger" style="font-size: 2em"></i></td>
+				<td>{{frm.description.value}}</td>
+				<td style="display: none;">{{frm.description}}</td>
+				<td>
+					{{frm.deadline}}
+					{% if request.method == 'POST' %}
+					{{frm.deadline.errors}}
+					{% endif %}
+				</td>
 			</tr>
 			{% endfor %}
-			<tr><td></td><td></td><td></td><td><a id="add-form" href="#"><i class="glyphicon glyphicon-plus text-success" style="font-size: 2em"></i></a></td></tr>
 		</table>
 		</div>
 		<input type="submit" value="{% trans 'Submit' %}">
 	</form>
+	{% comment %}
 	<!-- this div only used in different add/remove form js -->
 	<div >
 		<table id="empty-form" style="display: none;">
 			<tr class="fake-form">
 				<td>{{formset.empty_form.description}}</td>
 				<td>{{formset.empty_form.deadline}}</td>
-				<td>{{formset.empty_form.remarks}}</td>
-				<td><a id="" class="delete-form" href="#"><i class="glyphicon glyphicon-remove text-danger" style="font-size: 2em"></i></a></td>
 			</tr>
 		</table>
 	</div>
+	{% endcomment %}
 	</div>
 </div>
 
 {% endblock pagecontent %}
 
+{% comment %}
 {% block scripts %}
 
 <script>$(document).ready(addDeleteForms())</script>
 
 {% endblock %}
+{% endcomment %}

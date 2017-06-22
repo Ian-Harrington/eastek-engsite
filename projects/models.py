@@ -24,9 +24,10 @@ class Project(models.Model):
 	customer = models.ForeignKey('Customer', on_delete=models.PROTECT, verbose_name=_('customer'))
 	work_type = models.CharField(max_length=4, choices=WORK_TYPES, verbose_name=_('project type'))
 	status = models.CharField(max_length=3, choices=STATUS, verbose_name=_('status'))
-	#leader = models.ForeignKey(Employee, on_delete=models.PROTECT) # put in eng?projec
-	engineer = models.ManyToManyField(Employee, verbose_name=_('engineer'))
+	engineer = models.ManyToManyField(Employee, verbose_name=_('engineer(s)'))
 	estimated_hours = models.SmallIntegerField(null=True, verbose_name=_('estimated hours'))
+	eastek_pn = models.CharField(max_length=45, blank=True, verbose_name=_('eastek part number'))
+	cust_pn = models.CharField(max_length=45, blank=True, verbose_name=_('customer part number'))
 
 	def __str__(self):
 		return self.name
@@ -41,15 +42,21 @@ class Milestone(models.Model):
 		ordering = ['deadline']
 		verbose_name = _('milestone')
 		
-	project = models.ForeignKey(Project, on_delete=models.PROTECT, verbose_name=_('project'))
-	#task = models.ForeignKey('self', on_delete=PROTECT, blank=True, null=True) # represents a milestone
+	project = models.ForeignKey(Project, on_delete=models.CASCADE, verbose_name=_('project'))
 	description = models.CharField(max_length=50, verbose_name=_('milestone'))
 	deadline = models.DateField(verbose_name=_('deadline'))
-	is_complete = models.BooleanField(default=False, verbose_name=_('is complete'))
-	remarks = models.TextField(blank=True, verbose_name=_('remarks'))
+	completion_date = models.DateField(blank=True, null=True, verbose_name=_('completion date'))
 		
 	def __str__(self):
 		return self.project.name + ' - ' + self.description
+
+	def is_complete(self):
+		for item in self.checklist.all():
+			if item.completed != None and not item.completed:
+				return item.completed
+		else:
+			return self.checklist.all().count() != 0
+
 
 class Update(models.Model):
 	"""stores project updates and meta"""
@@ -73,7 +80,7 @@ class Update(models.Model):
 		('PLTRN', _('Pilot Run')),
 		('TFBLD', _('Building Test Fixture')),
 	)
-	project = models.ForeignKey(Project, on_delete=models.PROTECT, verbose_name=_('project')) # filled automatically
+	project = models.ForeignKey(Project, on_delete=models.CASCADE, verbose_name=_('project')) # filled automatically
 	stage = models.CharField(max_length=5, choices=STAGES, verbose_name=_('stage'))
 	action_required = models.TextField(verbose_name=_('action required')) # this is are free text b/c too many combinations otherwise
 	estimated_hours = models.SmallIntegerField(verbose_name=_('estimated hours'))
@@ -92,3 +99,33 @@ class Customer(models.Model):
 	
 	def __str__(self):
 		return self.name
+
+
+class ChecklistItem(models.Model):
+	"""represents a single item in a checklist"""
+	class Meta:
+		verbose_name = _('checklist item')
+	
+	RESPONSIBLE = (
+		('ENG', 'Engineering'), 
+		('QLT', 'Quality'),
+		('PUR', 'Purchasing'),
+		('ME', 'ME'),
+		('PRD', 'Production'),
+		('PMC', 'PMC'),
+	)
+
+	COMP_CHOICE = (
+		(True, 'Yes'),
+		('False', 'No'),
+		('None', 'N/A'),
+	)
+
+	checklist = models.ForeignKey(Milestone, on_delete=models.CASCADE, verbose_name=_('checklist'), related_name='checklist')
+	name = models.CharField(max_length=70, verbose_name=_('item'))
+	responsible =  models.CharField(max_length=3, choices=RESPONSIBLE, verbose_name=_('responsible')) # multiselect field
+	completed = models.NullBooleanField(blank=True, null=True, choices=COMP_CHOICE, verbose_name=_('is complete'))
+	remarks = models.CharField(max_length=120, blank=True, verbose_name=_('comments'))
+	
+	def __str__(self):
+		return self.checklist.description + ' - ' + self.name

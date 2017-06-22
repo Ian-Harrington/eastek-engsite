@@ -35,14 +35,3 @@ class Overtime(models.Model):
 
 	def __str__(self):
 		return self.emp.english_name + ' - ' + str(self.date)
-
-# ===== Deprecated ===== 
-'''
-class Project(models.Model):
-	"""basic project representation before project app is developed"""
-	name = models.CharField(max_length=60, unique=True)
-	customer = models.CharField(max_length=30)
-
-	def __str__(self):
-		return self.name
-'''

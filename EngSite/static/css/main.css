@@ -114,6 +114,18 @@ textarea {
     background-color:#F0F0F0 !important;
 }
 
+.nav-pad {
+    padding-top: 70px;
+}
+
+.errorlist {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    font-size-adjust: 85%;
+    color: #E22
+}
+
 #login-row {
     width: 100vw;
     text-align: center;
@@ -124,7 +136,6 @@ textarea {
     display: inline-block;
     background-color: #eee;
 }
-
 
 
 
