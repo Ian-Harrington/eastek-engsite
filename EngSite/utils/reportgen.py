@@ -86,7 +86,7 @@ def generate_gate_checklist(ms):
 	ws['H2'].value = str(ms.completion_date)
 	ws['H3'].value = ms.project.eastek_pn
 	ws['H4'].value = ms.project.cust_pn
-	#ws['H5'].value = ms.project.description
+	#ws['H5'].value = ms.project.description # if a description is added to project model
 	ws['H6'].value = ms.project.engineer.all()[0].english_name
 	# Checklist
 	t = ms.checklist.count() - 1
