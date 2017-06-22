@@ -27,7 +27,9 @@
 				<td style="display: none;">{{frm.description}}</td>
 				<td>
 					{{frm.deadline}}
+					{% if request.method == 'POST' %}
 					{{frm.deadline.errors}}
+					{% endif %}
 				</td>
 			</tr>
 			{% endfor %}

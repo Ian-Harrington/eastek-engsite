@@ -8,6 +8,7 @@ urlpatterns = [
 	url(r'^$', login_required(views.ProjectListView.as_view()), name='projectlist'),
 	url(r'^(?P<pid>[0-9]+)/$', views.project_page, name='dashboard'),
 	url(r'^(?P<pid>[0-9]+)/status_update/$', views.change_project_status, name='statusupdate'),
+	url(r'^(?P<pid>[0-9]+)/add_part_number/(?P<org>eastek|customer)/$', views.add_part_number, name='partnumupdate'),
 	url(r'^(?P<pid>[0-9]+)/join_project/$', views.add_self_to_project, name='joinproject'),
 	url(r'^add/$', views.add_project, name='addproject'),
 	#url(r'^(?P<pid>[0-9]+)/milestones/$', views.project_milestones, name='milestones'),
@@ -18,4 +19,5 @@ urlpatterns = [
 	url(r'^(?P<pid>[0-9]+)/download/(?P<gate>[12345])/$', views.download_checklist, name='downloadchecklist'),
 	url(r'^customers/$', views.CustomerListView.as_view(), name='customers'),
 	url(r'^customers/add_new_customer/$', views.add_customer, name='addcustomer'),
+
 ]

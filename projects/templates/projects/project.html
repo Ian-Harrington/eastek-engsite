@@ -14,17 +14,46 @@
 		<div class="col-md-6">
 			<h3> {{project.customer}} </h3>
 			<p>{{project.work_type|human_readable:work_opts}}</p>
+			<!-- wow this stuff isn't great -->
+			{% if project.eastek_pn %}
+				<p><b>{{project|verbose_name:'eastek_pn'|capfirst}}: </b>{{project.eastek_pn}}</p>
+			{% else %}
+				<form method="POST" action="{% url 'projects:partnumupdate' project.id 'eastek' %}">
+				{% csrf_token %}
+				<b>{{project|verbose_name:'eastek_pn'|capfirst}}:</b>
+				{{epn_form.partnum}}
+				<input type="submit" value="{% trans 'Submit' %}">
+				</form>
+			{% endif %}
+
+			{% if project.cust_pn %}
+				<p><b>{{project|verbose_name:'cust_pn'|capfirst}}: </b>{{project.cust_pn}}</p>
+			{% else %}
+				<form method="POST" action="{% url 'projects:partnumupdate' project.id 'customer' %}">
+				{% csrf_token %}
+				<b>{{project|verbose_name:'cust_pn'|capfirst}}:</b>
+				{{cpn_form.partnum}}
+				<input type="submit" value="{% trans 'Submit' %}">
+				</form>
+			{% endif %}
+			<!-- especially bad part ends here -->
 			<form method="POST" action="{% url 'projects:statusupdate' project.id %}">
 			{% csrf_token %}
 			{{projstatus}}
 			<input type="Submit" value="{% trans 'Update' %}">
 			</form>
+
+			<p><b>{% trans "Engineers" %}:</b>{{project.engineer.all|join:', '}}</p>
+
+			{% comment %}
 			<table>
 				<tr>
 					<th>{% trans "Engineers" %}:</th>
 					<td>{{project.engineer.all|join:', '}}</td>
 				</tr>
 			</table>
+			{% endcomment %}
+
 			{% if request.user.get_employee and not request.user.get_employee in project.engineer.all %}
 			<form method="POST" action="{% url 'projects:joinproject' project.id %}">
 			{% csrf_token %}

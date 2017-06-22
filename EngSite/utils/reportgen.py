@@ -8,8 +8,12 @@ from django.conf import settings
 
 from openpyxl.utils import range_boundaries
 from openpyxl import load_workbook, worksheet
+from openpyxl.styles import Border, Side
 from openpyxl.writer.excel import save_virtual_workbook
 from openpyxl.drawing.image import Image
+
+from .utils import choice_lookup
+from projects.models import ChecklistItem
 
 RECORDS_PER_SHEET = 32 
 
@@ -66,7 +70,6 @@ def generate_overtime_report(overtime):
 			duration = ot.time.strftime('%H:%M') + '~' + (datetime.datetime(100,1,1,ot.time.hour,ot.time.minute,0) + datetime.timedelta(hours=float(ot.request_hours))).strftime('%H:%M')
 			ws.cell(row=i+5, column=5, value=duration)
 			ws.cell(row=i+5, column=6, value=duration)
-
 			ws.cell(row=i+5, column=7, value=str(max(int(ot.request_hours), ot.request_hours)) + 'H')
 			ws.cell(row=i+5, column=8, value=ot.project.name + ' - ' + ot.reason)
 	wb.remove_sheet(wb['Template'])
@@ -75,20 +78,22 @@ def generate_overtime_report(overtime):
 def generate_gate_checklist(ms):
 	wb = load_workbook(os.path.join(settings.BASE_DIR, 'projects/static/Checklist_Template.xlsx'))
 	ws = wb['Template']
+	ws.title = ms.description
 	# Header (any information there is)
 	ws['A1'].value = ms.description + ' Checklist'
 	ws['C3'].value = ms.project.customer.name
 	ws['C4'].value = ms.project.name
-	ws['H2'].value = ms.completion_date
+	ws['H2'].value = str(ms.completion_date)
 	ws['H3'].value = ms.project.eastek_pn
 	ws['H4'].value = ms.project.cust_pn
 	#ws['H5'].value = ms.project.description
 	ws['H6'].value = ms.project.engineer.all()[0].english_name
 	# Checklist
+	t = ms.checklist.count() - 1
 	for i in range(ms.checklist.count()): #checklist is a queryset
 		ws.cell(row=i+8, column=1, value=i+1)
 		ws.cell(row=i+8, column=2, value=ms.checklist.all()[i].name)
-		ws.cell(row=i+8, column=4, value=ms.checklist.all()[i].responsible)
+		ws.cell(row=i+8, column=4, value=choice_lookup(opt_list=ChecklistItem.RESPONSIBLE, item=ms.checklist.all()[i].responsible))
 		if ms.checklist.all()[i].completed == True:
 			ws.cell(row=i+8, column=5, value='X')
 		elif ms.checklist.all()[i].completed == False:
@@ -96,4 +101,16 @@ def generate_gate_checklist(ms):
 		elif ms.checklist.all()[i].completed == None:
 			ws.cell(row=i+8, column=7, value='X')
 		ws.cell(row=i+8, column=8, value=ms.checklist.all()[i].remarks)
+	# remove formatting from all cells below
+	# add the thick end line
+	no_border = Border(left=Side(border_style=None),
+						right=Side(border_style=None),
+						top=Side(border_style=None),
+						bottom=Side(border_style=None))
+	strong_top = Border(top=Side(border_style='medium'))
+	for row in ws.iter_rows(min_row=i+9, max_col=8, max_row=64):
+		for c in row:
+			c.border = no_border
+	for c in ws[i+9]:
+		c.border = strong_top
 	return save_virtual_workbook(wb)

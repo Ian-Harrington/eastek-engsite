@@ -31,7 +31,9 @@ def project_page(request, pid):
 				'status': status,
 				'work_opts': models.Project.WORK_TYPES,
 				'status_opts': models.Project.STATUS,
-				'stage_opts': models.Update.STAGES}
+				'stage_opts': models.Update.STAGES,
+				'epn_form': forms.PartNumForm(),
+				'cpn_form': forms.PartNumForm(),}
 	return render(request, 'projects/project.html', context)
 
 
@@ -46,6 +48,20 @@ def change_project_status(request, pid):
 	if form.is_valid():
 		project.status = form.cleaned_data['status']
 		project.save()
+	return HttpResponseRedirect('/projects/' + pid)
+
+
+@require_POST
+@permission_required('projects.change_project', raise_exception=True)
+def add_part_number(request, pid, org):
+	proj = get_object_or_404(models.Project, pk=pid)
+	form = forms.PartNumForm(request.POST)
+	if form.is_valid():
+		if org == 'eastek':
+			proj.eastek_pn = form.cleaned_data['partnum']
+		elif org == 'customer':
+			proj.cust_pn = form.cleaned_data['partnum']
+		proj.save()
 	return HttpResponseRedirect('/projects/' + pid)
 
 
