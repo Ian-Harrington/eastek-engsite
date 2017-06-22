@@ -9,10 +9,17 @@
 		<div class="col-md-8 col-md-offset-2 col-xs-12">
 		<div class="row">
 			<div class="col-lg-4 col-md-6 col-xs-12" style="text-align: center; padding: 2%">
+				{% if request.user.get_employee %}
 				<a href="{% url 'overtime:add' %}">
 					<i class="fa fa-user-plus" aria-hidden='true' style="font-size: 15em;"></i>
 					<h3 class="no-show-text-link">{% trans "Add Overtime" %}</h3>
 				</a>
+				{% elif perms.overtime.view_overtime %}
+				<a href="{% url 'overtime:list' %}">
+					<i class="fa fa-address-card-o" aria-hidden='true' style="font-size: 15em;"></i>
+					<h3 class="no-show-text-link">{% trans "View Overtime" %}</h3>
+				</a>
+				{% endif %}
 			</div>
 			<div class="col-lg-4 col-md-6 col-xs-12" style="text-align: center; padding: 2%">
 				<a href="{% url 'projects:projectlist' %}?customer=&work_type=&status=INP&engineer={{request.user.employee.emp_id}}">

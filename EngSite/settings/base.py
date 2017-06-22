@@ -207,11 +207,6 @@ LOGIN_URL = '/login/'
 # Page to view after login if none specified
 LOGIN_REDIRECT_URL = '/'
 
-# Requires cookies to be sent over https:// connections
-#   (Does this alter behavior when not typically using HTTPS?)
-SESSION_COOKIE_SECURE = True
-CRSF_COOKIE_SECURE = True
-
 
 #================================
 #=         STATICFILES          =
