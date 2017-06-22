@@ -33,7 +33,7 @@
 						<li><a href="{% url 'overtime:list' 1 %}">{% trans "View All" %}</a></li>
 					</ul>
 				</li>
-				{% else %}
+				{% elif request.user.get_employee %}
 				<li><a href="{% url 'overtime:add' %}">{% trans "Overtime" %}</a></li>
 				{% endif %}
 			<!-- ========== Project Dropdown ========== -->

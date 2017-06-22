@@ -15,7 +15,7 @@
 					<h3 class="no-show-text-link">{% trans "Add Overtime" %}</h3>
 				</a>
 				{% elif perms.overtime.view_overtime %}
-				<a href="{% url 'overtime:list' %}">
+				<a href="{% url 'overtime:list' 1 %}">
 					<i class="fa fa-address-card-o" aria-hidden='true' style="font-size: 15em;"></i>
 					<h3 class="no-show-text-link">{% trans "View Overtime" %}</h3>
 				</a>
