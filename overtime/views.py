@@ -33,7 +33,7 @@ def add_overtime(request):
 		else:
 			context['notice'] = _('Not saved. Invalid data.')
 	else:
-		form = AddOvertime()
+		form = AddOvertime(initial={'date': Date.today()})
 	context['form'] = form
 	return render(request, 'overtime/add.html', context)
 
