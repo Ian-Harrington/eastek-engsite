@@ -60,7 +60,7 @@ LANGUAGE_CODE = 'en-us'
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
 # Whether to use internationalization or not
-USE_I18N = True
+USE_I18N = False
 
 # Supported languages
 LANGUAGES = [
