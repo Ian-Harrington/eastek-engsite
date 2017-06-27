@@ -15,7 +15,7 @@ from openpyxl.drawing.image import Image
 from .utils import choice_lookup
 from projects.models import ChecklistItem
 
-RECORDS_PER_SHEET = 32 
+RECORDS_PER_SHEET = 29 
 
 
 def merge_cells(self, range_string=None, start_row=None, start_column=None, end_row=None, end_column=None):
