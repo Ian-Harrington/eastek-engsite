@@ -1,8 +1,10 @@
 import re
+
 from django.db import models
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.contrib.auth import get_user_model
+from django.contrib.auth.models import Group
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -82,29 +84,28 @@ class Employee(models.Model):
 		if re.match(r'^[0-9]{4,5}$', emp_id) == None:
 			raise ValidationError(_('Employee ID must be numerals only and 4-5 digits long'))
 	
-	def generate_user(self, supress=False, send_email=True):
+	def generate_user(self, supress=True):
 		# check if custom user is implemented (quit if not?)
 		if not self.has_user(): 
 			username = self.email.split('@')[0]
-			password = self.english_name.split(' ')[0] + '.' + self.emp_id
+			password = self.email.split('.')[0].lower() + '.' + self.emp_id
 			User = get_user_model()
 			if not User.objects.filter(username=username).exists():
 				user = User.objects.create_user(username=username, email=self.email, password=password)
+				assert isinstance(user, User), user
+				user.groups.add(Group.objects.get(name='default'))
+				if self.team == 'SUPP':
+					user.groups.add(Group.objects.get(name='manager'))
+				if not self.is_active:
+					user.is_active = False
+					user.save()
 				self.account = user
 				self.save()
-				assert user.is_active
-				assert self.is_active
-				# would be better if it wasn't directly tied to users.User
-				if send_email:
-						pass 
-						# send email to registered account email
-						# need access to email server (not gonna happen)
+				return user
 			elif not supress:
-				pass
-				#raise error (user already exists)
+				return False # user already exists
 		elif not supress:
-			pass
-			#raise error (employee has account)
+			return False # employee has account
 
 	# returns the status of the presence of an associated user account
 	def has_user(self):

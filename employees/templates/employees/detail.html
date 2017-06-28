@@ -7,7 +7,7 @@
 {% block pagecontent %}
 <div class="container">
 	<div class="border-around" style="display: inline-block;">
-	{% if arg == 'add' %}
+	{% if arg != 'add' %}
 	<h3>{% firstof emp.name indvform.name.value %} {% trans "Employee Record" %}</h3>
 	{% else %}
 	<h3>{% trans "Add Employee Record" %}</h3>

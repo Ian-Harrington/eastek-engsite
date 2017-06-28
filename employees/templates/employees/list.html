@@ -33,6 +33,7 @@
 				<th>{{emps.model|verbose_name:'team'|title}}</th>
 				<th>{{emps.model|verbose_name:'leader'|title}}</th>
 				<th>{{emps.model|verbose_name:'email'|title}}</th>
+				<th>{{emps.model|verbose_name:'account'|title}}</th>
 			</tr>
 			{% for e in emps %}
 				<tr class="notice-me" onclick="document.location = '{% url 'employees:detail' e.emp_id %}'"> 
@@ -43,6 +44,14 @@
 					<td> {{e.get_team_display}} </td>
 					<td> {{e.leader.english_name}} </td>
 					<td> {{e.email}} </td>
+					{% if e.account %}
+					<td> {{e.account.username}} </td>
+					{% else %}
+					<td><form action="{% url 'employees:genaccount' e.emp_id %}" method="post">
+						{% csrf_token %}
+						<input type="Submit" value="{% trans 'Create Account' %}">
+					</form></td>
+					{% endif %}
 				</tr>
 			{% endfor %}
 		</table>

@@ -1,7 +1,9 @@
 from django.shortcuts import render, get_object_or_404, get_list_or_404
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.decorators import login_required, permission_required
-from django.contrib.auth.models import Group
+from django.views.decorators.http import require_POST
+from django.http import HttpResponseRedirect, HttpResponseNotFound
+
 from .models import Employee
 from .forms import FilterListForm, IndividualForm
 
@@ -47,16 +49,8 @@ def individual(request, emp_id):
 			form = IndividualForm(request.POST)
 		if form.is_valid():
 			# check against other validation methods? (email domain, etc.)
-			form.save()
+			emp = form.save()
 			context['saved'] = True
-			if 'user_acc' in form.cleaned_data:
-				emp = Employee.objects.get(pk=form.cleaned_data['emp_id'])
-				emp.generate_user(supress=True)
-				assert emp.account.is_active
-				user = emp.account
-				user.groups.add(Group.objects.get(name='default'))
-				if emp.team == 'SUPP':
-					user.groups.add(Group.objects.get(name='support'))
 			if not form.cleaned_data['is_active'] and emp.has_user():
 				emp.archive_account()
 		else:
@@ -77,3 +71,11 @@ def individual(request, emp_id):
 	context['indvform'] = form
 	return render(request, 'employees/detail.html', context)
 
+@require_POST
+@permission_required(['users.add_user', 'employees.change_employee'], raise_exception=True)
+def generate_account(request, emp_id):
+	emp = get_object_or_404(Employee, pk=emp_id)
+	if emp.generate_user():
+		return HttpResponseRedirect('/employees/')
+	else:
+		return HttpResponseNotFound()
