@@ -1,0 +1,233 @@
+[
+  {
+    "model": "projects.Customer",
+    "pk": 1,
+    "fields": {
+      "name": "Agilent"
+    }
+  },
+  {
+    "model": "projects.Customer",
+    "pk": 2,
+    "fields": {
+      "name": "Allegion"
+    }
+  },
+  {
+    "model": "projects.Customer",
+    "pk": 3,
+    "fields": {
+      "name": "Arjo"
+    }
+  },
+  {
+    "model": "projects.Customer",
+    "pk": 4,
+    "fields": {
+      "name": "Aztech"
+    }
+  },
+  {
+    "model": "projects.Customer",
+    "pk": 5,
+    "fields": {
+      "name": "Corning"
+    }
+  },
+  {
+    "model": "projects.Customer",
+    "pk": 6,
+    "fields": {
+      "name": "CST"
+    }
+  },
+  {
+    "model": "projects.Customer",
+    "pk": 7,
+    "fields": {
+      "name": "Derive"
+    }
+  },
+  {
+    "model": "projects.Customer",
+    "pk": 8,
+    "fields": {
+      "name": "ECCO"
+    }
+  },
+  {
+    "model": "projects.Customer",
+    "pk": 9,
+    "fields": {
+      "name": "FIO"
+    }
+  },
+  {
+    "model": "projects.Customer",
+    "pk": 10,
+    "fields": {
+      "name": "GE"
+    }
+  },
+  {
+    "model": "projects.Customer",
+    "pk": 11,
+    "fields": {
+      "name": "GRACO"
+    }
+  },
+  {
+    "model": "projects.Customer",
+    "pk": 12,
+    "fields": {
+      "name": "Hatch"
+    }
+  },
+  {
+    "model": "projects.Customer",
+    "pk": 13,
+    "fields": {
+      "name": "Laerdal"
+    }
+  },
+  {
+    "model": "projects.Customer",
+    "pk": 14,
+    "fields": {
+      "name": "LHI"
+    }
+  },
+  {
+    "model": "projects.Customer",
+    "pk": 15,
+    "fields": {
+      "name": "Lice guard"
+    }
+  },
+  {
+    "model": "projects.Customer",
+    "pk": 16,
+    "fields": {
+      "name": "Medisca"
+    }
+  },
+  {
+    "model": "projects.Customer",
+    "pk": 17,
+    "fields": {
+      "name": "Mobisol"
+    }
+  },
+  {
+    "model": "projects.Customer",
+    "pk": 18,
+    "fields": {
+      "name": "Motara"
+    }
+  },
+  {
+    "model": "projects.Customer",
+    "pk": 19,
+    "fields": {
+      "name": "National Instruments"
+    }
+  },
+  {
+    "model": "projects.Customer",
+    "pk": 20,
+    "fields": {
+      "name": "Omnicell"
+    }
+  },
+  {
+    "model": "projects.Customer",
+    "pk": 21,
+    "fields": {
+      "name": "POH"
+    }
+  },
+  {
+    "model": "projects.Customer",
+    "pk": 22,
+    "fields": {
+      "name": "Polyscience"
+    }
+  },
+  {
+    "model": "projects.Customer",
+    "pk": 23,
+    "fields": {
+      "name": "Posey"
+    }
+  },
+  {
+    "model": "projects.Customer",
+    "pk": 24,
+    "fields": {
+      "name": "Prince Castle"
+    }
+  },
+  {
+    "model": "projects.Customer",
+    "pk": 25,
+    "fields": {
+      "name": "Rainbird"
+    }
+  },
+  {
+    "model": "projects.Customer",
+    "pk": 26,
+    "fields": {
+      "name": "RF Technologies"
+    }
+  },
+  {
+    "model": "projects.Customer",
+    "pk": 27,
+    "fields": {
+      "name": "RMD"
+    }
+  },
+  {
+    "model": "projects.Customer",
+    "pk": 28,
+    "fields": {
+      "name": "Senzime AB"
+    }
+  },
+  {
+    "model": "projects.Customer",
+    "pk": 29,
+    "fields": {
+      "name": "Smiths  medical"
+    }
+  },
+  {
+    "model": "projects.Customer",
+    "pk": 30,
+    "fields": {
+      "name": "TECH 4 Life"
+    }
+  },
+  {
+    "model": "projects.Customer",
+    "pk": 31,
+    "fields": {
+      "name": "Thermofisher"
+    }
+  },
+  {
+    "model": "projects.Customer",
+    "pk": 32,
+    "fields": {
+      "name": "Videojet"
+    }
+  },
+  {
+    "model": "projects.Customer",
+    "pk": 33,
+    "fields": {
+      "name": "Zetroz"
+    }
+  }
+]
