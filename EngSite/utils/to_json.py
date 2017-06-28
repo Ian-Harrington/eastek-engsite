@@ -77,11 +77,12 @@ def XLSX_to_JSON(file_path, obj_name):
 			rVal.append(str(c.value))
 		objs.append(lstr_to_JSON(obj_name=obj_name, header=header, obj=rVal))
 	# opens a new file to write to & writes lines
-	fName = obj_name + '_to_JSON.json'
+	fName = obj_name.split('.')[1] + date.today().strftime('%Y-%m-%d') + '.json'
 	with open(fName, 'w') as f:
 		f.write('[')
+		f.write(objs.pop(0))
 		for o in objs:
-			f.write(o + ",")
+			f.write(', ' + o)
 		f.write(']')
 
 

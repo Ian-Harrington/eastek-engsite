@@ -1,0 +1,1010 @@
+[
+  {
+    "model": "employees.Employee",
+    "pk": "00057",
+    "fields": {
+      "name": "王家灵",
+      "english_name": "Jialing Wang",
+      "position": "LDR",
+      "is_active": true,
+      "is_leader": true,
+      "team": "ELEC",
+      "leader": "00057",
+      "email": "jialing.wang@eastek-intl.com",
+      "join_date": "1999-10-18",
+      "ret_date": null
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "01044",
+    "fields": {
+      "name": "贺秀龙",
+      "english_name": "Xiulong He",
+      "position": "ENG",
+      "is_active": true,
+      "is_leader": false,
+      "team": "ELEC",
+      "leader": "00035",
+      "email": "xiulong.he@eastek-intl.com",
+      "join_date": "2004-07-28",
+      "ret_date": null
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "01705",
+    "fields": {
+      "name": "代顺军",
+      "english_name": "Shunjun Dai",
+      "position": "ENG",
+      "is_active": true,
+      "is_leader": false,
+      "team": "ELEC",
+      "leader": "00057",
+      "email": "shunjun.dai@eastek-intl.com",
+      "join_date": "2005-05-30",
+      "ret_date": null
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "0528",
+    "fields": {
+      "name": "夏海福",
+      "english_name": "Haifu Xia",
+      "position": "LDR",
+      "is_active": true,
+      "is_leader": true,
+      "team": "MECH",
+      "leader": "0528",
+      "email": "haifu.xia@eastek-intl.com",
+      "join_date": "2006-08-02",
+      "ret_date": null
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "01190",
+    "fields": {
+      "name": "黄景隆",
+      "english_name": "Jinglong Huang",
+      "position": "LDR",
+      "is_active": true,
+      "is_leader": true,
+      "team": "TOOL",
+      "leader": "01190",
+      "email": "jinglong.huang@eastek-intl.com",
+      "join_date": "2006-10-30",
+      "ret_date": null
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "02269",
+    "fields": {
+      "name": "吴岭",
+      "english_name": "Ling Wu",
+      "position": "SEN",
+      "is_active": true,
+      "is_leader": false,
+      "team": "ELEC",
+      "leader": "00057",
+      "email": "ling.wu@eastek-intl.com",
+      "join_date": "2006-11-20",
+      "ret_date": null
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "02354",
+    "fields": {
+      "name": "周中林",
+      "english_name": "Zhonglin Zhou",
+      "position": "ENG",
+      "is_active": true,
+      "is_leader": false,
+      "team": "ELEC",
+      "leader": "00057",
+      "email": "zhonglin.zhou@eastek-intl.com",
+      "join_date": "2007-01-26",
+      "ret_date": null
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "02723",
+    "fields": {
+      "name": "李玉文",
+      "english_name": "Yuwen Li",
+      "position": "SEN",
+      "is_active": true,
+      "is_leader": false,
+      "team": "ELEC",
+      "leader": "00035",
+      "email": "yuwan.li@eastek-intl.com",
+      "join_date": "2007-07-04",
+      "ret_date": null
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "02766",
+    "fields": {
+      "name": "朱杜军",
+      "english_name": "Dujun Zhu",
+      "position": "ENG",
+      "is_active": true,
+      "is_leader": false,
+      "team": "ELEC",
+      "leader": "00057",
+      "email": "dujun.zhu@eastek-intl.com",
+      "join_date": "2007-07-29",
+      "ret_date": null
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "0550",
+    "fields": {
+      "name": "牛巧云",
+      "english_name": "Qiaoyun Niu",
+      "position": "AEN",
+      "is_active": true,
+      "is_leader": true,
+      "team": "SUPP",
+      "leader": "0550",
+      "email": "qiaoyun.niu@eastek-intl.com",
+      "join_date": "2007-12-31",
+      "ret_date": null
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "0571",
+    "fields": {
+      "name": "丁保险",
+      "english_name": "Baoxian Ding",
+      "position": "LDR",
+      "is_active": true,
+      "is_leader": true,
+      "team": "MECH",
+      "leader": "0571",
+      "email": "baoxian.ding@eastek-intl.com",
+      "join_date": "2009-09-24",
+      "ret_date": null
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "04216",
+    "fields": {
+      "name": "蔡利芳",
+      "english_name": "Lifang Cai",
+      "position": "ENG",
+      "is_active": true,
+      "is_leader": false,
+      "team": "ELEC",
+      "leader": "00035",
+      "email": "lifang.cai@eastek-intl.com",
+      "join_date": "2010-03-22",
+      "ret_date": null
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "01200",
+    "fields": {
+      "name": "林宙宏",
+      "english_name": "Zhouhong Lin",
+      "position": "TEN",
+      "is_active": true,
+      "is_leader": false,
+      "team": "TOOL",
+      "leader": "01190",
+      "email": "zhouhong.lin@eastek-intl.com",
+      "join_date": "2010-05-10",
+      "ret_date": null
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "0582",
+    "fields": {
+      "name": "谭军",
+      "english_name": "Jun Tan",
+      "position": "ENG",
+      "is_active": true,
+      "is_leader": false,
+      "team": "MECH",
+      "leader": "0571",
+      "email": "jun.tan@eastek-intl.com",
+      "join_date": "2012-02-13",
+      "ret_date": null
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "01228",
+    "fields": {
+      "name": "劉玉",
+      "english_name": "Yu Liu",
+      "position": "TEN",
+      "is_active": true,
+      "is_leader": false,
+      "team": "TOOL",
+      "leader": "01190",
+      "email": "yu.liu@eastek-intl.com",
+      "join_date": "2012-02-29",
+      "ret_date": null
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "07016",
+    "fields": {
+      "name": "曾海涛",
+      "english_name": "Haitao Zeng",
+      "position": "ENG",
+      "is_active": true,
+      "is_leader": false,
+      "team": "MECH",
+      "leader": "0528",
+      "email": "haitao.zeng@eastek-intl.com",
+      "join_date": "2013-08-02",
+      "ret_date": null
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "07824",
+    "fields": {
+      "name": "陳雄偉",
+      "english_name": "Xiongwei Chen",
+      "position": "AEN",
+      "is_active": true,
+      "is_leader": false,
+      "team": "MECH",
+      "leader": "0571",
+      "email": "xiongwei.chen@eastekinternational.com",
+      "join_date": "2014-07-16",
+      "ret_date": null
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "05270",
+    "fields": {
+      "name": "梅艳莲",
+      "english_name": "Yanlian Mei",
+      "position": "CLK",
+      "is_active": true,
+      "is_leader": false,
+      "team": "SUPP",
+      "leader": "0550",
+      "email": "yanlian.mei@eastek-intl.com",
+      "join_date": "2015-05-12",
+      "ret_date": null
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "08327",
+    "fields": {
+      "name": "吕东东",
+      "english_name": "DongDong LV",
+      "position": "TEN",
+      "is_active": true,
+      "is_leader": false,
+      "team": "TOOL",
+      "leader": "01190",
+      "email": "dongdong.lv@eastekinternational.com",
+      "join_date": "2015-06-01",
+      "ret_date": null
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "08495",
+    "fields": {
+      "name": "彭德明",
+      "english_name": "Deming Peng",
+      "position": "AEN",
+      "is_active": true,
+      "is_leader": false,
+      "team": "ELEC",
+      "leader": "00057",
+      "email": "deming.peng@eastekinternational.com",
+      "join_date": "2015-09-16",
+      "ret_date": null
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "08574",
+    "fields": {
+      "name": "张金泉",
+      "english_name": "Jinquan Zhang",
+      "position": "ENG",
+      "is_active": true,
+      "is_leader": false,
+      "team": "MECH",
+      "leader": "0571",
+      "email": "jinquan.zhang@eastekinternational.com",
+      "join_date": "2015-10-21",
+      "ret_date": null
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "08604",
+    "fields": {
+      "name": "张志成",
+      "english_name": "Zhicheng Zhang",
+      "position": "AEN",
+      "is_active": true,
+      "is_leader": false,
+      "team": "TOOL",
+      "leader": "01190",
+      "email": "zhicheng.zhang@eastekinternational.com",
+      "join_date": "2015-10-27",
+      "ret_date": null
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "08656",
+    "fields": {
+      "name": "谭丹",
+      "english_name": "Dan Tan",
+      "position": "AEN",
+      "is_active": true,
+      "is_leader": false,
+      "team": "ELEC",
+      "leader": "00035",
+      "email": "dan.tan@eastekinternational.com",
+      "join_date": "2015-11-03",
+      "ret_date": null
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "08667",
+    "fields": {
+      "name": "何德珍",
+      "english_name": "Dezhen He",
+      "position": "CLK",
+      "is_active": true,
+      "is_leader": false,
+      "team": "SUPP",
+      "leader": "0550",
+      "email": "dezhen.he@eastekinternational.com",
+      "join_date": "2015-11-04",
+      "ret_date": null
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "08733",
+    "fields": {
+      "name": "贺勇",
+      "english_name": "Yong He",
+      "position": "ENG",
+      "is_active": true,
+      "is_leader": false,
+      "team": "MECH",
+      "leader": "0528",
+      "email": "yong.he@eastekinternational.com",
+      "join_date": "2015-11-19",
+      "ret_date": null
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "08848",
+    "fields": {
+      "name": "张洋洋",
+      "english_name": "Yangyang Zhang",
+      "position": "ENG",
+      "is_active": true,
+      "is_leader": false,
+      "team": "MECH",
+      "leader": "0528",
+      "email": "yangyang.zhang@eastekinternational.com",
+      "join_date": "2016-03-01",
+      "ret_date": null
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "08888",
+    "fields": {
+      "name": "林家宏",
+      "english_name": "Jiahong Lin",
+      "position": "AEN",
+      "is_active": true,
+      "is_leader": false,
+      "team": "MECH",
+      "leader": "0528",
+      "email": "jiahong.lin@eastekinternational.com",
+      "join_date": "2016-04-12",
+      "ret_date": null
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "09075",
+    "fields": {
+      "name": "黄永烨",
+      "english_name": "Yongye Huang　",
+      "position": "AEN",
+      "is_active": true,
+      "is_leader": false,
+      "team": "MECH",
+      "leader": "0571",
+      "email": "yongye.huang@eastekinternational.com",
+      "join_date": "2016-11-01",
+      "ret_date": null
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "09207",
+    "fields": {
+      "name": "王沁雨",
+      "english_name": "Qinyu Wang",
+      "position": "CLK",
+      "is_active": true,
+      "is_leader": false,
+      "team": "SUPP",
+      "leader": "0550",
+      "email": "qinyu.wang@eastekinternational.com",
+      "join_date": "2016-12-23",
+      "ret_date": null
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "09229",
+    "fields": {
+      "name": "陈铸",
+      "english_name": "Zhu Chen　",
+      "position": "CLK",
+      "is_active": true,
+      "is_leader": false,
+      "team": "SUPP",
+      "leader": "0550",
+      "email": "zhu.chen@eastekinternational.com",
+      "join_date": "2017-02-08",
+      "ret_date": null
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "09472",
+    "fields": {
+      "name": "張旭",
+      "english_name": "Xu Zhang",
+      "position": "ENG",
+      "is_active": true,
+      "is_leader": false,
+      "team": "MECH",
+      "leader": "0571",
+      "email": "xu.zhang@eastekinternational.com",
+      "join_date": "2017-03-10",
+      "ret_date": null
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "09485",
+    "fields": {
+      "name": "王瑞",
+      "english_name": "Rui Wang",
+      "position": "AEN",
+      "is_active": true,
+      "is_leader": false,
+      "team": "MECH",
+      "leader": "0528",
+      "email": "rui.wang@eastekinternational.com",
+      "join_date": "2017-03-14",
+      "ret_date": null
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "09522",
+    "fields": {
+      "name": "王明",
+      "english_name": "Ming Wang",
+      "position": "AEN",
+      "is_active": true,
+      "is_leader": false,
+      "team": "MECH",
+      "leader": "0571",
+      "email": "ming.wang@eastekinternational.com",
+      "join_date": "2017-04-05",
+      "ret_date": null
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "09530",
+    "fields": {
+      "name": "劉嘉俊",
+      "english_name": "Jia Jun Liu",
+      "position": "AEN",
+      "is_active": true,
+      "is_leader": false,
+      "team": "MECH",
+      "leader": "0571",
+      "email": "jiajun.liu@eastekinternational.com",
+      "join_date": "2017-04-17",
+      "ret_date": null
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "09531",
+    "fields": {
+      "name": "黄强",
+      "english_name": "Qiang Huang",
+      "position": "TEN",
+      "is_active": true,
+      "is_leader": false,
+      "team": "TOOL",
+      "leader": "01190",
+      "email": "qiang.huang@eastekinternational.com",
+      "join_date": "2017-04-20",
+      "ret_date": null
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "09598",
+    "fields": {
+      "name": "袁楨林",
+      "english_name": "Zhen Lin Yuan",
+      "position": "ENG",
+      "is_active": true,
+      "is_leader": false,
+      "team": "MECH",
+      "leader": "0528",
+      "email": "zhenlin.yuan@eastekinternational.com",
+      "join_date": "2017-05-26",
+      "ret_date": null
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "09639",
+    "fields": {
+      "name": "孫業高",
+      "english_name": "Ye Gao Sun",
+      "position": "ENG",
+      "is_active": true,
+      "is_leader": false,
+      "team": "ELEC",
+      "leader": "00035",
+      "email": "yegao.sun@eastek-intl.com",
+      "join_date": "2017-06-16",
+      "ret_date": null
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "09127",
+    "fields": {
+      "name": "李水清",
+      "english_name": "Shuiqing Li",
+      "position": "ENG",
+      "is_active": false,
+      "is_leader": false,
+      "team": "MECH",
+      "leader": "0571",
+      "email": "shuiqing.li@eastekinternational.com",
+      "join_date": "2016-11-18",
+      "ret_date": "2017-01-18"
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "08828",
+    "fields": {
+      "name": "程会娥",
+      "english_name": "Huirong Cheng",
+      "position": "AEN",
+      "is_active": false,
+      "is_leader": false,
+      "team": "MECH",
+      "leader": "0571",
+      "email": "huirong.cheng@eastekinternational.com",
+      "join_date": "2016-02-17",
+      "ret_date": "2017-01-03"
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "04100",
+    "fields": {
+      "name": "陳華麗",
+      "english_name": "Huali Chen",
+      "position": "CLK",
+      "is_active": false,
+      "is_leader": false,
+      "team": "SUPP",
+      "leader": "0550",
+      "email": "huali.chen@eastek-intl.com",
+      "join_date": "2010-03-02",
+      "ret_date": "2017-01-03"
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "08788",
+    "fields": {
+      "name": "周带娣",
+      "english_name": "Dai Di Zhou",
+      "position": "CLK",
+      "is_active": false,
+      "is_leader": false,
+      "team": "SUPP",
+      "leader": "0550",
+      "email": "daidi.zhou@eastekinternational.com",
+      "join_date": "2015-12-01",
+      "ret_date": "2016-02-29"
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "08130",
+    "fields": {
+      "name": "刘艾婷",
+      "english_name": "Ai Ting Liu　",
+      "position": "CLK",
+      "is_active": false,
+      "is_leader": false,
+      "team": "SUPP",
+      "leader": "0550",
+      "email": "aiting.liu@eastekinternational.com",
+      "join_date": "2015-03-10",
+      "ret_date": "2016-04-12"
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "03315",
+    "fields": {
+      "name": "张春梅",
+      "english_name": "Chunmei Zhang　",
+      "position": "AEN",
+      "is_active": false,
+      "is_leader": false,
+      "team": "MECH",
+      "leader": "0528",
+      "email": "chunmei.zhang@eastekinternational.com",
+      "join_date": "2008-07-05",
+      "ret_date": "2016-08-12"
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "03180",
+    "fields": {
+      "name": "包文超",
+      "english_name": "Wenchao Bao　",
+      "position": "AEN",
+      "is_active": false,
+      "is_leader": false,
+      "team": "MECH",
+      "leader": "0571",
+      "email": "wenchao.bao@eastekinternational.com",
+      "join_date": "2011-12-15",
+      "ret_date": "2016-07-05"
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "08776",
+    "fields": {
+      "name": "李偲",
+      "english_name": "Si Li　",
+      "position": "ENG",
+      "is_active": false,
+      "is_leader": false,
+      "team": "MECH",
+      "leader": "0528",
+      "email": "si.li@eastekinternational.com",
+      "join_date": "2015-11-24",
+      "ret_date": "2016-03-23"
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "07976",
+    "fields": {
+      "name": "夏明俊",
+      "english_name": "Mingjun Xia　",
+      "position": "ENG",
+      "is_active": false,
+      "is_leader": false,
+      "team": "MECH",
+      "leader": "0571",
+      "email": "mingjun.xia@eastekinternational.com",
+      "join_date": "2014-12-02",
+      "ret_date": "2016-07-22"
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "08840",
+    "fields": {
+      "name": "夏翠丽",
+      "english_name": "Cui li Xia",
+      "position": "CLK",
+      "is_active": false,
+      "is_leader": false,
+      "team": "SUPP",
+      "leader": "0550",
+      "email": "cuili.xia@eastekinternational.com",
+      "join_date": "2016-02-29",
+      "ret_date": "2016-05-16"
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "08876",
+    "fields": {
+      "name": "张力",
+      "english_name": "Li Zhang　",
+      "position": "CLK",
+      "is_active": false,
+      "is_leader": false,
+      "team": "SUPP",
+      "leader": "0550",
+      "email": "li.zhang@eastekinternational.com",
+      "join_date": "2016-03-22",
+      "ret_date": "2016-07-01"
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "08886",
+    "fields": {
+      "name": "邱其昌",
+      "english_name": "Qi Chang Qiu",
+      "position": "ENG",
+      "is_active": false,
+      "is_leader": false,
+      "team": "MECH",
+      "leader": "0571",
+      "email": "qichang.qiu@eastekinternational.com",
+      "join_date": "2016-04-12",
+      "ret_date": "2016-05-27"
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "08881",
+    "fields": {
+      "name": "董涛",
+      "english_name": "Tao Dong",
+      "position": "AEN",
+      "is_active": false,
+      "is_leader": false,
+      "team": "MECH",
+      "leader": "0571",
+      "email": "tao.dong@eastekinternational.com",
+      "join_date": "2016-04-07",
+      "ret_date": "2016-10-25"
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "08890",
+    "fields": {
+      "name": "赵云滔",
+      "english_name": "Yun Tao Zhao",
+      "position": "AEN",
+      "is_active": false,
+      "is_leader": false,
+      "team": "MECH",
+      "leader": "0571",
+      "email": "yuntao.zhao@eastekinternational.com",
+      "join_date": "2016-04-14",
+      "ret_date": "2016-07-11"
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "09045",
+    "fields": {
+      "name": "杨红桂",
+      "english_name": "Honggui Yang　",
+      "position": "AEN",
+      "is_active": false,
+      "is_leader": false,
+      "team": "MECH",
+      "leader": "0571",
+      "email": "honggui.yang@eastekinternational.com",
+      "join_date": "2016-10-25",
+      "ret_date": "2016-11-21"
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "09292",
+    "fields": {
+      "name": "岳友明",
+      "english_name": "You Ming Yue",
+      "position": "AEN",
+      "is_active": false,
+      "is_leader": false,
+      "team": "MECH",
+      "leader": "0571",
+      "email": "youming.yue@eastekinternational.com",
+      "join_date": "2017-02-15",
+      "ret_date": "2017-02-23"
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "09473",
+    "fields": {
+      "name": "高衛",
+      "english_name": "Wei Gao",
+      "position": "AEN",
+      "is_active": false,
+      "is_leader": false,
+      "team": "MECH",
+      "leader": "0571",
+      "email": "wei.gao@eastekinternational.com",
+      "join_date": "2017-03-14",
+      "ret_date": "2017-04-24"
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "09470",
+    "fields": {
+      "name": "鄭小生",
+      "english_name": "Xiao Sheng Zheng",
+      "position": "AEN",
+      "is_active": false,
+      "is_leader": false,
+      "team": "MECH",
+      "leader": "0571",
+      "email": "xiaosheng.zheng@eastekinternational.com",
+      "join_date": "2017-03-08",
+      "ret_date": "2017-04-25"
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "09511",
+    "fields": {
+      "name": "何建龍",
+      "english_name": "Jian Long He",
+      "position": "ENG",
+      "is_active": false,
+      "is_leader": false,
+      "team": "MECH",
+      "leader": "0528",
+      "email": "jianlong.he@eastekinternational.com",
+      "join_date": "2017-03-27",
+      "ret_date": "2017-05-10"
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "09204",
+    "fields": {
+      "name": "胡宝",
+      "english_name": "Bao Hu　",
+      "position": "AEN",
+      "is_active": false,
+      "is_leader": false,
+      "team": "MECH",
+      "leader": "0528",
+      "email": "bao.hu@eastekinternational.com",
+      "join_date": "2016-12-23",
+      "ret_date": "2017-03-10"
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "09195",
+    "fields": {
+      "name": "蔡国俊",
+      "english_name": "Guojun Cai　",
+      "position": "AEN",
+      "is_active": false,
+      "is_leader": false,
+      "team": "MECH",
+      "leader": "0571",
+      "email": "guojun.cai@eastekinternational.com",
+      "join_date": "2016-09-02",
+      "ret_date": "2017-02-23"
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "08311",
+    "fields": {
+      "name": "罗青",
+      "english_name": "Qing Luo",
+      "position": "TEN",
+      "is_active": false,
+      "is_leader": false,
+      "team": "TOOL",
+      "leader": "01190",
+      "email": "qing.luo@eastekinternational.com",
+      "join_date": "2015-04-05",
+      "ret_date": "2017-03-31"
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "06829",
+    "fields": {
+      "name": "朱杰",
+      "english_name": "Jie Zhu",
+      "position": "ENG",
+      "is_active": false,
+      "is_leader": false,
+      "team": "ELEC",
+      "leader": "00035",
+      "email": "jie.zhu@eastek-intl.com",
+      "join_date": "2013-06-11",
+      "ret_date": "2017-01-04"
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "08879",
+    "fields": {
+      "name": "欧盛才",
+      "english_name": "Shengcai Ou",
+      "position": "ENG",
+      "is_active": false,
+      "is_leader": false,
+      "team": "MECH",
+      "leader": "0528",
+      "email": "shengcai.ou@eastekinternational.com",
+      "join_date": "2016-04-06",
+      "ret_date": "2017-05-10"
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "08936",
+    "fields": {
+      "name": "冯成军",
+      "english_name": "Chengjun Feng",
+      "position": "ENG",
+      "is_active": false,
+      "is_leader": false,
+      "team": "MECH",
+      "leader": "0571",
+      "email": "chengjun.feng@eastekinternational.com",
+      "join_date": "2016-09-02",
+      "ret_date": "2017-02-23"
+    }
+  },
+  {
+    "model": "employees.Employee",
+    "pk": "00035",
+    "fields": {
+      "name": "熊孝亮",
+      "english_name": "Xiaoliang Xiong",
+      "position": "LDR",
+      "is_active": false,
+      "is_leader": true,
+      "team": "ELEC",
+      "leader": "00035",
+      "email": "xl.xiong@eastek-intl.com",
+      "join_date": "1998-08-06",
+      "ret_date": "2017-06-19"
+    }
+  }
+]
