@@ -25,7 +25,7 @@ class Project(models.Model):
 	work_type = models.CharField(max_length=4, choices=WORK_TYPES, verbose_name=_('project type'))
 	status = models.CharField(max_length=3, choices=STATUS, verbose_name=_('status'))
 	engineer = models.ManyToManyField(Employee, verbose_name=_('engineer(s)'))
-	estimated_hours = models.SmallIntegerField(null=True, verbose_name=_('estimated hours'))
+	#estimated_hours = models.SmallIntegerField(null=True, verbose_name=_('estimated hours'))
 	eastek_pn = models.CharField(max_length=45, blank=True, verbose_name=_('eastek part number'))
 	cust_pn = models.CharField(max_length=45, blank=True, verbose_name=_('customer part number'))
 

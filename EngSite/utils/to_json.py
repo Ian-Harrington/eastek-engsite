@@ -41,8 +41,7 @@ def parse(data):
 		return 'true'
 	elif data.lower() == 'false' or data.lower() == '=false()':
 		return 'false'
-	elif re.match(r'^[1-9][0-9]*(\.)?[0-9]*$', data): # doesn't catch 0.5 or .5 (maybe not a big deal)
-		#isinstance(data, type(1)) or isinstance(data, type(1.0)): # all ints or floats (xlsx breaks this)
+	elif re.match(r'^[0-9]+(\.[0-9]+)?$', data): # could catch bad numbers like 00, 05, .0, 5.
 		return tmp
 	elif re.match(r'^[12][0-9]{3}-[01][0-9]-[0-3][0-9]', data):
 		return '"' + re.match(r'^[12][0-9]{3}-[01][0-9]-[0-3][0-9]', data).group() + '"'
