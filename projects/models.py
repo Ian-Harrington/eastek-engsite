@@ -46,7 +46,7 @@ class Milestone(models.Model):
 	description = models.CharField(max_length=50, verbose_name=_('milestone'))
 	deadline = models.DateField(verbose_name=_('deadline'))
 	completion_date = models.DateField(blank=True, null=True, verbose_name=_('completion date'))
-		
+	
 	def __str__(self):
 		return self.project.name + ' - ' + self.description
 

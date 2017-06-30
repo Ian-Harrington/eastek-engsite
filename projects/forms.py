@@ -42,8 +42,6 @@ class PartNumForm(forms.Form):
 
 class MilestoneForm(forms.ModelForm):
 	"""docstring for MilestoneForm"""
-	#description = forms.CharField(widget=forms.TextInput(attrs={'size':30}), label=_('milestone'))
-	#deadline = forms.DateField(widget=forms.TextInput(attrs={'size':12}), label=_('deadline'))
 
 	class Meta:
 		model = models.Milestone
