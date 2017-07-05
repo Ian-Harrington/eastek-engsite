@@ -52,7 +52,7 @@ def individual(request, emp_id):
 			emp = form.save()
 			context['saved'] = True
 			if not form.cleaned_data['is_active'] and emp.has_user():
-				emp.archive_account()
+				emp.archive_account() # might not want this (good security procedure though)
 		else:
 			pass
 		# common context	

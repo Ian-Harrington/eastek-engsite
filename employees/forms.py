@@ -33,3 +33,6 @@ class IndividualForm(forms.ModelForm):
 			self.add_error(self.is_active, ValidationError(_('Employees with a retire date must be marked as retired'))) # add to is_active
 		if self.cleaned_data['is_leader'] and self.cleaned_data['leader'].emp_id != self.cleaned_data['emp_id']:
 			self.add_error('leader', ValidationError(_('A team leader must be their own team leader')))
+
+	def clean_email(self):
+		return self.cleaned_data['email'].lower()

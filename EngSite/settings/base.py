@@ -80,9 +80,9 @@ LOCALE_PATHS = [
 USE_L10N = False
 
 # Date/Time display formats
-SHORT_DATE_FORMAT = DATE_FORMAT = 'Y-n-j'
-SHORT_DATETIME_FORMAT = DATETIME_FORMAT = 'Y-n-j | G:i'
-TIME_FORMAT = 'G:i'
+SHORT_DATE_FORMAT = DATE_FORMAT = 'Y-n-j' # 2006-10-25
+SHORT_DATETIME_FORMAT = DATETIME_FORMAT = 'Y-n-j | G:i' # 2006-10-25 | 14:30
+TIME_FORMAT = 'G:i' # 14:30
 # Date[Time] input formats (uses python string parsing)
 DATE_INPUT_FORMATS = [
     '%Y-%m-%d', '%Y/%m/%d', '%Y.%m.%d',  # '2006-10-25', '2006/10/25', '2006.10.25'
