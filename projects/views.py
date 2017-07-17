@@ -108,11 +108,11 @@ def add_project(request):
 				'form-INITIAL_FORMS':'0',
 				'form-MIN_NUM_FORMS':'',
 				'form-MAX_NUM_FORMS':'',
-				'form-0-description': GATE_LIST[0][0],
-				'form-1-description': GATE_LIST[1][0],
-				'form-2-description': GATE_LIST[2][0],
-				'form-3-description': GATE_LIST[3][0],
-				'form-4-description': GATE_LIST[4][0],}
+				'form-0-description': models.Defaults.GATE_LIST[0][0],
+				'form-1-description': models.Defaults.GATE_LIST[1][0],
+				'form-2-description': models.Defaults.GATE_LIST[2][0],
+				'form-3-description': models.Defaults.GATE_LIST[3][0],
+				'form-4-description': models.Defaults.GATE_LIST[4][0],}
 	if request.method == 'POST':
 		proj_form = forms.ProjectForm(request.POST)
 		mstn_form = formset(request.POST)
@@ -245,7 +245,11 @@ def complete_checklist(request, pid, gate):
 			init['form-'+str(i)+'-remarks'] = ''
 			# don't know if the pre-existing remarks are supposed to be added or not
 		formset = forms.ChecklistFormset(init)
-	context = {'formset': formset, 'gate':{'number':gate, 'name':models.Defaults.GATE_LIST[int(gate)-1][0]}, 'pid':pid, 'responsible':models.ChecklistItem.RESPONSIBLE}
+	context = {'formset': formset, 
+				'gate':{'number':gate, 'name':models.Defaults.GATE_LIST[int(gate)-1][0]}, 
+				'pid':pid, 
+				'responsible':models.Defaults.RESPONSIBLE, 
+				'item_desc': models.Defaults.GATE_LIST[int(gate)-1][2]}
 	return render(request, 'projects/checklist.html', context)
 
 @login_required

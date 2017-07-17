@@ -22,7 +22,7 @@
 				</tr> 
 				{% for frm in formset %}
 				<tr> 
-					<td> {{frm.name.value}} </td>
+					<td> {{frm.name.value|human_readable:item_desc}} </td>
 					<td style="display: none;"> {{frm.name}} </td>
 					<td> {{frm.responsible.value|human_readable:responsible}} </td>
 					<td style="display: none;"> {{frm.responsible}} </td>

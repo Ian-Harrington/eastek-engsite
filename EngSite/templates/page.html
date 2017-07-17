@@ -27,7 +27,7 @@
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> {% trans "Overtime" %} <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						{% if request.user.get_employee %}
-						<li><a href="{% url 'overtime:add' %}">{% trans "Record New" %}</a></li>
+						<li><a href="{% url 'overtime:add' %}">{% trans "Request Overtime" %}</a></li>
 						{% endif %}
 						<li><a href="{% url 'overtime:requestform' %}">{% trans "Download Form" %}</a></li>
 						<li><a href="{% url 'overtime:list' 1 %}">{% trans "View All" %}</a></li>
@@ -42,7 +42,7 @@
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> {% trans "Projects" %} <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="{% url 'projects:projectlist' %}?customer=&work_type=&status=INP&engineer={{request.user.employee.emp_id}}">{% trans "My Projects" %}</a></li>
-						<li><a href="{% url 'projects:addproject' %}">{% trans "Create New Project" %}</a></li>
+						<li><a href="{% url 'projects:addproject' %}">{% trans "Add New Project" %}</a></li>
 						<li role="separator" class="divider"></li>
 						<li><a href="{% url 'projects:projectlist' %}">{% trans "All Projects" %}</a></li>
 						<li><a href="{% url 'projects:customers' %}">{% trans "Customer List" %}</a></li>
@@ -55,7 +55,7 @@
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> {% trans "Employees" %} <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="{% url 'employees:list' %}">{% trans "View All" %}</a></li>
-						<li><a href="{% url 'employees:detail' 'add' %}">{% trans "Add New" %}</a></li>
+						<li><a href="{% url 'employees:detail' 'add' %}">{% trans "Add New Employee" %}</a></li>
 					</ul>
 				</li>
 				{% endif %}
@@ -85,13 +85,13 @@
 
 <div class="nav-pad">
 {% block pagecontent %}
-	<p> There was a problem loading the page content </p>
+	<p> {% trans "There was a problem loading the page content"} </p>
 {% endblock pagecontent%}
 </div>
 
 {% endblock content %}
 
 {% block pagescripts %}
-{# <script>$(document).ready(changeLang())</script> #}
+<script>$(document).ready(changeLang())</script>
 {% block scripts %} {% endblock %}
 {% endblock %}
