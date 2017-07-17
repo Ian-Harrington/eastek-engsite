@@ -75,7 +75,7 @@
 					<tr>
 						<td>{{ms.deadline}}</td>
 						<td>{{ms.description}}</td>
-						{% if ms.is_complete %}
+						{% if ms.is_complete or not perms.projects.change_checklist %}
 						<td>
 							{% firstof ms.completion_date 'Yes' %}
 							<a href="{% url 'projects:downloadchecklist' project.id forloop.counter %}"><span class="glyphicon glyphicon-save" style="font-size: 1.2em" aria-hidden="true"></span></a>

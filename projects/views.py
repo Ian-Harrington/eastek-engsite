@@ -7,6 +7,7 @@ from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import permission_required, login_required
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.forms import formset_factory
+from django.db.models import Q
 
 from EngSite.utils.utils import choice_lookup
 from EngSite.utils.reportgen import generate_gate_checklist
@@ -161,7 +162,8 @@ class ProjectListView(PermissionRequiredMixin, ListView):
 			if self.request.GET.get('status'):
 				qs = qs.filter(status=self.request.GET.get('status'))
 			if self.request.GET.get('engineer'):
-				qs = qs.filter(engineer=self.request.GET.get('engineer'))
+				qs = qs.filter(Q(engineer=self.request.GET.get('engineer')) | 
+								Q(lead_eng=self.request.GET.get('engineer')))
 		else:
 			qs = qs.filter(status='INP') # default to only show in-progress
 		return qs
@@ -218,7 +220,7 @@ def complete_checklist(request, pid, gate):
 	if request.method == 'POST':
 		formset = forms.ChecklistFormset(request.POST)
 		if formset.is_valid():
-			milestone = models.Milestone.objects.filter(project=pid).get(description=GATE_LIST[int(gate)-1][0])
+			milestone = models.Milestone.objects.filter(project=pid).get(description=models.Defaults.GATE_LIST[int(gate)-1][0])
 			for frm in formset:
 				cli = frm.save(commit=False)
 				cli.checklist = milestone
@@ -229,7 +231,7 @@ def complete_checklist(request, pid, gate):
 			return HttpResponseRedirect('/projects/'+pid)
 	else:
 		# where will the defaults be located?
-		checklist = GATE_LIST[int(gate)-1][1]
+		checklist = models.Defaults.GATE_LIST[int(gate)-1][1]
 		init = {
 			'form-TOTAL_FORMS':str(len(checklist)), # may need to be dynamic
 			'form-INITIAL_FORMS':'0',
@@ -243,179 +245,18 @@ def complete_checklist(request, pid, gate):
 			init['form-'+str(i)+'-remarks'] = ''
 			# don't know if the pre-existing remarks are supposed to be added or not
 		formset = forms.ChecklistFormset(init)
-	context = {'formset': formset, 'gate':{'number':gate, 'name':GATE_LIST[int(gate)-1][0]}, 'pid':pid, 'responsible':models.ChecklistItem.RESPONSIBLE}
+	context = {'formset': formset, 'gate':{'number':gate, 'name':models.Defaults.GATE_LIST[int(gate)-1][0]}, 'pid':pid, 'responsible':models.ChecklistItem.RESPONSIBLE}
 	return render(request, 'projects/checklist.html', context)
 
 @login_required
 def download_checklist(request, pid, gate):
 	proj = get_object_or_404(models.Project, pk=pid)
-	ms = models.Milestone.objects.filter(project=pid).get(description=GATE_LIST[int(gate)-1][0])
+	ms = models.Milestone.objects.filter(project=pid).get(description=models.Defaults.GATE_LIST[int(gate)-1][0])
 	if ms.is_complete():
-		filename = proj.name + ' - ' + GATE_LIST[int(gate)-1][0] + ' Gate Checklist.xlsx'
+		filename = proj.name + ' - ' + models.Defaults.GATE_LIST[int(gate)-1][0] + ' Gate Checklist.xlsx'
 		response = HttpResponse(generate_gate_checklist(ms), content_type='application/vnd.ms-excel')
 		response['Content-Disposition'] = 'attachment; filename="' + filename + '"'
 		return response
 	elif not ms.is_complete():
 		pass
 		#raise error
-
-KICKOFF = (
-	('Gate 1 Check List Approved and Released', 'ENG'),
-	('Kick-off Form Complete', 'ENG'),
-	('Kick-off Meeting Between LZ and Factory Complete', 'ENG'),
-	('Factory Kick-off Meeting Complete', 'ENG'),
-	('Project Schedule has been Created and Agreed by Customer', 'ENG'),
-	('DFM / DFA Feedback Complete', 'ENG'),
-	('Customer Has Approved DFM & DFA Feedbacks', 'ENG'),
-	('Document Numbers Have Been Created and Added to the BOM', 'ENG'),
-	('BOM Has Been Created & Loaded in ERP System ', 'ENG'),
-	('AVL loaded and Verified ', 'PUR'),
-	('BOM Has Been Reviewed and Verified ', 'ENG'),
-	('BOM Has Been Released in ERP System via ECO', 'ENG'),
-	('Proto Build Requirement?', 'ENG'),
-	('All Customer Documents Released to DCC', 'ENG'),
-)
-ENG_SAMPLES = (
-	('Gate 2 Check List Approved and Released', 'ENG'),
-	('DFM / DFA Completed & Approved', 'ENG'),
-	('Tool Design Completed & Approved', 'ENG'),
-	('Mold Flow Analysis Completed & Approved', 'ENG'),
-	('ICT Test Defined & Implemented', 'ENG'),
-	('Functional Test Defined & Implemented', 'ENG'),
-	('E-Samples Shipped to Customer', 'ENG'),
-	('1st Article Reports Completed and Sent to Customer', 'ENG'),
-	('E-Samples Approval Form Sent to Customer', 'ENG'),
-	('Customer Approval to Purchase Raw Materials for Production', 'ENG'),
-	('Work Instructions Verified and Released', 'ENG'),
-	('BOM Verified and Released to DCC', 'ENG'),
-	('Component Specs (Mech. & Elec.) Approved and Released to DCC', 'ENG'),
-	('Packaging Design Completed & Released', 'ENG'),
-	('E-Samples Shipped in Final Packaging', 'ENG'),
-	('Serial Number Labels Defined & Implemented', 'ENG'),
-	('Pallet Size Defined & Documented', 'ENG'),
-	('Labeling, Bar Code Specs Defined & Documented', 'ENG'),
-	('New Printers, Barcode Scanners etc. Required ?', 'ENG'),
-	('DMR Approved and Released  (Required for Medical Devices)', 'ENG'),
-	('Risk Analysis Completed & Released', 'ENG'),
-	('Process FMEA Verified & Released', 'ENG'),
-	('Control Plan Verified & Released', 'ENG'),
-	('Production Sampling Plan Defined', 'ENG'),
-	('ESD Requirements Defined', 'ENG'),
-	('Customer Service Notified to Send Tooling & E-Sample Invoices', 'ENG'),
-	('Customer Approval of E-Samples Have Been Received', 'ENG'),
-	('IQC Inspection Instructions Verified & Released', 'QLT'),
-	('First Article Inspection Verified & Released', 'QLT'),
-	('Quality Inspection Instructions Verified & Released', 'QLT'),
-	('Quality Measurement Fixtures Created & Verified', 'QLT'),
-	('Quality Standards Defined (Customer or IPC-A-610D)', 'QLT'),
-	('Certificate of Conformance(s) Required?', 'QLT'),
-	('Material Std Cost Loaded in ERP', 'PUR'),
-	('Lead-Time Loaded in ERP and Verified', 'PUR'),
-	('Local New Suppliers Audited & Approved?', 'PUR'),
-	('All PO\'s Placed and Confirmed? Pilot Runs & Production Run', 'PUR'),
-	('ICT Platform defined If Required', 'ME'),
-	('ICT Fixture in house If Required', 'ME'),
-	('ICT Test program Validated', 'ME'),
-	('ICT test procedure released & verified ICT', 'ME'),
-	('Troubleshoot Training Completed', 'ME'),
-	('List of Components Which Can Not be Tested Provided', 'ME'),
-	('Assembly and Test Fixtures Have been Created', 'ME'),
-	('Test Equipment is Defined & Validated', 'ME'),
-	('Test program is Defined & Validated', 'ME'),
-	('Functional Testing Procedure Released & Verified', 'ME'),
-)
-QUALIFICATION = (
-	('Gate 3 Check List Approved and Released', 'ENG'),
-	('List of Customer Consigned Equipment', 'ME'),
-	('Calibration Record for all Required Production Equipment', 'ME'),
-	('SMT Program Defined & Verified', 'PRD'),
-	('Stencil in house & Verified', 'PRD'),
-	('Solder Paste Type Defined & Verified', 'PRD'),
-	('Machine Set-up and Process Defined & Verified', 'PRD'),
-	('Feeder & Nozzles Requirements Meet the Need', 'PRD'),
-	('Special Nozzle & Feeder Requirements Defined & Verified, if any', 'PRD'),
-	('Profile Completed & Verified', 'PRD'),
-	('AOI Program Completed & Verified', 'PRD'),
-	('Wave Carriers/Pallets Defined', 'PRD'),
-	('Flux Type Defined', 'PRD'),
-	('Water Cleaning or any Special Requirements Defined & Verified', 'PRD'),
-	('No-Clean Flux Has Been Defined & Verified', 'PRD'),
-	('Any Special Equipment & Training', 'PRD'),
-	('Inspection Jig/Fixture/Template', 'PRD'),
-	('Operation Tools & Fixture', 'PRD'),
-	('Component Handling Defined & Verified', 'PRD'),
-	('Work instructions Verified', 'PRD'),
-	('Quality Bulletin for changes', 'QLT'),
-	('Consumables (labels,ribbon,box,etc.)', 'PMC'),
-	('Line Setup (conveyors & workbenches)', 'PRD'),
-	('Setup Rework Stations (Touch up)', 'PRD'),
-	('Line Set Up (equipment,etc.)', 'PRD'),
-	('Tool setup (screwdrivers,fixtures,etc.)', 'PRD'),
-	('Line Balance (Time study)', 'PRD'),
-	('Material Flow on Line', 'PRD'),
-	('Flow Chart Review', 'PRD'),
-	('Work Instruction For Machine Defined', 'PRD'),
-	('Indirect Material List Defined', 'PRD'),
-	('Production Line Layout Defined', 'PRD'),
-	('SMT Line Balanced and Headcount Defined', 'PRD'),
-	('Packaging Area Balanced', 'PRD'),
-	('Rework Area Balanced', 'PRD'),
-	('Production Cycle Time Defined', 'PRD'),
-	('Production Line Capacity Defined', 'PRD'),
-	('Operators Trained and Certified', 'PRD'),
-	('Production Line Audit Before QA audit', 'PRD'),
-	('Production Line Scheduled', 'PMC'),
-	('Production Line Scheduled', 'PMC'),
-	('The Date for Receive Material at Plant', 'PMC'),
-	('Define Build Quantity', 'PMC'),
-	('Inventory Status of Consigned Material', 'PMC'),
-	('Provide Customer Copy of Consigned Inventory', 'PMC'),
-	('Functional Test Fixture GR&R Completed', 'QLT'),
-	('PPAP Documents Approved and Released', 'ENG'),
-	('Process Validation Document Approved and Released', 'ENG'),
-	('IQ Reports Approved and Released (Required for Medical Devices)', 'ENG'),
-	('OQ Reports Approved and Released (Required for Medical Devices)', 'ENG'),
-	('PQ Reports Approved and Released (Required for Medical Devices)', 'ENG'),
-	('DHR Approved and Released (Required for Medical Devices)', 'PRD'),
-	('Process Audit Has Been Performed', 'QLT'),
-)
-PILOT = (
-	('Gate 4 Check List Approved and Released', 'ENG'),
-	('Component Incoming Inspections have been Reviewed & Released', 'ENG'),
-	('ERP BOM has been Checked, Verified & Released', 'ENG'),
-	('Work Instructions have been Checked, Verified & Released', 'ENG'),
-	('DMR Document is Verified, Approved and Released', 'ENG'),
-	('Customer Approval Form Has been Sent and Received', 'ENG'),
-	('Raw Materials is Ready for 1st Production', 'PMC'),
-	('Production Line Layout is Confirmed and Verified', 'PRD'),
-	('Production Line Setup is Confirmed and Verified', 'PRD'),
-	('Production Line Balance is Confirmed and Verified', 'PRD'),
-	('Operators Trained and Certified', 'PRD'),
-	('Production Fixtures have been verified', 'PRD'),
-	('Pilot Run Units Have been Shipped to Customer', 'PRD'),
-	('Pilot Run Yield Data has been collected, Analyzed and Approved', 'QLT'),
-	('Pilot Run Summary Report has been issued and Released to DCC', 'QLT'),
-	('Quality Work Instructions have been Checked, Verified & Released', 'QLT'),
-	('DHR Approved and Released (Required for MedicalDevices)', 'QLT'),
-	('COC Approved and Released (Required for MedicalDevices)', 'QLT'),
-)
-PRODUCTION = (
-	('Gate 5 Check List Approved and Released', 'ENG'),
-	('Work Instructions have Corrected via ECO and Released', 'ENG'),
-	('ERP BOM has been Checked, Verified & Released', 'ENG'),
-	('DMR Document is Verified, Approved and Released', 'ENG'),
-	('Production Line Balance is Confirmed and Verified', 'PRD'),
-	('Production Fixtures have been verified', 'PRD'),
-	('1st Production Units Have been Shipped to Customer', 'PRD'),
-	('1st Production run Data collected, Analyzed and Approved', 'QLT'),
-	('Quality Work Instructions have been Checked, Verified & Released', 'QLT'),
-	('DHR Approved and Released (Required for MedicalDevices)', 'QLT'),
-	('COC Approved and Released (Required for MedicalDevices)', 'QLT'),
-)
-GATE_LIST = (
-	('Kick-off', KICKOFF),
-	('Engineering Samples', ENG_SAMPLES),
-	('Qualification', QUALIFICATION),
-	('Pilot Run', PILOT),
-	('First Production', PRODUCTION),
-)

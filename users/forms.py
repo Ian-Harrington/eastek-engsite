@@ -7,7 +7,7 @@ from projects.models import Project
 
 class PasswordForm(forms.Form):
 	"""docstring for PasswordForm"""
-	BAD_PASSWORDS = ['password', '12345678', '88888888', 'abcdefgh']
+	BAD_PASSWORDS = ['password', '12345678', '88888888', 'abcdefgh', '1234.abcd']
 
 	password1 = forms.CharField(min_length=8, widget=forms.PasswordInput, label=_('Password'))
 	password2 = forms.CharField(min_length=8, widget=forms.PasswordInput, label=_('Confirm password'))

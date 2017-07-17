@@ -67,14 +67,12 @@
 					<ul class="dropdown-menu">
 						<li class="dropdown-header">{% trans "Settings" %}</a></li>
 						<li><a href="{% url 'users:setpassword' %}">{% trans "Change Password" %}</a></li>
-						<li><a href="{% url 'users:setlinks' %}">{% trans "Set Homepage Links" %}</a></li>
-						{% comment %}
+						{# <li><a href="{% url 'users:setlinks' %}">{% trans "Set Homepage Links" %}</a></li> #}
 						<li class="dropdown-header">{% trans "Language" %}</a></li>
 						<li><div class="btn-group" role="group" style="padding-left: 3px">
 							<button id="set-lang-en" type="button" class="btn btn-default">{% trans "English" %}</button>
 							<button id="set-lang-zh" type="button" class="btn btn-default">{% trans "Chinese" %}</button>
 						</div></li>
-						{% endcomment %}
 						<li role="separator" class="divider"></li>
 						<li><a href="{% url 'logout' %}">{% trans "Logout" %}</a></li>
 					</ul>

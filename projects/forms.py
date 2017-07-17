@@ -29,12 +29,9 @@ CheckFormset = forms.formset_factory(CheckForm)
 
 class ProjectForm(forms.ModelForm):
 	"""docstring for ProjectForm"""
-	# Want to filter engineer based on is_active, MultipleChoiceField takes a [(DB_value, User_value)]
-	#engineer = forms.MultipleChoiceField(choices=Employee.objects.all().filter(is_active=True))
-
 	class Meta:
 		model = models.Project
-		fields = ['name', 'customer', 'eastek_pn', 'cust_pn', 'work_type', 'status', 'engineer']
+		fields = ['name', 'customer', 'eastek_pn', 'cust_pn', 'work_type', 'status', 'lead_eng']
 
 class PartNumForm(forms.Form):
 	partnum = forms.CharField(max_length=50, min_length=5, strip=True, label=_('part number'))

@@ -1,4 +1,4 @@
 from django.contrib import admin
-from .models import Overtime, Project
+from .models import Overtime
 
 admin.site.register(Overtime)
