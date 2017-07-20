@@ -311,11 +311,11 @@ class Defaults():
 		('g5-q11', _('COC Approved and Released (Required for MedicalDevices)')),
 	)
 	GATE_LIST = (
-		(_('Kick-off'), KICKOFF, G1_TRANS),
-		(_('Engineering Samples'), ENG_SAMPLES, G2_TRANS),
-		(_('Qualification'), QUALIFICATION, G3_TRANS),
-		(_('Pilot Run'), PILOT, G4_TRANS),
-		(_('First Production'), PRODUCTION, G5_TRANS),
+		('Kick-off', KICKOFF, G1_TRANS),
+		('Engineering Samples', ENG_SAMPLES, G2_TRANS),
+		('Qualification', QUALIFICATION, G3_TRANS),
+		('Pilot Run', PILOT, G4_TRANS),
+		('First Production', PRODUCTION, G5_TRANS),
 	)
 	RESPONSIBLE = (
 		('ENG', _('Engineering')), 
@@ -348,9 +348,13 @@ class Project(models.Model):
 		verbose_name = _('project')
 
 	WORK_TYPES = (
-		('MECH', _('Mechanical')),
-		('ELEC', _('Electronic')),
-		('ASSM', _('Assembly'))
+		('M', _('Mechanical')),
+		('E', _('Electronic')),
+		('A', _('Assembly')),
+		('ME', str(_('Mechanical'))+'/'+str(_('Electronic'))),
+		('MA', str(_('Mechanical'))+'/'+str(_('Assembly'))),
+		('EA', str(_('Electronic'))+'/'+str(_('Assembly'))),
+		('MEA', str(_('Mechanical'))+'/'+str(_('Electronic'))+'/'+str(_('Assembly'))),
 	)
 	STATUS = (
 		('INP', _('In-Progress')),
@@ -358,15 +362,15 @@ class Project(models.Model):
 		('CND', _('Cancelled')),
 		('CMP', _('Completed'))
 	)
-	name = models.CharField(max_length=50, unique=True, verbose_name=_('project name')) #name or PN (need to improve)
+	name = models.CharField(max_length=120, verbose_name=_('project name')) #name or PN (need to improve)
 	customer = models.ForeignKey('Customer', on_delete=models.PROTECT, verbose_name=_('customer'))
-	work_type = models.CharField(max_length=4, choices=WORK_TYPES, verbose_name=_('project type'))
+	work_type = models.CharField(max_length=3, choices=WORK_TYPES, verbose_name=_('project type'))
 	status = models.CharField(max_length=3, choices=STATUS, verbose_name=_('status'))
-	lead_eng = models.ForeignKey(Employee, on_delete=models.PROTECT, verbose_name=_('lead engineer'), related_name='project_leader')
+	#lead_eng = models.ForeignKey(Employee, on_delete=models.PROTECT, verbose_name=_('lead engineer'), related_name='project_leader')
 	engineer = models.ManyToManyField(Employee, blank=True, verbose_name=_('engineer(s)'), related_name='project_member')
 	#estimated_hours = models.SmallIntegerField(null=True, verbose_name=_('estimated hours'))
-	eastek_pn = models.CharField(max_length=45, blank=True, verbose_name=_('eastek part number'))
-	cust_pn = models.CharField(max_length=45, blank=True, verbose_name=_('customer part number'))
+	eastek_pn = models.CharField(max_length=85, blank=True, verbose_name=_('eastek part number'))
+	cust_pn = models.CharField(max_length=85, blank=True, verbose_name=_('customer part number'))
 
 	def __str__(self):
 		return self.name
@@ -383,7 +387,7 @@ class Milestone(models.Model):
 		
 	project = models.ForeignKey(Project, on_delete=models.CASCADE, verbose_name=_('project'))
 	description = models.CharField(max_length=50, verbose_name=_('milestone'))
-	deadline = models.DateField(verbose_name=_('deadline'))
+	deadline = models.DateField(blank=True, null=True, verbose_name=_('deadline'))
 	completion_date = models.DateField(blank=True, null=True, verbose_name=_('completion date'))
 	
 	def __str__(self):
@@ -416,7 +420,7 @@ class Update(models.Model):
 
 class Customer(models.Model):
 	"""stores info regarding customers [only name needed right now]"""
-	name = models.CharField(max_length=50, unique=True, verbose_name=_('customer'))
+	name = models.CharField(max_length=80, unique=True, verbose_name=_('customer'))
 
 	class Meta:
 		verbose_name = _('customer')
@@ -437,10 +441,10 @@ class ChecklistItem(models.Model):
 	)
 
 	checklist = models.ForeignKey(Milestone, on_delete=models.CASCADE, verbose_name=_('checklist'), related_name='checklist')
-	name = models.CharField(max_length=70, verbose_name=_('item'))
+	name = models.CharField(max_length=140, verbose_name=_('item'))
 	responsible =  models.CharField(max_length=3, choices=Defaults.RESPONSIBLE, verbose_name=_('responsible')) # multiselect field
 	completed = models.NullBooleanField(blank=True, null=True, choices=COMP_CHOICE, verbose_name=_('is complete'))
-	remarks = models.CharField(max_length=120, blank=True, verbose_name=_('comments'))
+	remarks = models.CharField(max_length=140, blank=True, verbose_name=_('comments'))
 	
 	def __str__(self):
 		return self.checklist.description + ' - ' + self.name

@@ -162,8 +162,9 @@ class ProjectListView(PermissionRequiredMixin, ListView):
 			if self.request.GET.get('status'):
 				qs = qs.filter(status=self.request.GET.get('status'))
 			if self.request.GET.get('engineer'):
-				qs = qs.filter(Q(engineer=self.request.GET.get('engineer')) | 
-								Q(lead_eng=self.request.GET.get('engineer')))
+				qs = qs.filter(engineer=self.request.GET.get('engineer'))
+				#qs = qs.filter(Q(engineer=self.request.GET.get('engineer')) | 
+				#				Q(lead_eng=self.request.GET.get('engineer')))
 		else:
 			qs = qs.filter(status='INP') # default to only show in-progress
 		return qs
@@ -257,8 +258,8 @@ def download_checklist(request, pid, gate):
 	proj = get_object_or_404(models.Project, pk=pid)
 	ms = models.Milestone.objects.filter(project=pid).get(description=models.Defaults.GATE_LIST[int(gate)-1][0])
 	if ms.is_complete():
-		filename = proj.name + ' - ' + models.Defaults.GATE_LIST[int(gate)-1][0] + ' Gate Checklist.xlsx'
-		response = HttpResponse(generate_gate_checklist(ms), content_type='application/vnd.ms-excel')
+		filename = proj.name + ' - ' + str(models.Defaults.GATE_LIST[int(gate)-1][0]) + ' Gate Checklist.xlsx'
+		response = HttpResponse(generate_gate_checklist(ms, gate), content_type='application/vnd.ms-excel')
 		response['Content-Disposition'] = 'attachment; filename="' + filename + '"'
 		return response
 	elif not ms.is_complete():

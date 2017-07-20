@@ -43,16 +43,8 @@
 			<input type="Submit" value="{% trans 'Update' %}">
 			</form>
 
+			{# <p><b>{% trans "Lead Engineer" %}:</b>{{project.lead_eng}}</p> #}
 			<p><b>{% trans "Engineers" %}:</b>{{project.engineer.all|join:', '}}</p>
-
-			{% comment %}
-			<table>
-				<tr>
-					<th>{% trans "Engineers" %}:</th>
-					<td>{{project.engineer.all|join:', '}}</td>
-				</tr>
-			</table>
-			{% endcomment %}
 
 			{% if request.user.get_employee and not request.user.get_employee in project.engineer.all %}
 			<form method="POST" action="{% url 'projects:joinproject' project.id %}">
@@ -75,12 +67,12 @@
 					<tr>
 						<td>{{ms.deadline}}</td>
 						<td>{{ms.description}}</td>
-						{% if ms.is_complete or not perms.projects.change_checklist %}
+						{% if ms.is_complete  %}
 						<td>
 							{% firstof ms.completion_date 'Yes' %}
 							<a href="{% url 'projects:downloadchecklist' project.id forloop.counter %}"><span class="glyphicon glyphicon-save" style="font-size: 1.2em" aria-hidden="true"></span></a>
 						</td>
-						{% else %}
+						{% elif perms.projects.change_checklist %}
 						{% ifchanged ms.is_complete %}
 						<td><a href="{% url 'projects:checklist' project.id forloop.counter %}" class="btn btn-default">{% trans "Gate Checklist" %}</a></td>
 						{% else %}

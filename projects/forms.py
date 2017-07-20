@@ -31,7 +31,7 @@ class ProjectForm(forms.ModelForm):
 	"""docstring for ProjectForm"""
 	class Meta:
 		model = models.Project
-		fields = ['name', 'customer', 'eastek_pn', 'cust_pn', 'lead_eng', 'work_type', 'status']
+		fields = ['name', 'customer', 'eastek_pn', 'cust_pn', 'engineer', 'work_type', 'status'] #lead_eng
 
 class PartNumForm(forms.Form):
 	partnum = forms.CharField(max_length=50, min_length=5, strip=True, label=_('part number'))
