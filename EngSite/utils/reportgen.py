@@ -13,7 +13,7 @@ from openpyxl.writer.excel import save_virtual_workbook
 from openpyxl.drawing.image import Image
 
 from .utils import choice_lookup
-from projects.models import ChecklistItem
+from projects.models import Defaults
 
 RECORDS_PER_SHEET = 29 
 
@@ -75,7 +75,7 @@ def generate_overtime_report(overtime):
 	wb.remove_sheet(wb['Template'])
 	return save_virtual_workbook(wb)
 
-def generate_gate_checklist(ms):
+def generate_gate_checklist(ms, gate):
 	wb = load_workbook(os.path.join(settings.BASE_DIR, 'projects/static/Checklist_Template.xlsx'))
 	ws = wb['Template']
 	ws.title = ms.description
@@ -89,18 +89,18 @@ def generate_gate_checklist(ms):
 	#ws['H5'].value = ms.project.description # if a description is added to project model
 	ws['H6'].value = ms.project.engineer.all()[0].english_name
 	# Checklist
-	t = ms.checklist.count() - 1
-	for i in range(ms.checklist.count()): #checklist is a queryset
+	chklist = ms.checklist.all().order_by('id')
+	for i in range(chklist.count()): #checklist is a queryset
 		ws.cell(row=i+8, column=1, value=i+1)
-		ws.cell(row=i+8, column=2, value=ms.checklist.all()[i].name)
-		ws.cell(row=i+8, column=4, value=choice_lookup(opt_list=ChecklistItem.RESPONSIBLE, item=ms.checklist.all()[i].responsible))
-		if ms.checklist.all()[i].completed == True:
+		ws.cell(row=i+8, column=2, value=str(choice_lookup(opt_list=Defaults.GATE_LIST[int(gate)-1][2], item=chklist[i].name)))
+		ws.cell(row=i+8, column=4, value=str(choice_lookup(opt_list=Defaults.RESPONSIBLE, item=chklist[i].responsible)))
+		if chklist[i].completed == True:
 			ws.cell(row=i+8, column=5, value='X')
-		elif ms.checklist.all()[i].completed == False:
+		elif chklist[i].completed == False:
 			ws.cell(row=i+8, column=6, value='X')
-		elif ms.checklist.all()[i].completed == None:
+		elif chklist[i].completed == None:
 			ws.cell(row=i+8, column=7, value='X')
-		ws.cell(row=i+8, column=8, value=ms.checklist.all()[i].remarks)
+		ws.cell(row=i+8, column=8, value=chklist[i].remarks)
 	# remove formatting from all cells below
 	# add the thick end line
 	no_border = Border(left=Side(border_style=None),
