@@ -44,7 +44,15 @@
 			</form>
 
 			{# <p><b>{% trans "Lead Engineer" %}:</b>{{project.lead_eng}}</p> #}
+			{% if request.LANGUAGE_CODE == 'zh-hans' %}
+			<p><b>{% trans "Engineers" %}:</b>
+				{% for eng in project.engineer.all %}
+				{{eng.name}} &nbsp;
+				{% endfor %}
+			</p>
+			{% else %}
 			<p><b>{% trans "Engineers" %}:</b>{{project.engineer.all|join:', '}}</p>
+			{% endif %}
 
 			{% if request.user.get_employee and not request.user.get_employee in project.engineer.all %}
 			<form method="POST" action="{% url 'projects:joinproject' project.id %}">

@@ -8,7 +8,7 @@
 {% block pagecontent %} 
 <div class="container">
 	<div class="border-around">
-		<h3> {{gate.name}} Checklist </h3>
+		<h3> {{gate.name}} {% trans "Checklist" %} </h3>
 		<form method="post" action="{% url 'projects:checklist' pid gate.number %}">
 			{% csrf_token %}
 			{{formset.management_form}}

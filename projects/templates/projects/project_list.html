@@ -27,7 +27,15 @@
 				<td> {{p.customer}} </td>
 				<td> {{p.work_type|human_readable:work_opts}} </td>
 				<td> {{p.status|human_readable:status_opts}} </td>
+				{% if request.LANGUAGE_CODE == 'zh-hans' %}
+				<td>
+					{% for eng in p.engineer.all %}
+					{{eng.name}} &nbsp;
+					{% endfor %}
+				</td>
+				{% else %}
 				<td> {{p.engineer.all|join:', '}} </td>
+				{% endif %}
 			</tr>
 			{% endfor %}
 		</table>
