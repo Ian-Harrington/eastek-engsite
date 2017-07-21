@@ -24,12 +24,25 @@
 			</tr>
 			{% for ot in page_obj %}
 			<tr class="notice-me">
-				<td>{{ot.emp}}</td>
+				{% if request.LANGUAGE_CODE == 'zh-hans' %}
+				<td>{{ot.emp.name}}</td>
+				{% else %}
+				<td>{{ot.emp.english_name}}</td>
+				{% endif %}
 				<td>{{ot.project}}</td>
 				<td>{{ot.date}}</td>
 				<td>{{ot.time}}</td>
 				<td>{{ot.request_hours|floatformat}}</td>
-				<td>{{ot.actual_hours|floatformat|default_if_none:''}}</td>
+				{% if ot.actual_hours %}
+				<td>{{ot.actual_hours|floatformat}}</td>
+				{% else %}
+				<td><form method="POST" action="{% url 'overtime:actualhours' page_obj.number %}">
+					{% csrf_token %}
+					{{AH_form.actual_hours}}
+					<input style="display: none;" type="number" name="overtime_id" id="id_overtime_id" value="{{ot.id}}" required>
+					<input type="submit" value="{% trans 'Update' %}">
+				</form></td>
+				{% endif %}
 				<td>{{ot.reason}}</td>
 			</tr>
 			{% empty %}

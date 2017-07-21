@@ -1,10 +1,11 @@
 from datetime import date as Date
 
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, CreateView, UpdateView
+from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import permission_required, login_required
 from django.contrib.auth.mixins import PermissionRequiredMixin
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.db.models.query import QuerySet
 from django.urls import reverse_lazy
 from django.core.paginator import Paginator
@@ -13,7 +14,7 @@ from django.utils.translation import ugettext_lazy as _
 from EngSite.utils.reportgen import generate_overtime_report
 from projects.models import Project
 from .models import Overtime
-from .forms import AddOvertime, DatePicker, OvertimeFilter
+from .forms import AddOvertime, DatePicker, OvertimeFilter, ActualHoursForm
 
 @permission_required('overtime.add_overtime', raise_exception=True)
 def add_overtime(request):
@@ -118,5 +119,16 @@ def overtime_list(request, page):
 			ot = ot.filter(project=filters['project'])
 		form = OvertimeFilter(filters)
 	paginator = Paginator(ot, 50)
-	context = {'form': form, 'page_obj': paginator.page(page), 'overtime': Overtime}
+	context = {'form': form, 'page_obj': paginator.page(page), 'overtime': Overtime, 'AH_form':ActualHoursForm()}
 	return render(request, 'overtime/list.html', context)
+
+@require_POST
+@permission_required('overtime.change_overtime', raise_exception=True)
+def add_actual_hours(request, page):
+	AH_form = ActualHoursForm(request.POST)
+	if AH_form.is_valid():
+		overtime = get_object_or_404(Overtime, pk=AH_form.cleaned_data['overtime_id'])
+		assert overtime.id == AH_form.cleaned_data['overtime_id']
+		overtime.actual_hours = AH_form.cleaned_data['actual_hours']
+		overtime.save()
+	return HttpResponseRedirect('/overtime/list/' + page)
