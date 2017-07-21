@@ -7,6 +7,7 @@ from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import permission_required, login_required
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.forms import formset_factory
+from django.utils import translation
 from django.db.models import Q
 
 from EngSite.utils.utils import choice_lookup
@@ -255,8 +256,9 @@ def complete_checklist(request, pid, gate):
 
 @login_required
 def download_checklist(request, pid, gate):
+	translation.activate('en')
 	proj = get_object_or_404(models.Project, pk=pid)
-	ms = models.Milestone.objects.filter(project=pid).get(description=models.Defaults.GATE_LIST[int(gate)-1][0])
+	ms = models.Milestone.objects.filter(project=pid).get(description=str(models.Defaults.GATE_LIST[int(gate)-1][0]))
 	if ms.is_complete():
 		filename = proj.name + ' - ' + str(models.Defaults.GATE_LIST[int(gate)-1][0]) + ' Gate Checklist.xlsx'
 		response = HttpResponse(generate_gate_checklist(ms, gate), content_type='application/vnd.ms-excel')

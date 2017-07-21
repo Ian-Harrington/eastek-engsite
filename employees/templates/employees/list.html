@@ -42,7 +42,11 @@
 					<td> {{e.english_name}} </td>
 					<td> {{e.get_position_display}} </td>
 					<td> {{e.get_team_display}} </td>
+					{% if request.LANGUAGE_CODE == 'zh-hans' %}
+					<td> {{e.leader.name}} </td>
+					{% else %}
 					<td> {{e.leader.english_name}} </td>
+					{% endif %}
 					<td> {{e.email}} </td>
 					{% if e.account %}
 					<td> {{e.account.username}} </td>

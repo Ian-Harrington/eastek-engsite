@@ -39,7 +39,7 @@ class PartNumForm(forms.Form):
 
 class MilestoneForm(forms.ModelForm):
 	"""docstring for MilestoneForm"""
-	deadline = forms.DateField(widget=forms.DateInput(attrs={'class':'deadline-input'}))
+	deadline = forms.DateField(widget=forms.DateInput(attrs={'class':'deadline-input'}), label=_('deadline'))
 	class Meta:
 		model = models.Milestone
 		fields = ['description', 'deadline']

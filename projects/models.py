@@ -311,11 +311,11 @@ class Defaults():
 		('g5-q11', _('COC Approved and Released (Required for MedicalDevices)')),
 	)
 	GATE_LIST = (
-		('Kick-off', KICKOFF, G1_TRANS),
-		('Engineering Samples', ENG_SAMPLES, G2_TRANS),
-		('Qualification', QUALIFICATION, G3_TRANS),
-		('Pilot Run', PILOT, G4_TRANS),
-		('First Production', PRODUCTION, G5_TRANS),
+		(_('Kick-off'), KICKOFF, G1_TRANS),
+		(_('Engineering Samples'), ENG_SAMPLES, G2_TRANS),
+		(_('Qualification'), QUALIFICATION, G3_TRANS),
+		(_('Pilot Run'), PILOT, G4_TRANS),
+		(_('First Production'), PRODUCTION, G5_TRANS),
 	)
 	RESPONSIBLE = (
 		('ENG', _('Engineering')), 
@@ -351,10 +351,10 @@ class Project(models.Model):
 		('M', _('Mechanical')),
 		('E', _('Electronic')),
 		('A', _('Assembly')),
-		('ME', str(_('Mechanical'))+'/'+str(_('Electronic'))),
-		('MA', str(_('Mechanical'))+'/'+str(_('Assembly'))),
-		('EA', str(_('Electronic'))+'/'+str(_('Assembly'))),
-		('MEA', str(_('Mechanical'))+'/'+str(_('Electronic'))+'/'+str(_('Assembly'))),
+		('ME', _('Mechanical/Electronic')),
+		('MA', _('Mechanical/Assembly')),
+		('EA', _('Electronic/Assembly')),
+		('MEA', _('Mechanical/Electronic/Assembly')),
 	)
 	STATUS = (
 		('INP', _('In-Progress')),
@@ -435,9 +435,9 @@ class ChecklistItem(models.Model):
 		verbose_name = _('checklist item')
 
 	COMP_CHOICE = (
-		(True, 'Yes'),
-		('False', 'No'),
-		('None', 'N/A'),
+		(True, _('Yes')),
+		('False', _('No')),
+		('None', _('N/A')),
 	)
 
 	checklist = models.ForeignKey(Milestone, on_delete=models.CASCADE, verbose_name=_('checklist'), related_name='checklist')
