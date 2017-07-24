@@ -95,7 +95,7 @@ class Employee(models.Model):
 				assert isinstance(user, User), user
 				user.groups.add(Group.objects.get(name='default'))
 				if self.team == 'SUPP':
-					user.groups.add(Group.objects.get(name='manager'))
+					user.groups.add(Group.objects.get(name='support'))
 				if not self.is_active:
 					user.is_active = False
 					user.save()
