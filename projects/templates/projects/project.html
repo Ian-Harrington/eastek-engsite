@@ -75,7 +75,7 @@
 					<tr>
 						<td>{{ms.deadline}}</td>
 						<td>{{ms.description}}</td>
-						{% if ms.is_complete  %}
+						{% if ms.is_complete %}
 						<td>
 							{% firstof ms.completion_date 'Yes' %}
 							<a href="{% url 'projects:downloadchecklist' project.id forloop.counter %}"><span class="glyphicon glyphicon-save" style="font-size: 1.2em" aria-hidden="true"></span></a>
@@ -86,6 +86,8 @@
 						{% else %}
 						<td><a href="#" class="btn btn-default disabled">{% trans "Gate Checklist" %}</a></td>
 						{% endifchanged %}
+						{% else %}
+						<td><a href="#" class="btn btn-default disabled">{% trans "Gate Checklist" %}</a></td>
 						{% endif %}
 					</tr>
 					{% endfor %}
