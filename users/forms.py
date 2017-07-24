@@ -40,11 +40,7 @@ class PasswordForm(forms.Form):
 class LinkForm(forms.Form):
 	"""docstring for LinkForm"""
 	link = forms.ModelChoiceField(queryset=Project.objects.filter(status='INP'), label=_('project link'), empty_label='')
-	link_text = forms.CharField(max_length=17, required=False, label=_('link name'))
+	link_text = forms.CharField(max_length=17, label=_('link name'))
 	
-	def clean_link_text(self):
-		if self.cleaned_data['link_text'] == '':
-			return self.cleaned_data['link'].name[:17]
-		return self.cleaned_data['link_text']
 
 Link3Formset = forms.formset_factory(LinkForm, extra=3, max_num=3)
