@@ -55,8 +55,8 @@ def generate_overtime_report(overtime):
 	# set up the date for the template
 	date = overtime[0].date
 	ws = wb['Template']
-	ws['H4'].value = ws['H4'].value + str(date.year) + ws['J4'].value + str(date.month) + ws['K4'].value + str(date.day) + ws['L4'].value
-	ws['J4'] = ws['K4'] = ws['L4'] = None
+	ws['I4'].value = ws['I4'].value + str(date.year) + ws['K4'].value + str(date.month) + ws['L4'].value + str(date.day) + ws['M4'].value
+	ws['K4'] = ws['L4'] = ws['M4'] = None
 	img = Image(os.path.join(settings.BASE_DIR, 'EngSite/static/img/eastek_logo.png'))
 	for sheet in range(1, math.ceil(len(overtime)/RECORDS_PER_SHEET)+1):
 		ws = wb.copy_worksheet(wb['Template']) # copy the template worksheet
@@ -71,7 +71,7 @@ def generate_overtime_report(overtime):
 			ws.cell(row=i+5, column=5, value=duration)
 			ws.cell(row=i+5, column=6, value=duration)
 			ws.cell(row=i+5, column=7, value=str(max(int(ot.request_hours), ot.request_hours)) + 'H')
-			ws.cell(row=i+5, column=8, value=ot.project.name + ' - ' + ot.reason)
+			ws.cell(row=i+5, column=9, value=ot.project.name + ' - ' + ot.reason)
 	wb.remove_sheet(wb['Template'])
 	return save_virtual_workbook(wb)
 

@@ -13,8 +13,8 @@ class AddOvertime(forms.ModelForm):
 	def validate_date(date):
 		if date < pydate.today():
 			raise ValidationError(_('Cannot submit for overtime in the past'))
-		elif date - pydate.today() > timedelta(days=1):
-			raise ValidationError(_('Cannot submit for overtime more than 1 day in advance'))
+		elif date - pydate.today() > timedelta(days=2):
+			raise ValidationError(_('Cannot submit for overtime more than 2 days in advance'))
 
 	date = forms.DateField(validators=[validate_date], label=_('Date'))
 	request_hours = forms.DecimalField(validators=[Overtime.validate_hours], max_digits=3, decimal_places=1, label=_('Request hours'), widget=forms.TextInput(attrs={'type':'number', 'step':'0.5'}))
