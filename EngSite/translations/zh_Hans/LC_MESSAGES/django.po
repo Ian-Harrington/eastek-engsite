@@ -965,11 +965,11 @@ msgstr "启动"
 
 #: projects/models.py:315
 msgid "Engineering Samples"
-msgstr "开始"
+msgstr "工程样板"
 
 #: projects/models.py:316
 msgid "Qualification"
-msgstr "资格"
+msgstr "确认"
 
 #: projects/models.py:317 projects/models.py:341
 msgid "Pilot Run"
