@@ -18,7 +18,7 @@ class AddOvertime(forms.ModelForm):
 
 	date = forms.DateField(validators=[validate_date], label=_('Date'))
 	request_hours = forms.DecimalField(validators=[Overtime.validate_hours], max_digits=3, decimal_places=1, label=_('Request hours'), widget=forms.TextInput(attrs={'type':'number', 'step':'0.5'}))
-	reason = forms.ChoiceField(choices=[('','---------')]+[(str(x[1]),x[1]) for x in Defaults.WORK_REASON])
+	reason = forms.ChoiceField(choices=[('','---------')]+[(str(x[1]),x[1]) for x in Defaults.WORK_REASON], label=_('Reason'))
 
 	class Meta:
 		model = Overtime

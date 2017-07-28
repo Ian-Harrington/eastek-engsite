@@ -92,7 +92,7 @@ class ChecklistForm(forms.ModelForm):
 		if value == 'False':
 			raise forms.ValidationError(_('Item must be completed or not applicable'))
 
-	completed = forms.ChoiceField(required=False, choices=models.ChecklistItem.COMP_CHOICE, validators=[validate_completed])
+	completed = forms.ChoiceField(required=False, choices=models.ChecklistItem.COMP_CHOICE, validators=[validate_completed], label=_('Completed'))
 
 	class Meta:
 		model = models.ChecklistItem
