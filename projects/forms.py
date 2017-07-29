@@ -29,6 +29,7 @@ CheckFormset = forms.formset_factory(CheckForm)
 
 class ProjectForm(forms.ModelForm):
 	"""docstring for ProjectForm"""
+	engineer = forms.ModelChoiceField(required=False, queryset=Employee.objects.filter(is_active=True).exclude(team='SUPP'), empty_label='---------', label=_('Engineer'))
 	class Meta:
 		model = models.Project
 		fields = ['name', 'customer', 'eastek_pn', 'cust_pn', 'engineer', 'work_type', 'status'] #lead_eng
