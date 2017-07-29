@@ -37,12 +37,14 @@
 				<li><a href="{% url 'overtime:add' %}">{% trans "Overtime" %}</a></li>
 				{% endif %}
 			<!-- ========== Project Dropdown ========== -->
-				{% if perms.projects.add_project and perms.projects.add_update %}
+				{% if perms.projects.add_update %}
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> {% trans "Projects" %} <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="{% url 'projects:projectlist' %}?customer=&work_type=&status=INP&engineer={{request.user.employee.emp_id}}">{% trans "My Projects" %}</a></li>
+						{% if perms.projects.add_project %}
 						<li><a href="{% url 'projects:addproject' %}">{% trans "Add New Project" %}</a></li>
+						{% endif %}
 						<li role="separator" class="divider"></li>
 						<li><a href="{% url 'projects:projectlist' %}">{% trans "All Projects" %}</a></li>
 						<li><a href="{% url 'projects:customers' %}">{% trans "Customer List" %}</a></li>

@@ -96,6 +96,8 @@ class Employee(models.Model):
 				user.groups.add(Group.objects.get(name='default'))
 				if self.team == 'SUPP':
 					user.groups.add(Group.objects.get(name='support'))
+				if self.position == 'ENG' or self.position == 'SEN' or self.position == 'TEN' or self.position == 'LDR':
+					user.groups.add(Group.objects.get(name='engineer'))
 				if not self.is_active:
 					user.is_active = False
 					user.save()

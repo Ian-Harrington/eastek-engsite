@@ -28,6 +28,7 @@
 				</a>
 			</div>
 			<div class="col-lg-4 col-md-6 col-xs-12" style="text-align: center; padding: 2%">
+				{% if perms.projects.add_project %}
 				<a href="{% url 'projects:addproject' %}">
 					<span class="fa-stack" style="font-size: 7.5em;">
 						<i class="fa fa-plus fa-stack-1x" aria-hidden='true' style="top: 10px"></i>
@@ -35,6 +36,7 @@
 					</span>
 					<h3 class="no-show-text-link">{% trans "Add New Project" %}</h3>
 				</a>
+				{% endif %}
 			</div>
 			<div class="col-lg-4 col-md-6 col-xs-12" style="text-align: center; padding: 2%">
 				{% if request.user.projlink1 %}
