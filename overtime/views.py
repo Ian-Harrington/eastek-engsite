@@ -22,11 +22,11 @@ def add_overtime(request):
 	if request.method == 'POST':
 		ot = Overtime.objects.filter(date=request.POST.get('date')).filter(emp=request.user.employee)
 		if ot.count() == 0: # a lot of extra work just for a small notification (necessary?)
-			form = AddOvertime(request.POST)
+			form = AddOvertime(request.POST)  #, user=request.user
 			form.instance.emp = request.user.employee # need way to test and catch users w/o attached employees 
 			context['notice'] = _('Overtime recorded successfully')
 		else:
-			form = AddOvertime(request.POST, instance=ot[0])
+			form = AddOvertime(request.POST, instance=ot[0])  #, user=request.user
 			context['notice'] = _('Previously submitted overtime has been overwritten')
 
 		if form.is_valid():
@@ -34,7 +34,7 @@ def add_overtime(request):
 		else:
 			context['notice'] = _('Not saved. Invalid data.')
 	else:
-		form = AddOvertime(initial={'date': Date.today()})
+		form = AddOvertime(initial={'date': Date.today()}) #, user=request.user
 	context['form'] = form
 	return render(request, 'overtime/add.html', context)
 

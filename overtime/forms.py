@@ -10,6 +10,12 @@ from projects.models import Project, Defaults
 
 class AddOvertime(forms.ModelForm):
 	"""form for employees to use to add overtime"""
+	'''
+	def __init__(self, *args, **kwargs):
+		self.user = kwargs.pop('user')
+		self.project = forms.ModelChoiceField(queryset=Project.objects.filter(engineer=self.user.employee), label=_('project'))
+		super(AddOvertime, self).__init__(*args, **kwargs)
+	'''
 	def validate_date(date):
 		if date < pydate.today():
 			raise ValidationError(_('Cannot submit for overtime in the past'))
@@ -19,7 +25,7 @@ class AddOvertime(forms.ModelForm):
 	date = forms.DateField(validators=[validate_date], label=_('Date'))
 	request_hours = forms.DecimalField(validators=[Overtime.validate_hours], max_digits=3, decimal_places=1, label=_('Request hours'), widget=forms.TextInput(attrs={'type':'number', 'step':'0.5'}))
 	reason = forms.ChoiceField(choices=[('','---------')]+[(str(x[1]),x[1]) for x in Defaults.WORK_REASON], label=_('Reason'))
-
+	
 	class Meta:
 		model = Overtime
 		fields = ['date', 'time', 'request_hours', 'project', 'reason']

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-20 15:39+0800\n"
+"POT-Creation-Date: 2017-07-29 12:18+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: EngSite/settings/base.py:67 EngSite/templates/page.html:73
+#: EngSite/settings/base.py:67 EngSite/templates/page.html:78
 msgid "English"
 msgstr "英语"
 
-#: EngSite/settings/base.py:68 EngSite/templates/page.html:74
+#: EngSite/settings/base.py:68 EngSite/templates/page.html:79
 msgid "Chinese"
 msgstr "中文"
 
@@ -38,7 +38,7 @@ msgstr "加班记录"
 msgid "My Projects"
 msgstr "我的项目"
 
-#: EngSite/templates/home.html:36 EngSite/templates/page.html:45
+#: EngSite/templates/home.html:37 EngSite/templates/page.html:46
 #: projects/templates/projects/add_project.html:11
 msgid "Add New Project"
 msgstr "增加新项目"
@@ -51,7 +51,7 @@ msgstr "加班"
 msgid "Download Form"
 msgstr "下载表格"
 
-#: EngSite/templates/page.html:33 EngSite/templates/page.html:57
+#: EngSite/templates/page.html:33 EngSite/templates/page.html:59
 msgid "View All"
 msgstr "查看所有"
 
@@ -59,40 +59,44 @@ msgstr "查看所有"
 msgid "Projects"
 msgstr "项目"
 
-#: EngSite/templates/page.html:47
+#: EngSite/templates/page.html:49
 msgid "All Projects"
 msgstr "所有项目"
 
-#: EngSite/templates/page.html:48
+#: EngSite/templates/page.html:50
 #: projects/templates/projects/customer_list.html:10
 msgid "Customer List"
 msgstr "客户清单"
 
-#: EngSite/templates/page.html:55
+#: EngSite/templates/page.html:57
 msgid "Employees"
 msgstr "员工"
 
-#: EngSite/templates/page.html:58
+#: EngSite/templates/page.html:60
 msgid "Add New Employee"
 msgstr "增加新员工"
 
-#: EngSite/templates/page.html:66
+#: EngSite/templates/page.html:68
 msgid "Account"
 msgstr "账户"
 
-#: EngSite/templates/page.html:68
+#: EngSite/templates/page.html:70
 msgid "Settings"
 msgstr "设置"
 
-#: EngSite/templates/page.html:69
+#: EngSite/templates/page.html:72
+msgid "Admin Site"
+msgstr ""
+
+#: EngSite/templates/page.html:74
 msgid "Change Password"
 msgstr "更改密码"
 
-#: EngSite/templates/page.html:71
+#: EngSite/templates/page.html:76
 msgid "Language"
 msgstr "语言"
 
-#: EngSite/templates/page.html:77
+#: EngSite/templates/page.html:82
 msgid "Logout"
 msgstr "注销"
 
@@ -132,7 +136,7 @@ msgstr "有退休日期的员工必须标识为退休的"
 msgid "A team leader must be their own team leader"
 msgstr "一个团队组长必须是他们自己团队的组长"
 
-#: employees/models.py:15 overtime/forms.py:39
+#: employees/models.py:15 overtime/forms.py:45
 msgid "Employee"
 msgstr "员工"
 
@@ -140,7 +144,7 @@ msgstr "员工"
 msgid "Assistant Engineer"
 msgstr "助理工程师"
 
-#: employees/models.py:27 projects/forms.py:15
+#: employees/models.py:27 projects/forms.py:15 projects/forms.py:32
 msgid "Engineer"
 msgstr "工程师"
 
@@ -268,31 +272,35 @@ msgstr "过滤"
 msgid "Add Employee"
 msgstr "增加员工"
 
-#: employees/templates/employees/list.html:52
+#: employees/templates/employees/list.html:56
 msgid "Create Account"
 msgstr "创建账户"
 
-#: employees/templates/employees/list.html:59
+#: employees/templates/employees/list.html:63
 msgid "No employee information found"
 msgstr "未发现员工信息"
 
-#: overtime/forms.py:15
+#: overtime/forms.py:21
 msgid "Cannot submit for overtime in the past"
 msgstr "过去不能提交加班"
 
-#: overtime/forms.py:17
-msgid "Cannot submit for overtime more than 1 day in advance"
-msgstr "不能提前超过1天提交加班"
+#: overtime/forms.py:23
+msgid "Cannot submit for overtime more than 2 days in advance"
+msgstr "不能提前超过2天提交加班"
 
-#: overtime/forms.py:19 overtime/forms.py:31 overtime/forms.py:38
+#: overtime/forms.py:25 overtime/forms.py:37 overtime/forms.py:44
 msgid "Date"
 msgstr "日期"
 
-#: overtime/forms.py:20
+#: overtime/forms.py:26 overtime/forms.py:50
 msgid "Request hours"
 msgstr "申请小时数"
 
-#: overtime/forms.py:40
+#: overtime/forms.py:27
+msgid "Reason"
+msgstr "原因"
+
+#: overtime/forms.py:46
 msgid "Project"
 msgstr "项目"
 
@@ -358,7 +366,14 @@ msgstr "提交"
 msgid "Overtime List"
 msgstr "加班清单"
 
-#: overtime/templates/overtime/list.html:36
+#: overtime/templates/overtime/list.html:43
+#: projects/templates/projects/project.html:43
+#: users/templates/users/pwd_change.html:20
+#: users/templates/users/set_links.html:28
+msgid "Update"
+msgstr "更新"
+
+#: overtime/templates/overtime/list.html:49
 msgid "No overtime records found"
 msgstr "未发现加班记录"
 
@@ -370,23 +385,23 @@ msgstr "下载加班记录"
 msgid "Download"
 msgstr "下载"
 
-#: overtime/views.py:26
+#: overtime/views.py:27
 msgid "Overtime recorded successfully"
 msgstr "加班记录成功"
 
-#: overtime/views.py:29
+#: overtime/views.py:30
 msgid "Previously submitted overtime has been overwritten"
 msgstr "先前提交的加班已被覆盖"
 
-#: overtime/views.py:34
+#: overtime/views.py:35
 msgid "Not saved. Invalid data."
 msgstr "未保存. 无效日期"
 
-#: overtime/views.py:55
+#: overtime/views.py:56
 msgid "No overtime recorded on selected date"
 msgstr "所选日期无加班记录"
 
-#: overtime/views.py:57
+#: overtime/views.py:58
 msgid "Invalid date provided"
 msgstr "提供的无效日期"
 
@@ -399,29 +414,37 @@ msgid "Project type"
 msgstr "项目类型"
 
 #: projects/forms.py:14 projects/forms.py:20
-#: projects/templates/projects/project.html:101
+#: projects/templates/projects/project.html:103
 msgid "Status"
 msgstr "状态"
 
-#: projects/forms.py:37
+#: projects/forms.py:38
 msgid "part number"
 msgstr "料号"
 
-#: projects/forms.py:51
+#: projects/forms.py:43 projects/models.py:390
+msgid "deadline"
+msgstr "截止期限"
+
+#: projects/forms.py:52
 msgid "Estimated hours"
 msgstr "估计时间"
 
-#: projects/forms.py:66
+#: projects/forms.py:67
 msgid "Associated project not found"
 msgstr "未找到相关项目"
 
-#: projects/forms.py:78
+#: projects/forms.py:79
 msgid "User instance not found"
 msgstr "未找到用户实例"
 
-#: projects/forms.py:93
+#: projects/forms.py:94
 msgid "Item must be completed or not applicable"
 msgstr "项目必须完成或不适用"
+
+#: projects/forms.py:96 projects/models.py:363
+msgid "Completed"
+msgstr "已完成的"
 
 #: projects/models.py:26
 msgid "Gate 1 Check List Approved and Released"
@@ -1091,10 +1114,6 @@ msgstr "暂停"
 msgid "Cancelled"
 msgstr "取消"
 
-#: projects/models.py:363
-msgid "Completed"
-msgstr "已完成的"
-
 #: projects/models.py:365
 msgid "project name"
 msgstr "项目名称"
@@ -1126,10 +1145,6 @@ msgstr "客户料号"
 #: projects/models.py:386 projects/models.py:389
 msgid "milestone"
 msgstr "里程碑"
-
-#: projects/models.py:390
-msgid "deadline"
-msgstr "截止期限"
 
 #: projects/models.py:391
 msgid "completion date"
@@ -1207,12 +1222,6 @@ msgstr "增加"
 msgid "No customers found"
 msgstr "未找到客户"
 
-#: projects/templates/projects/project.html:43
-#: users/templates/users/pwd_change.html:20
-#: users/templates/users/set_links.html:28
-msgid "Update"
-msgstr "更新"
-
 #: projects/templates/projects/project.html:48
 #: projects/templates/projects/project.html:54
 msgid "Engineers"
@@ -1232,23 +1241,24 @@ msgstr "完成"
 
 #: projects/templates/projects/project.html:85
 #: projects/templates/projects/project.html:87
+#: projects/templates/projects/project.html:90
 msgid "Gate Checklist"
 msgstr "Gate 检查清单"
 
-#: projects/templates/projects/project.html:95
+#: projects/templates/projects/project.html:97
 msgid "No milestones set"
 msgstr "无里程碑设置"
 
-#: projects/templates/projects/project.html:119
+#: projects/templates/projects/project.html:121
 #: projects/templates/projects/update_list.html:29
 msgid "No updates recorded"
 msgstr "无更新记录"
 
-#: projects/templates/projects/project.html:121
+#: projects/templates/projects/project.html:123
 msgid "Update Status"
 msgstr "更新状态"
 
-#: projects/templates/projects/project.html:122
+#: projects/templates/projects/project.html:124
 msgid "View Previous"
 msgstr "查看以前的"
 
@@ -1256,7 +1266,7 @@ msgstr "查看以前的"
 msgid "Project List"
 msgstr "项目清单"
 
-#: projects/templates/projects/project_list.html:35
+#: projects/templates/projects/project_list.html:43
 msgid "No projects found"
 msgstr "未发现项目"
 
